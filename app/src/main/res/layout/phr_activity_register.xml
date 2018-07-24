@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/phr_white">
+
+    <include layout="@layout/phr_register_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/phr_padding_12"
+        android:paddingRight="@dimen/phr_padding_12"
+        android:layout_marginTop="@dimen/phr_margin_20">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_30"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="@dimen/phr_height_20"
+                android:layout_height="@dimen/phr_height_20"
+                android:src="@mipmap/phr_username_fl"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/phr_margin_3"
+                android:layout_marginStart="@dimen/phr_margin_3"
+                android:inputType="text"
+                android:id="@+id/phr_register_username"
+                android:hint="@string/phr_register_username_hint"
+                android:textColorHint="@color/color_login_text4"
+                android:background="@null"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_1"
+            android:background="@drawable/phr_shape_gradient_line"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_30"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/phr_margin_3">
+            <ImageView
+                android:layout_width="@dimen/phr_height_20"
+                android:layout_height="@dimen/phr_height_20"
+                android:src="@mipmap/phr_password_fl"
+                android:layout_centerVertical="true"
+                android:id="@+id/image"
+                android:scaleType="fitXY"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/phr_margin_3"
+                android:layout_marginStart="@dimen/phr_margin_3"
+                android:inputType="textPassword"
+                android:id="@+id/phr_register_password"
+                android:hint="@string/phr_register_password_hint"
+                android:textColorHint="@color/color_login_text4"
+                android:background="@null"
+                android:layout_toRightOf="@+id/image"
+                android:layout_toEndOf="@+id/image"
+                android:layout_toLeftOf="@+id/view"
+                android:layout_toStartOf="@+id/view" />
+
+            <View
+                android:layout_width="@dimen/phr_height_1"
+                android:layout_height="match_parent"
+                android:background="@drawable/phr_shape_gradient_line"
+                android:layout_marginRight="@dimen/phr_margin_1"
+                android:layout_marginLeft="@dimen/phr_margin_1"
+                android:layout_marginTop="@dimen/phr_margin_3"
+                android:layout_marginBottom="@dimen/phr_margin_3"
+                android:id="@+id/view"
+                android:layout_toLeftOf="@+id/phr_register_see_password"
+                android:layout_toStartOf="@+id/phr_register_see_password" />
+            <ImageView
+                android:layout_width="@dimen/phr_width_20"
+                android:layout_height="@dimen/phr_width_20"
+                android:src="@mipmap/phr_see_password_fl"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:id="@+id/phr_register_see_password"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_1"
+            android:background="@drawable/phr_shape_gradient_line"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_30"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/phr_margin_3">
+            <ImageView
+                android:layout_width="@dimen/phr_height_20"
+                android:layout_height="@dimen/phr_height_20"
+                android:src="@mipmap/phr_password_fl"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/phr_margin_3"
+                android:layout_marginStart="@dimen/phr_margin_3"
+                android:inputType="textPassword"
+                android:id="@+id/phr_register_repeat_password"
+                android:hint="@string/phr_register_repeat_password_hint"
+                android:textColorHint="@color/color_login_text4"
+                android:background="@null"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_1"
+            android:background="@drawable/phr_shape_gradient_line"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/phr_height_6"
+            android:layout_gravity="center_vertical">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phr_register_man"
+                android:layout_weight="1"
+                android:id="@+id/phr_register_man"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phr_register_girl"
+                android:layout_weight="1"
+                android:id="@+id/phr_register_girl"/>
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_30"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/phr_margin_3">
+            <ImageView
+                android:layout_width="@dimen/phr_height_20"
+                android:layout_height="@dimen/phr_height_20"
+                android:src="@mipmap/phr_id_card_fl"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/phr_margin_3"
+                android:layout_marginStart="@dimen/phr_margin_3"
+                android:inputType="number"
+                android:id="@+id/phr_register_id_card"
+                android:hint="@string/phr_register_id_card"
+                android:textColorHint="@color/color_login_text4"
+                android:background="@null"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_1"
+            android:background="@drawable/phr_shape_gradient_line"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/PHR.Button.Blue"
+            android:layout_marginTop="@dimen/phr_height_15"
+            android:text="@string/phr_register_submit"
+            android:textSize="@dimen/phr_text_size_20"
+            android:id="@+id/phr_register_submit"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/phr_padding_12"
+    android:paddingRight="@dimen/phr_padding_12"
+    android:orientation="vertical"
+    android:background="@color/color_login_bg1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/phr_margin_10"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="@dimen/phr_width_80"
+            android:layout_height="@dimen/phr_width_80"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitXY"
+            android:src="@mipmap/phr_logo_fl"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phr_login_app_name"
+            android:textColor="@color/color_main_image_bg"
+            android:textSize="@dimen/phr_text_size_30"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/phr_margin_20"
+        android:textColorHint="@color/color_login_text4">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/phr_login_username"
+            android:textColor="@color/color_login_text1"
+            android:hint="@string/phr_login_username"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/color_login_text4"
+        android:layout_marginTop="@dimen/phr_margin_5">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/phr_login_password"
+            android:id="@+id/phr_login_password"
+            android:inputType="textPassword"
+            android:textColor="@color/color_login_text1"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/phr_login_login"
+        android:id="@+id/phr_login_login"
+        android:layout_marginTop="@dimen/phr_margin_10"
+        android:textSize="@dimen/phr_text_size_20"
+        style="@style/PHR.Button.Blue"/>
+
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phr_login_register"
+        android:textColor="@color/color_7bf_blue"
+        android:layout_gravity="right"
+        tools:ignore="RtlHardcoded"
+        android:layout_marginTop="@dimen/phr_margin_5"/>
+
+</LinearLayout>
