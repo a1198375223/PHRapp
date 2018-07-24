@@ -16,6 +16,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions{
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -31,4 +38,17 @@ dependencies {
     implementation 'com.trello.rxlifecycle2:rxlifecycle:2.2.1'
     implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
     implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+
+    // LeanCloud 基础包
+    implementation 'cn.leancloud.android:avoscloud-sdk:v4.6.4'
+    // LeanCloud 统计包
+    implementation 'cn.leancloud.android:avoscloud-statistics:v4.6.4'
+    // LeanCloud 用户反馈包
+    implementation 'cn.leancloud.android:avoscloud-feedback:v4.6.4@aar'
+
+    //Glide依赖包
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
 }
