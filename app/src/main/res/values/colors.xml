@@ -38,4 +38,7 @@
     <color name="color_submit_button_normal_press">#b3c60a</color>
     <!--blue-->
     <color name="color_7bf_blue">#75BAFF</color>
+
+    <!--rv text color-->
+    <color name="color_rv_text">#0d0c0c</color>
 </resources>

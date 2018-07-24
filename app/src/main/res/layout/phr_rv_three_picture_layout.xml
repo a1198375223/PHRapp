@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_marginRight="@dimen/phr_margin_3"
+    android:layout_marginLeft="@dimen/phr_margin_3"
+    android:paddingTop="@dimen/phr_margin_2">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/phr_height_25"
+        android:lineSpacingExtra="@dimen/phr_padding_2"
+        android:paddingLeft="@dimen/phr_padding_2"
+        android:paddingRight="@dimen/phr_padding_2"
+        android:textSize="@dimen/phr_text_size_18"
+        tools:text="海峡两岸体育情丨海运会门球比赛是两岸队员球技和友谊的交流"
+        android:id="@+id/phr_rv_three_image_text"
+        android:textColor="@color/color_rv_text"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/phr_rv_three_image_icon1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_50"
+            tools:src="@mipmap/ic_launcher_round"
+            android:scaleType="fitXY"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/phr_height_1"
+            tools:ignore="RtlHardcoded" />
+        <ImageView
+            android:id="@+id/phr_rv_three_image_icon2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_50"
+            tools:src="@mipmap/ic_launcher_round"
+            android:scaleType="fitXY"
+           android:layout_weight="1"
+            android:layout_marginLeft="@dimen/phr_height_1"
+            android:layout_marginRight="@dimen/phr_height_1"/>
+        <ImageView
+            android:id="@+id/phr_rv_three_image_icon3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_50"
+            tools:src="@mipmap/ic_launcher_round"
+            android:scaleType="fitXY"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/phr_height_1"
+            tools:ignore="RtlHardcoded" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/phr_height_7"
+        tools:text="新闻一线"
+        android:textSize="@dimen/phr_text_size_10"
+        android:id="@+id/phr_rv_three_image_author"
+        android:paddingLeft="@dimen/phr_padding_2"
+        android:paddingRight="@dimen/phr_padding_2"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/phr_height_1"
+        android:background="@color/phr_white" />
+
+
+</LinearLayout>
