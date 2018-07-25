@@ -17,20 +17,20 @@
         android:supportsRtl="true"
         android:theme="@style/PHR.AppTheme">
         <activity android:name=".item.main.PHRMainActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-        <activity android:name=".common.PHRActivity" />
-        <activity android:name=".item.message.PHRMessageActivity" />
-        <activity android:name=".item.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".common.PHRActivity" />
+        <activity android:name=".item.message.PHRMessageActivity" />
+        <activity android:name=".item.login.LoginActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
     </application>
 

@@ -66,8 +66,8 @@ public class PHRMainActivity extends PHRActivity{
         name=(TextView) headerView.findViewById(R.id.phr_main_navigation_view_header_name_text);
         email=(TextView) headerView.findViewById(R.id.phr_main_navigation_view_header_note_text);
         head_img=(ImageView) headerView.findViewById(R.id.phr_main_navigation_view_header_icon);
-        name.setText(b.getString("name"));
-        email.setText(b.getString("email"));
+    /*    name.setText(b.getString("name"));
+        email.setText(b.getString("email"));*/
         Glide.with(PHRMainActivity.this)
                 .load("http://lc-nujpdri6.cn-n1.lcfile.com/dcde1581cbcb099c1fb6.png")
                 .apply(options)

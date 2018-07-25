@@ -2,13 +2,12 @@ package com.starstudio.loser.phrapp.item.message.list.presenter;
 
 /*
     create by:loser
-    date:2018/7/24 9:54
+    date:2018/7/25 14:08
 */
-
 
 import android.support.v4.app.Fragment;
 
-import com.starstudio.loser.phrapp.common.base.PHRFragment;
+import com.starstudio.loser.phrapp.common.PHRFragment;
 import com.starstudio.loser.phrapp.common.base.PHRFragmentPresenter;
 import com.starstudio.loser.phrapp.item.message.list.contract.CommonContract;
 import com.starstudio.loser.phrapp.item.message.list.model.data.BaseBean;
@@ -16,12 +15,11 @@ import com.starstudio.loser.phrapp.item.message.list.model.data.BaseBean;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-
-public class HealthPresenter extends PHRFragmentPresenter<CommonContract.View, CommonContract.Model> implements CommonContract.Presenter{
+public class CommonPresenter extends PHRFragmentPresenter<CommonContract.View, CommonContract.Model> implements CommonContract.Presenter{
     private CommonContract.Model mModel;
     private CommonContract.View mView;
 
-    public HealthPresenter(Fragment fragment) {
+    public CommonPresenter(Fragment fragment) {
         super(fragment);
     }
 

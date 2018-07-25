@@ -18,6 +18,7 @@ import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.common.utils.GlideUtils;
 import com.starstudio.loser.phrapp.item.message.list.model.data.BaseBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -25,10 +26,9 @@ public class RvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<BaseBean.ResultBean.DataBean> mData;
     private OnItemClickListener mListener;
 
-    public RvAdapter(Context context, BaseBean baseBean, OnItemClickListener clickListener) {
+    public RvAdapter(Context context) {
         this.mContext = context;
-        this.mData = baseBean.getResult().getData();
-        this.mListener = clickListener;
+        this.mData = new ArrayList<>();
     }
 
     //点击事件
@@ -36,7 +36,16 @@ public class RvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         void onItemClickListener(int position);
     }
 
+    public void setListener(OnItemClickListener listener) {
+        this.mListener = listener;
+    }
 
+    public void setDataList(BaseBean baseBean) {
+        if (baseBean.getResult() != null) {
+            this.mData = baseBean.getResult().getData();
+        }
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override

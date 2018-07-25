@@ -7,6 +7,6 @@ package com.starstudio.loser.phrapp.common;
 
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
-public class PHRActivity extends RxAppCompatActivity {
+public class PHRActivity extends RxAppCompatActivity{
 
 }

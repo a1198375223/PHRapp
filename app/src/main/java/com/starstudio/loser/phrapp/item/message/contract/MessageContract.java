@@ -11,9 +11,10 @@ import android.view.View;
 import com.starstudio.loser.phrapp.common.base.BaseModel;
 import com.starstudio.loser.phrapp.common.base.BasePresenter;
 import com.starstudio.loser.phrapp.common.base.BaseView;
+import com.starstudio.loser.phrapp.item.message.presenter.MessageEventListener;
 
 public interface MessageContract {
-    interface MessageView extends BaseView {
+    interface MessageView extends BaseView<MessageEventListener> {
         View getView();
     }
 
@@ -22,7 +23,7 @@ public interface MessageContract {
     }
 
     interface MessagePresenter extends BasePresenter<MessageView, MessageModel> {
-        Fragment getFragment(int position);
+
     }
 
 }

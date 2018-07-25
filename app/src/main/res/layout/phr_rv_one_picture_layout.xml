@@ -4,9 +4,9 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_marginRight="@dimen/phr_margin_3"
-    android:layout_marginLeft="@dimen/phr_margin_3"
-    android:paddingTop="@dimen/phr_margin_2">
+    android:paddingLeft="@dimen/phr_padding_5"
+    android:paddingRight="@dimen/phr_padding_5"
+    android:paddingTop="@dimen/phr_padding_2">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -37,16 +37,18 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/phr_height_7"
+        android:layout_height="wrap_content"
         tools:text="新闻一线"
         android:textSize="@dimen/phr_text_size_10"
         android:id="@+id/phr_rv_one_image_author"
-        android:paddingLeft="@dimen/phr_padding_2"
-        android:paddingRight="@dimen/phr_padding_2"/>
+        android:paddingTop="@dimen/phr_padding_2"
+        android:paddingRight="@dimen/phr_padding_2"
+        android:paddingBottom="@dimen/phr_padding_2"
+        tools:ignore="RtlHardcoded" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/phr_height_1"
+        android:layout_height="1dp"
         android:background="@color/phr_white" />
 
 

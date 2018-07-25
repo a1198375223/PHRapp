@@ -7,8 +7,10 @@ package com.starstudio.loser.phrapp.common.base;
 
 import android.app.Activity;
 
-public class PHRView implements BaseView {
+
+public class PHRView<E extends BaseEventListener> implements BaseView<E> {
     private Activity mActivity;
+    private E mListener;
 
     public PHRView(Activity activity) {
         this.mActivity = activity;
@@ -17,4 +19,16 @@ public class PHRView implements BaseView {
     protected Activity getActivity() {
         return mActivity;
     }
+
+
+
+    public E getListener() {
+        return mListener;
+    }
+
+    @Override
+    public void setEventListener(E eventListener) {
+        this.mListener = eventListener;
+    }
+
 }

@@ -23,7 +23,7 @@ public class Client {
         if (sInstance == null) {
             sInstance = new Client();
             sInstance.mRetrofit = new Retrofit.Builder()
-                    .baseUrl("http://v.juhe.cn/toutiao/index")
+                    .baseUrl("http://v.juhe.cn/toutiao/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
