@@ -41,4 +41,7 @@
 
     <!--rv text color-->
     <color name="color_rv_text">#0d0c0c</color>
+
+    <!--progress bg-->
+    <color name="color_progress_bg">#0bd6cfcf</color>
 </resources>

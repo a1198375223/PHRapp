@@ -24,6 +24,16 @@
         <item name="android:background">@drawable/phr_selector_button_yellow</item>
     </style>
 
+    <!--web dialog-->
+    <style name="PHR.ProgressDialog" parent="Base.Theme.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/phr_progress_dialog</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
 
 
 </resources>

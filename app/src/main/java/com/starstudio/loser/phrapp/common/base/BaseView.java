@@ -8,4 +8,8 @@ package com.starstudio.loser.phrapp.common.base;
 
 public interface BaseView<E extends BaseEventListener> {
     void setEventListener(E eventListener);
+
+    void showProgressDialog();
+
+    void dismissProgressDialog();
 }
