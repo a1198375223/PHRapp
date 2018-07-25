@@ -66,14 +66,33 @@
         android:textSize="@dimen/phr_text_size_20"
         style="@style/PHR.Button.Blue"/>
 
-    <TextView
-        android:id="@+id/tv_register"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/phr_login_register"
-        android:textColor="@color/color_7bf_blue"
-        android:layout_gravity="right"
-        tools:ignore="RtlHardcoded"
-        android:layout_marginTop="@dimen/phr_margin_5"/>
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_find"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/phr_login_find"
+            android:textColor="@color/color_7bf_blue"
+            android:gravity="left"
+            tools:ignore="RtlHardcoded"
+            android:layout_marginTop="@dimen/phr_margin_5"/>
+
+        <TextView
+            android:id="@+id/tv_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_marginTop="@dimen/phr_margin_5"
+            android:text="@string/phr_login_register"
+            android:textColor="@color/color_7bf_blue"
+            tools:ignore="RtlHardcoded" />
+    </LinearLayout>
+
+
 
 </LinearLayout>

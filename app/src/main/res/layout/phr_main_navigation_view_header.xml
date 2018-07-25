@@ -57,7 +57,14 @@
         android:id="@+id/phr_main_navigation_view_header_icon"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+    <Button
+        android:id="@+id/phr_phr_main_navigation_view_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="登录/注册" />
 
     <TextView
         android:id="@+id/phr_main_navigation_view_header_note_text"
