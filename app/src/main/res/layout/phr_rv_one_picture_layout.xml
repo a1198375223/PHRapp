@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/phr_padding_5"
+    android:paddingRight="@dimen/phr_padding_5"
+    android:paddingTop="@dimen/phr_padding_2">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/phr_rv_one_image_icon"
+            android:layout_width="@dimen/phr_height_60"
+            android:layout_height="@dimen/phr_height_50"
+            tools:src="@mipmap/ic_launcher_round"
+            android:scaleType="fitXY"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_50"
+            android:lineSpacingExtra="@dimen/phr_padding_2"
+            android:paddingLeft="@dimen/phr_padding_2"
+            android:paddingRight="@dimen/phr_padding_2"
+            android:textSize="@dimen/phr_text_size_18"
+            tools:text="海峡两岸体育情丨海运会门球比赛是两岸队员球技和友谊的交流"
+            android:id="@+id/phr_rv_one_image_text"
+            android:layout_toLeftOf="@+id/phr_rv_one_image_icon"
+            android:layout_toStartOf="@+id/phr_rv_one_image_icon"
+            android:textColor="@color/color_rv_text"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="新闻一线"
+        android:textSize="@dimen/phr_text_size_10"
+        android:id="@+id/phr_rv_one_image_author"
+        android:paddingTop="@dimen/phr_padding_2"
+        android:paddingRight="@dimen/phr_padding_2"
+        android:paddingBottom="@dimen/phr_padding_2"
+        tools:ignore="RtlHardcoded" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_line_color" />
+
+
+</LinearLayout>

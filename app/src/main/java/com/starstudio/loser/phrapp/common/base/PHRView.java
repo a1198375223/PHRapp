@@ -6,9 +6,16 @@ package com.starstudio.loser.phrapp.common.base;
 */
 
 import android.app.Activity;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
-public class PHRView implements BaseView {
+import com.starstudio.loser.phrapp.common.view.PHRProgressDialog;
+
+
+public class PHRView<E extends BaseEventListener> implements BaseView<E> {
     private Activity mActivity;
+    private E mListener;
+    private PHRProgressDialog mDialog;
 
     public PHRView(Activity activity) {
         this.mActivity = activity;
@@ -17,4 +24,34 @@ public class PHRView implements BaseView {
     protected Activity getActivity() {
         return mActivity;
     }
+
+
+
+    public E getListener() {
+        return mListener;
+    }
+
+    @Override
+    public void setEventListener(E eventListener) {
+        this.mListener = eventListener;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void showProgressDialog() {
+        if (mDialog == null) {
+            mDialog = new PHRProgressDialog(getActivity());
+            mDialog.showProgressDialog();
+        }
+        mDialog.showProgressDialog();
+    }
+
+    @Override
+    public void dismissProgressDialog() {
+        if (mDialog != null) {
+            mDialog.dismiss();
+            mDialog = null;
+        }
+    }
+
 }

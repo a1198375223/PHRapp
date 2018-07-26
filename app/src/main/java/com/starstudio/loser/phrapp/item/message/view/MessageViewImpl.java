@@ -6,35 +6,30 @@ package com.starstudio.loser.phrapp.item.message.view;
 */
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
-
 import com.starstudio.loser.phrapp.R;
+import com.starstudio.loser.phrapp.common.PHRActivity;
 import com.starstudio.loser.phrapp.common.base.PHRView;
 import com.starstudio.loser.phrapp.item.message.contract.MessageContract;
-import com.starstudio.loser.phrapp.item.message.presenter.MessagePresenterImpl;
+import com.starstudio.loser.phrapp.item.message.presenter.MessageEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessageViewImpl extends PHRView implements MessageContract.MessageView {
+public class MessageViewImpl extends PHRView<MessageEventListener> implements MessageContract.MessageView {
     private View mRootView;
     private List<String> mTitle;
-    private MessageContract.MessagePresenter mPresenter;
-
 
     public MessageViewImpl(Activity activity) {
         super(activity);
         mRootView = LayoutInflater.from(activity).inflate(R.layout.phr_activity_message, null);
-        mPresenter = new MessagePresenterImpl(activity);
 
         ViewPager viewPager = (ViewPager) activity.findViewById(R.id.phr_message_view_pager);
         TabLayout tabLayout = (TabLayout) activity.findViewById(R.id.phr_message_tab_layout);
@@ -55,6 +50,11 @@ public class MessageViewImpl extends PHRView implements MessageContract.MessageV
         for (int i=0; i<mTitle.size(); i++) {
             tabLayout.addTab(tabLayout.newTab().setText(mTitle.get(i)));
         }
+
+        viewPager.setAdapter(new MyAdapter(((PHRActivity)activity).getSupportFragmentManager()));
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+
     }
 
     @Override
@@ -63,15 +63,16 @@ public class MessageViewImpl extends PHRView implements MessageContract.MessageV
     }
 
 
+
     private class MyAdapter extends FragmentPagerAdapter {
 
-        public MyAdapter(FragmentManager fm) {
+        protected MyAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
-            return mPresenter.getFragment(position);
+            return getListener().getFragment(position);
         }
 
         @Override
@@ -82,7 +83,7 @@ public class MessageViewImpl extends PHRView implements MessageContract.MessageV
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
-            return super.getPageTitle(position);
+            return mTitle.get(position);
         }
     }
 

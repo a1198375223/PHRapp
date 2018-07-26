@@ -35,4 +35,12 @@
     <!--main string-->
     <string name="phr_main_logo_text">PHR个人健康管理</string>
 
+    <!--search view-->
+    <string name="phr_search_view_text">查   找</string>
+
+    <!--message menu-->
+    <string name="phr_message_menu_add">添加</string>
+    <string name="phr_message_menu_delete">删除</string>
+
+
 </resources>

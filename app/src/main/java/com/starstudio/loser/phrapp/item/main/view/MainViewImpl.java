@@ -7,6 +7,7 @@ package com.starstudio.loser.phrapp.item.main.view;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -23,6 +24,7 @@ import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.common.base.PHRView;
 import com.starstudio.loser.phrapp.item.main.PHRMainActivity;
 import com.starstudio.loser.phrapp.item.main.contract.MainContract;
+import com.starstudio.loser.phrapp.item.message.PHRMessageActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -109,6 +111,8 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
                 switch (position) {
                     case 0:
                         Toast.makeText(activity, "no 1", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent((PHRMainActivity) activity, PHRMessageActivity.class);
+                        activity.startActivity(intent);
                         break;
                     case 1:
                         Toast.makeText(activity, "no 2", Toast.LENGTH_SHORT).show();
