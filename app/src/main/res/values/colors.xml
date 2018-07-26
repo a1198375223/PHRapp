@@ -42,6 +42,9 @@
     <!--rv text color-->
     <color name="color_rv_text">#0d0c0c</color>
 
+    <!--message line color-->
+    <color name="color_line_color">#32aca1a1</color>
+
     <!--progress bg-->
-    <color name="color_progress_bg">#0bd6cfcf</color>
+    <color name="color_progress_bg">#00d6cfcf</color>
 </resources>

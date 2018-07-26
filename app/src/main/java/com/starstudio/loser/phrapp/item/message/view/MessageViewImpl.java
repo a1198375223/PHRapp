@@ -19,7 +19,6 @@ import com.starstudio.loser.phrapp.common.PHRActivity;
 import com.starstudio.loser.phrapp.common.base.PHRView;
 import com.starstudio.loser.phrapp.item.message.contract.MessageContract;
 import com.starstudio.loser.phrapp.item.message.presenter.MessageEventListener;
-import com.starstudio.loser.phrapp.item.message.presenter.MessagePresenterImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +61,7 @@ public class MessageViewImpl extends PHRView<MessageEventListener> implements Me
     public View getView() {
         return mRootView;
     }
+
 
 
     private class MyAdapter extends FragmentPagerAdapter {

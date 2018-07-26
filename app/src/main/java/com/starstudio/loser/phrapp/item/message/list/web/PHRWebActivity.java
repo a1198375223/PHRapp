@@ -46,8 +46,8 @@ public class PHRWebActivity extends PHRActivity{
         //加载网页
         mWebView.loadUrl(url);
 
-        //自动加载图片
-        mSettings.setLoadsImagesAutomatically(true);
+        //不自动加载图片
+        mSettings.setLoadsImagesAutomatically(false);
 
         //允许加载文件
         mSettings.setAllowFileAccess(true);
@@ -85,6 +85,10 @@ public class PHRWebActivity extends PHRActivity{
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                //不自动加载图片，并且阻塞
+                mSettings.setLoadsImagesAutomatically(false);
+                mSettings.setBlockNetworkImage(true);
+
                 showProgressDialog();
                 super.onPageStarted(view, url, favicon);
             }
@@ -92,6 +96,9 @@ public class PHRWebActivity extends PHRActivity{
             @Override
             public void onPageFinished(WebView view, String url) {
                 dismissProgressDialog();
+                //自动加载图片
+                mSettings.setBlockNetworkImage(false);
+                mSettings.setLoadsImagesAutomatically(true);
                 super.onPageFinished(view, url);
             }
         });
