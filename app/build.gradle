@@ -52,7 +52,9 @@ dependencies {
     // LeanCloud 用户反馈包
     implementation 'cn.leancloud.android:avoscloud-feedback:v4.6.4@aar'
 
+    // LeanCloud 应用内搜索包
+    implementation 'cn.leancloud.android:avoscloud-search:v4.6.4@aar'
+
     //Glide依赖包
-    implementation 'com.github.bumptech.glide:glide:4.7.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
 }

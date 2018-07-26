@@ -44,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
         password=(EditText) findViewById(R.id.phr_login_password);
         login_btn=(Button) findViewById(R.id.phr_login_login);
         sign_in=(TextView) findViewById(R.id.tv_register);
-        AVOSCloud.initialize(this,"NUjpdRi6jqP1S2iAfQCs7YNU-gzGzoHsz","27zlhvjRBd155W8iAWSoNJiO");
         AVOSCloud.setDebugLogEnabled(true);
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
