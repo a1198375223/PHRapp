@@ -6,15 +6,16 @@ package com.starstudio.loser.phrapp.item.main;
 */
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,7 +24,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.makeramen.roundedimageview.RoundedImageView;
 import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.common.PHRActivity;
 import com.starstudio.loser.phrapp.item.login.LoginActivity;
@@ -41,6 +41,7 @@ public class PHRMainActivity extends PHRActivity{
     TextView name,note;
     ImageView head_img;
     Button login;
+    Menu menu;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -61,7 +62,7 @@ public class PHRMainActivity extends PHRActivity{
             }
         }else{
             set_head_by_login(b,(NavigationView) findViewById(R.id.phr_main_navigation_view));//从登录页面跳转转来
-            Log.d(TAG, "onCreate: set_head_by_login");
+            Log.d(TAG, "onCreate: set_head_by_login()启动方式");
         }
 
         Log.d(TAG, "+++++++++++++++++++:----------------测试成功");
@@ -79,9 +80,16 @@ public class PHRMainActivity extends PHRActivity{
         mPresenter.detach();
     }
 
-    private void initView(NavigationView navigationView){
+    public void initView(NavigationView navigationView){
         View headerView = navigationView.getHeaderView(0);
+        name = (TextView) headerView.findViewById(R.id.phr_main_navigation_view_header_name_text);
+        note = (TextView) headerView.findViewById(R.id.phr_main_navigation_view_header_note_text);
+        name.setText("");
+        note.setText("");
+        head_img = (ImageView) headerView.findViewById(R.id.phr_main_navigation_view_header_icon);
+        head_img.setVisibility(View.GONE);
         login = headerView.findViewById(R.id.phr_phr_main_navigation_view_login);
+        login.setVisibility(View.VISIBLE);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,6 +106,8 @@ public class PHRMainActivity extends PHRActivity{
                 .diskCacheStrategy(DiskCacheStrategy.NONE);
 
         View headerView = navigationView.getHeaderView(0);
+        menu = navigationView.getMenu();
+        menu.findItem(R.id.phr_main_navigation_view_menu_item5).setVisible(true);//登录后让“退出登录”可见
         name = (TextView) headerView.findViewById(R.id.phr_main_navigation_view_header_name_text);
         note = (TextView) headerView.findViewById(R.id.phr_main_navigation_view_header_note_text);
         head_img = (ImageView) headerView.findViewById(R.id.phr_main_navigation_view_header_icon);

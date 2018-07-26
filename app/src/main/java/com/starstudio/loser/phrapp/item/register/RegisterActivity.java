@@ -112,7 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String name = username.getText().toString();
                 String mail = email.getText().toString();
 
-                Log.d(TAG, "onClick: "+password+"   "+phoneNumber+" "+name+"    "+mail);
+                Log.d(TAG, "onClick: "+password+"   "+phoneNumber+" "+name+"    "+mail+"    "+sex);
                 if (password.equals("")||phoneNumber.equals("")||name.equals("")||mail.equals("")){
                     Toast toast = Toast.makeText(RegisterActivity.this, "请输入所有字段！", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
@@ -153,6 +153,10 @@ public class RegisterActivity extends AppCompatActivity {
                                         toast.show();
                                     }else if (e.getCode()==125){
                                         Toast toast = Toast.makeText(RegisterActivity.this, "请输入正确的邮箱格式！", Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+                                    }else if (e.getCode()==127){
+                                        Toast toast = Toast.makeText(RegisterActivity.this, "手机号无效！", Toast.LENGTH_SHORT);
                                         toast.setGravity(Gravity.CENTER, 0, 0);
                                         toast.show();
                                     }

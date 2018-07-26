@@ -6,7 +6,7 @@
     <string name="phr_main_navigation_view_menu_item2">item2</string>
     <string name="phr_main_navigation_view_menu_item3">item3</string>
     <string name="phr_main_navigation_view_menu_item4">item4</string>
-    <string name="phr_main_navigation_view_menu_item5">item5</string>
+    <string name="phr_main_navigation_view_menu_item5">退出登录</string>
     <string name="phr_main_gridlayout_text1">健康咨询</string>
     <string name="phr_main_gridlayout_text2">计划免疫</string>
     <string name="phr_main_gridlayout_text3">就医地图</string>

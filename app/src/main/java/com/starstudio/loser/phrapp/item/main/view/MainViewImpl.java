@@ -6,6 +6,7 @@ package com.starstudio.loser.phrapp.item.main.view;
 */
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.common.base.PHRView;
+import com.starstudio.loser.phrapp.item.main.PHRMainActivity;
 import com.starstudio.loser.phrapp.item.main.contract.MainContract;
 
 import java.util.ArrayList;
@@ -32,13 +34,13 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public MainViewImpl(final Activity activity) {
+    public MainViewImpl(final PHRMainActivity activity) {
         super(activity);
 
         mRootView = LayoutInflater.from(activity).inflate(R.layout.phr_main_layout, null);
 
         //navigationView
-        NavigationView navigationView = (NavigationView) activity.findViewById(R.id.phr_main_navigation_view);
+        final NavigationView navigationView = (NavigationView) activity.findViewById(R.id.phr_main_navigation_view);
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -57,7 +59,11 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
                         Toast.makeText(activity, "click item4", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.phr_main_navigation_view_menu_item5:
-                        Toast.makeText(activity, "click item5", Toast.LENGTH_SHORT).show();
+                        SharedPreferences pref = activity.getSharedPreferences("user_data",Activity.MODE_PRIVATE );
+                        pref.edit().clear().commit();
+                        activity.initView(navigationView);
+                        item.setVisible(false);
+                        Toast.makeText(activity, "已退出登录", Toast.LENGTH_SHORT).show();
                         break;
                     default:
                 }
