@@ -17,9 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/PHR.AppTheme">
         <activity android:name=".item.main.PHRMainActivity">
-
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
