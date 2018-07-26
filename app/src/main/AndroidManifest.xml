@@ -19,14 +19,12 @@
         <activity android:name=".item.main.PHRMainActivity">
 
              <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <action android:name="android.intent.action.MAIN" />
 
-
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".item.register.RegisterActivity"/>
         <activity android:name=".common.PHRActivity" />
         <activity android:name=".item.message.PHRMessageActivity" />
         <activity android:name=".item.login.LoginActivity">
