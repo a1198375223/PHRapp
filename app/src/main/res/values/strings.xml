@@ -6,7 +6,7 @@
     <string name="phr_main_navigation_view_menu_item2">item2</string>
     <string name="phr_main_navigation_view_menu_item3">item3</string>
     <string name="phr_main_navigation_view_menu_item4">item4</string>
-    <string name="phr_main_navigation_view_menu_item5">item5</string>
+    <string name="phr_main_navigation_view_menu_item5">退出登录</string>
     <string name="phr_main_gridlayout_text1">健康咨询</string>
     <string name="phr_main_gridlayout_text2">计划免疫</string>
     <string name="phr_main_gridlayout_text3">就医地图</string>
@@ -17,17 +17,20 @@
     <!--login string-->
     <string name="phr_login_app_name">PHR健康社区</string>
     <string name="phr_login_register">注  册</string>
+    <string name="phr_login_find">找回密码</string>
     <string name="phr_login_username">用户名</string>
     <string name="phr_login_password">密  码</string>
     <string name="phr_login_login">登 入</string>
     <!--register string-->
     <string name="phr_register_username_hint">请输入用户名</string>
+    <string name="phr_register_phone_hint">请输入手机号</string>
     <string name="phr_register_password_hint">请输入密码</string>
     <string name="phr_register_repeat_password_hint">请重复密码</string>
     <string name="phr_register_submit">提  交</string>
     <string name="phr_register_man">男</string>
     <string name="phr_register_girl">女</string>
     <string name="phr_register_id_card">请输入身份证号</string>
+    <string name="phr_register_email">请输入邮箱</string>
 
     <!--main string-->
     <string name="phr_main_logo_text">PHR个人健康管理</string>
