@@ -47,10 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         password=(EditText) findViewById(R.id.phr_login_password);
         login_btn=(Button) findViewById(R.id.phr_login_login);
         sign_in=(TextView) findViewById(R.id.tv_register);
-        find_pwd=findViewById(R.id.tv_find);
-
         AVOSCloud.setDebugLogEnabled(true);
-
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
                         public void done(AVUser avUser, AVException e) {
                             if (e == null) {
                                 AVQuery<AVObject> query = new AVQuery<>("_User");
-                                query.include("head_img");
                                 query.whereEqualTo("mobilePhoneNumber",phoneNumber);
                                 query.getFirstInBackground(new GetCallback<AVObject>() {
                                     @Override
