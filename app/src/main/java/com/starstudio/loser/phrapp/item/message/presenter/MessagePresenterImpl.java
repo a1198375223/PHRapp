@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.starstudio.loser.phrapp.common.base.PHRPresenter;
 import com.starstudio.loser.phrapp.item.message.contract.MessageContract;
-import com.starstudio.loser.phrapp.item.message.list.view.EconomicFragmennt;
+import com.starstudio.loser.phrapp.item.message.list.view.EconomicFragment;
 import com.starstudio.loser.phrapp.item.message.list.view.EntertainmentFragment;
 import com.starstudio.loser.phrapp.item.message.list.view.FashionFragment;
 import com.starstudio.loser.phrapp.item.message.list.view.HealthFragment;
@@ -36,30 +36,39 @@ public class MessagePresenterImpl extends PHRPresenter<MessageContract.MessageVi
                     fragment = mMessageView == null ? null : new Fragment();
                     break;
                 case 2:
+//                    fragment = mMessageView == null ? null : new Fragment();
                     fragment = mMessageView == null ? null : new TopFragment();
                     break;
                 case 3:
+//                    fragment = mMessageView == null ? null : new Fragment();
                     fragment = mMessageView == null ? null : new SportsFragment();
                     break;
                 case 4:
+//                    fragment = mMessageView == null ? null : new Fragment();
                     fragment = mMessageView == null ? null : new SocialFragment();
                     break;
                 case 5:
+//                    fragment = mMessageView == null ? null : new Fragment();
                     fragment = mMessageView == null ? null : new IslandFragment();
                     break;
                 case 6:
+//                    fragment = mMessageView == null ? null : new Fragment();
                     fragment = mMessageView == null ? null : new EntertainmentFragment();
                     break;
                 case 7:
+//                    fragment = mMessageView == null ? null : new Fragment();
                     fragment = mMessageView == null ? null : new MilitaryFragment();
                     break;
                 case 8:
-                    fragment = mMessageView == null ? null : new EconomicFragmennt();
+//                    fragment = mMessageView == null ? null : new Fragment();
+                    fragment = mMessageView == null ? null : new EconomicFragment();
                     break;
                 case 9:
+//                    fragment = mMessageView == null ? null : new Fragment();
                     fragment = mMessageView == null ? null : new FashionFragment();
                     break;
                 case 10:
+//                    fragment = mMessageView == null ? null : new Fragment();
                     fragment = mMessageView == null ? null : new ScienceFragment();
                     break;
                 default:

@@ -2,7 +2,7 @@ package com.starstudio.loser.phrapp.item.message.list.presenter;
 
 /*
     create by:loser
-    date:2018/7/25 14:08
+    date:2018/7/27 10:01
 */
 
 import android.content.Intent;
@@ -10,21 +10,23 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+
 import com.starstudio.loser.phrapp.common.PHRFragment;
 import com.starstudio.loser.phrapp.common.base.PHRFragmentPresenter;
 import com.starstudio.loser.phrapp.item.message.list.contract.CommonContract;
 import com.starstudio.loser.phrapp.item.message.list.model.data.BaseBean;
 import com.starstudio.loser.phrapp.item.message.list.model.data.UsefulData;
 import com.starstudio.loser.phrapp.item.message.list.web.PHRWebActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-
-public class CommonPresenter extends PHRFragmentPresenter<CommonContract.View, CommonContract.Model> implements CommonContract.Presenter{
-    private CommonContract.Model mModel;
+public class HealthPresenter extends PHRFragmentPresenter<CommonContract.View, CommonContract.SimpleModel> implements CommonContract.SimplePresenter{
+    private CommonContract.SimpleModel mModel;
     private CommonContract.View mView;
 
     private FragmentEventListener mListener = new FragmentEventListener() {
@@ -56,7 +58,7 @@ public class CommonPresenter extends PHRFragmentPresenter<CommonContract.View, C
         }
     };
 
-    public CommonPresenter(Fragment fragment) {
+    public HealthPresenter(Fragment fragment) {
         super(fragment);
     }
 
@@ -76,7 +78,7 @@ public class CommonPresenter extends PHRFragmentPresenter<CommonContract.View, C
                     @Override
                     public void onNext(BaseBean baseBean) {
                         if (baseBean.getResult() != null) {
-                            mModel.convertToUsefulDataAndLoadView(baseBean);
+                            mModel.saveToLeanCloud(baseBean);
                         }
                     }
 
@@ -87,7 +89,7 @@ public class CommonPresenter extends PHRFragmentPresenter<CommonContract.View, C
 
                     @Override
                     public void onComplete() {
-
+                        mModel.getLeanCloudData();
                     }
                 });
     }

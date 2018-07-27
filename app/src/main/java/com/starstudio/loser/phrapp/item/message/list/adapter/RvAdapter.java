@@ -17,13 +17,14 @@ import android.widget.TextView;
 import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.common.utils.GlideUtils;
 import com.starstudio.loser.phrapp.item.message.list.model.data.BaseBean;
+import com.starstudio.loser.phrapp.item.message.list.model.data.UsefulData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
-    private List<BaseBean.ResultBean.DataBean> mData;
+    private List<UsefulData> mData;
     private OnItemClickListener mListener;
 
     public RvAdapter(Context context) {
@@ -40,10 +41,8 @@ public class RvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.mListener = listener;
     }
 
-    public void setDataList(BaseBean baseBean) {
-        if (baseBean.getResult() != null) {
-            this.mData = baseBean.getResult().getData();
-        }
+    public void setDataList(List<UsefulData> usefulData) {
+        this.mData = usefulData;
         notifyDataSetChanged();
     }
 
@@ -68,15 +67,15 @@ public class RvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             });
         }
         if (holder instanceof ThreePictureViewHolder) {
-            GlideUtils.loadImage(mContext, mData.get(position).getThumbnail_pic_s(), ((ThreePictureViewHolder) holder).mIcon1);
-            GlideUtils.loadImage(mContext, mData.get(position).getThumbnail_pic_s02(), ((ThreePictureViewHolder) holder).mIcon2);
-            GlideUtils.loadImage(mContext, mData.get(position).getThumbnail_pic_s03(), ((ThreePictureViewHolder) holder).mIcon3);
-            ((ThreePictureViewHolder) holder).mAuthor.setText(mData.get(position).getAuthor_name());
+            GlideUtils.loadImage(mContext, mData.get(position).getImage1(), ((ThreePictureViewHolder) holder).mIcon1);
+            GlideUtils.loadImage(mContext, mData.get(position).getImage2(), ((ThreePictureViewHolder) holder).mIcon2);
+            GlideUtils.loadImage(mContext, mData.get(position).getImage3(), ((ThreePictureViewHolder) holder).mIcon3);
+            ((ThreePictureViewHolder) holder).mAuthor.setText(mData.get(position).getAuthor());
             ((ThreePictureViewHolder) holder).mContent.setText(mData.get(position).getTitle());
         } else if (holder instanceof OnePictureViewHolder) {
-            GlideUtils.loadImage(mContext, mData.get(position).getThumbnail_pic_s(), ((OnePictureViewHolder) holder).mIcon);
+            GlideUtils.loadImage(mContext, mData.get(position).getImage1(), ((OnePictureViewHolder) holder).mIcon);
             ((OnePictureViewHolder) holder).mContent.setText(mData.get(position).getTitle());
-            ((OnePictureViewHolder) holder).mAuthor.setText(mData.get(position).getAuthor_name());
+            ((OnePictureViewHolder) holder).mAuthor.setText(mData.get(position).getAuthor());
         }
     }
 
@@ -87,7 +86,7 @@ public class RvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        if (mData.get(position).getThumbnail_pic_s03() != null) {
+        if (mData.get(position).getImage3() != null) {
             return TYPE.THREE_PICTURE.ordinal();
         }
         return TYPE.ONE_PICTURE.ordinal();
@@ -95,6 +94,9 @@ public class RvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
+        if (mData == null) {
+            return 0;
+        }
         return mData.size();
     }
 

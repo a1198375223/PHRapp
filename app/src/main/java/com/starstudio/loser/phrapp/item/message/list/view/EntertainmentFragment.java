@@ -18,19 +18,23 @@ import com.starstudio.loser.phrapp.item.message.list.contract.CommonContract;
 import com.starstudio.loser.phrapp.item.message.list.model.EntertainmentModel;
 import com.starstudio.loser.phrapp.item.message.list.model.HealthModel;
 import com.starstudio.loser.phrapp.item.message.list.model.data.BaseBean;
+import com.starstudio.loser.phrapp.item.message.list.model.data.UsefulData;
 import com.starstudio.loser.phrapp.item.message.list.presenter.CommonPresenter;
+import com.starstudio.loser.phrapp.item.message.list.presenter.FragmentEventListener;
 import com.starstudio.loser.phrapp.item.message.list.web.PHRWebActivity;
 
-public class EntertainmentFragment extends PHRFragment implements CommonContract.View{
+import java.util.List;
+
+public class EntertainmentFragment extends PHRFragment<FragmentEventListener> implements CommonContract.View{
     private RecyclerView mRecyclerView;
     private RvAdapter mAdapter;
     private CommonContract.Presenter mPresenter;
-    private BaseBean mBaseBean;
+    private List<UsefulData> mData;
 
     @Override
     public void initFragment(View view) {
         mPresenter = new CommonPresenter(this);
-        mPresenter.setModel(new EntertainmentModel());
+        mPresenter.setModel(new EntertainmentModel(mPresenter));
         mPresenter.setView(this);
         mPresenter.attach();
         mRecyclerView = (RecyclerView) view.findViewById(R.id.phr_message_fragment_recycler_view);
@@ -40,11 +44,7 @@ public class EntertainmentFragment extends PHRFragment implements CommonContract
         mAdapter.setListener(new RvAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(int position) {
-                Intent intent = new Intent(getActivity(), PHRWebActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("url", mBaseBean.getResult().getData().get(position).getUrl());
-                intent.putExtras(bundle);
-                startActivity(intent);
+                getListener().startWebActivity(mData.get(position).getUrl());
             }
         });
         mRecyclerView.setAdapter(mAdapter);
@@ -53,8 +53,8 @@ public class EntertainmentFragment extends PHRFragment implements CommonContract
 
 
     @Override
-    public void load(BaseBean baseBean) {
-        mBaseBean = baseBean;
-        mAdapter.setDataList(baseBean);
+    public void loadRecyclerView(List<UsefulData> list) {
+        mData = list;
+        mAdapter.setDataList(list);
     }
 }
