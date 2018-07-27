@@ -115,10 +115,10 @@ public class PHRMainActivity extends PHRActivity{
         login = headerView.findViewById(R.id.phr_phr_main_navigation_view_login);
         login.setVisibility(View.GONE);
 
-        name.setText(map.get("name").toString());
-        note.setText(map.get("note").toString());
+        name.setText(map.get("name"));
+        note.setText(map.get("note"));
         Glide.with(PHRMainActivity.this)
-                .load(map.get("url").toString())
+                .load(map.get("url"))
                 .apply(options)
                 .into(head_img);
     }

@@ -6,7 +6,9 @@ package com.starstudio.loser.phrapp.item.message.list.view;
 */
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -34,8 +36,10 @@ public class HealthFragment extends PHRFragment<FragmentEventListener> implement
     private CommonContract.SimplePresenter mPresenter;
     private List<UsefulData> mData;
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void initFragment(View view) {
+        showProgressDialog();
         mPresenter = new HealthPresenter(this);
         mPresenter.setView(this);
         mPresenter.setModel(new HealthModel(mPresenter));
@@ -52,6 +56,7 @@ public class HealthFragment extends PHRFragment<FragmentEventListener> implement
         });
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(linearLayoutManager);
+        dismissProgressDialog();
     }
 
     @Override

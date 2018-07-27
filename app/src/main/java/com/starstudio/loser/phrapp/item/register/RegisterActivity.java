@@ -101,7 +101,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void signUp(){
-        AVOSCloud.initialize(this,"NUjpdRi6jqP1S2iAfQCs7YNU-gzGzoHsz","27zlhvjRBd155W8iAWSoNJiO");
         AVOSCloud.setDebugLogEnabled(true);
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override

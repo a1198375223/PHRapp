@@ -7,6 +7,7 @@ package com.starstudio.loser.phrapp.item.message.presenter;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 
 import com.starstudio.loser.phrapp.common.base.PHRPresenter;
@@ -21,6 +22,8 @@ import com.starstudio.loser.phrapp.item.message.list.view.ScienceFragment;
 import com.starstudio.loser.phrapp.item.message.list.view.SocialFragment;
 import com.starstudio.loser.phrapp.item.message.list.view.SportsFragment;
 import com.starstudio.loser.phrapp.item.message.list.view.TopFragment;
+
+import static com.avos.avoscloud.AVAnalytics.TAG;
 
 public class MessagePresenterImpl extends PHRPresenter<MessageContract.MessageView, MessageContract.MessageModel> implements MessageContract.MessagePresenter {
     private MessageContract.MessageView mMessageView;
