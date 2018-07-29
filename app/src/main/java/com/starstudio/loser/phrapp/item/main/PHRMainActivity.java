@@ -41,7 +41,7 @@ public class PHRMainActivity extends PHRActivity{
     TextView name,note;
     ImageView head_img;
     Button login;
-    Menu menu;
+    Menu logout;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -94,6 +94,7 @@ public class PHRMainActivity extends PHRActivity{
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(PHRMainActivity.this, LoginActivity.class));
+                finish();
             }
         });
     }
@@ -106,8 +107,9 @@ public class PHRMainActivity extends PHRActivity{
                 .diskCacheStrategy(DiskCacheStrategy.NONE);
 
         View headerView = navigationView.getHeaderView(0);
-        menu = navigationView.getMenu();
-        menu.findItem(R.id.phr_main_navigation_view_menu_item5).setVisible(true);//登录后让“退出登录”可见
+        logout = navigationView.getMenu();
+        logout.findItem(R.id.phr_main_navigation_view_menu_item5).setVisible(true);
+        logout.findItem(R.id.phr_main_navigation_view_menu_item4).setVisible(true);//登录后让“退出登录”和“个人信息管理可见”可见
         name = (TextView) headerView.findViewById(R.id.phr_main_navigation_view_header_name_text);
         note = (TextView) headerView.findViewById(R.id.phr_main_navigation_view_header_note_text);
         head_img = (ImageView) headerView.findViewById(R.id.phr_main_navigation_view_header_icon);
