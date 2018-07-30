@@ -64,12 +64,7 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
                         Toast.makeText(activity, "click item3", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.phr_main_navigation_view_menu_item4:
-                        SharedPreferences pref = activity.getSharedPreferences("user_data",MODE_PRIVATE );
-                        Bundle b=new Bundle();
-                        b.putString("name",pref.getString("name",""));
-                        b.putString("note",pref.getString("note",""));
-                        b.putString("url",pref.getString("url",""));
-                        activity.startActivity(new Intent(activity, ModifyActivity.class).putExtras(b));
+                        activity.startActivity(new Intent(activity, ModifyActivity.class));
                         Toast.makeText(activity, "click item4", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.phr_main_navigation_view_menu_item5:

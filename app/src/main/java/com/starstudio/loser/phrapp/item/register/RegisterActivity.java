@@ -122,8 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
                     } else {
-
-                        AVUser user = new AVUser();// 新建 AVUser 对象实例
+                        final AVUser user = new AVUser();// 新建 AVUser 对象实例
                         user.setUsername(name);// 设置用户名
                         user.setPassword(password);// 设置密码
                         user.setEmail(mail);
@@ -135,11 +134,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 if (e == null) {
                                     Bundle b = new Bundle();
                                     b.putString("url", "");
-                                    b.putString("name", username.getText().toString());
-                                    b.putString("note", email.getText().toString());
+                                    b.putString("name", user.getUsername());
+                                    b.putString("note", user.getString("note"));
                                     Intent intent = new Intent(RegisterActivity.this, PHRMainActivity.class);
                                     intent.putExtras(b);
                                     startActivity(intent);
+                                    finish();
                                 } else {
                                     Log.d(TAG, "done: " + e.getCode());
                                     if (e.getCode()==0){

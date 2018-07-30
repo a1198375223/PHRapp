@@ -70,18 +70,18 @@ public class LoginActivity extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         try {
-                                            AVQuery<AVObject> avFileAVQuery = new AVQuery<>("_File");
-                                            AVObject avFile=avFileAVQuery.get(user.getAVObject("head_img").getObjectId());
-                                            Log.d(TAG, "直接获取文件："+avFile.get("url"));
+//                                            AVQuery<AVObject> avFileAVQuery = new AVQuery<>("_File");
+//                                            AVObject avFile=avFileAVQuery.get(user.getAVObject("head_img").getObjectId());
+//                                            Log.d(TAG, "直接获取文件："+avFile.get("url"));
                                             Bundle b=new Bundle();
-                                            b.putString("url",avFile.get("url").toString());
-                                            b.putString("name",user.getUsername());
-                                            b.putString("note",user.get("note").toString());
+//                                            b.putString("url",avFile.get("url").toString());
+//                                            b.putString("name",user.getUsername());
+//                                            b.putString("note",user.get("note").toString());
                                             Intent intent = new Intent(LoginActivity.this, PHRMainActivity.class);
                                             intent.putExtras(b);
                                             startActivity(intent);
                                             finish();
-                                        }catch (AVException ave){
+                                        }catch (Exception ave){
                                             ave.printStackTrace();
                                         }
                                     }
