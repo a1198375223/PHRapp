@@ -102,6 +102,7 @@ public class CommonPresenter extends PHRFragmentPresenter<CommonContract.View, C
     @Override
     public void loadView(List<UsefulData> list) {
         mView.loadRecyclerView(list);
+        mView.dismissProgressDialog();
         mView.showSuccessToast("加载成功");
     }
 }

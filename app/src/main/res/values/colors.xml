@@ -47,4 +47,9 @@
 
     <!--progress bg-->
     <color name="color_progress_bg">#00d6cfcf</color>
+
+    <!--text color-->
+    <color name="color_text_title">#333333</color>
+    <color name="color_text_sub_title">#666666</color>
+    <color name="color_text_hint">#aaaaaa</color>
 </resources>

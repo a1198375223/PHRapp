@@ -34,6 +34,7 @@
             <!--</intent-filter>-->
         </activity>
         <activity android:name=".item.message.list.web.PHRWebActivity"/>
+        <activity android:name=".item.community.CommunityActivity"/>
     </application>
 
 </manifest>

@@ -52,7 +52,4 @@ public class FashionModel extends PHRModel implements CommonContract.Model {
     }
 
 
-    public boolean isRepeat() {
-        return false;
-    }
 }

@@ -105,6 +105,6 @@ public class HealthPresenter extends PHRFragmentPresenter<CommonContract.View, C
     public void loadView(List<UsefulData> list) {
         mView.loadRecyclerView(list);
         mView.dismissProgressDialog();
-        mView.showSuccessToast("加载成功");
+        //mView.showSuccessToast("加载成功");
     }
 }

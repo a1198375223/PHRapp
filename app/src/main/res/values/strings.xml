@@ -42,5 +42,40 @@
     <string name="phr_message_menu_add">添加</string>
     <string name="phr_message_menu_delete">删除</string>
 
+    <!--community string-->
+    <string name="phr_community_name">用户名</string>
+    <string name="phr_community_description">描述</string>
+    <string name="phr_community_time">发布时间</string>
+    <string name="phr_community_title">输入标题</string>
+    <string name="phr_community_sub_title">输入正文</string>
+    <string name="phr_community_text">3行正文</string>
+    <string name="phr_community_count">1.3k</string>
+    <string name="phr_community_goon">继续</string>
+
+    <!--write fragment string-->
+    <string name="phr_write_positive">发布</string>
+    <string name="phr_write_negative">取消</string>
+    <string name="phr_write_error_title">出错啦~</string>
+    <string name="phr_write_error_content">请先登入</string>
+    <string name="phr_write_error_ok">确认</string>
+
+    <string name="phr_community_text_test">静夜思\n
+[唐] 李白\n
+床前明月光，疑是地上霜。\n
+举头望明月，低头思故乡。</string>
+
+
+    <string name="my_text">北京时间7月31日消息，36岁的老将德维恩-韦德今夏成为了自由球员，迈阿密热火队率先表达了对其留下的渴望，并表示他们愿意耐心等待韦德最终做出决定，不过热火现在仍没有透露具体的报价。今日，韦德在接受采访时表示，他会做出对自己家庭最好的决定。
+
+“到时候就知道了。”韦德在接受采访时说道，“时间会告诉答案。”
+
+“我的还在正在读高中三年级，”韦德继续说道，“现在这个时候，我已经36岁了，尤其是进入职业生涯的这个时候，很多决定都是要围绕家庭来做决定，我要做对最好的决定。所以我会确保我的儿子们得到能够让他们在比赛，或是在生活中取得成功的任何工具。”
+
+值得一提的是，热火队总裁帕特-莱利在此前接受采访时表示，他将与球队经理米奇-阿里森商谈韦德的未来问题，不过，热火目前只能给韦德提供两份合同：530万的中产特例，240万的老将底薪。莱利表示，在今年夏天，热火已经与韦德及其经纪人莱昂-罗斯有过交流，但显然结果并不是很理想，双方都没有透露任何谈话细节。值得一提的是，有媒体爆料CBA的浙江稠州银行男篮已经为韦德提供了一份3年2500万美元的合同。
+
+在上赛季即将结束时，韦德已经多次表示自己并不确定是否会继续在NBA征战自己的第16个赛季，之后他也没有对这种表述做过任何修改。最近几周，韦德仍然坚持做训练，包括和勒布朗-詹姆斯在拉斯维加斯看夏季联赛，但这并不能说明他是否会继续打球。
+
+过去的一个赛季，韦德先是在骑士队效力，赛季中期的时候，他被交易到了热火。过去一个赛季，韦德替补出场，场均可以得到12分3.4个篮板和3.1次助攻。</string>
+
 
 </resources>

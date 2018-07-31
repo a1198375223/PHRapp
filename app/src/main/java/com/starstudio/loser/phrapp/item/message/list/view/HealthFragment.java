@@ -39,7 +39,6 @@ public class HealthFragment extends PHRFragment<FragmentEventListener> implement
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void initFragment(View view) {
-        showProgressDialog();
         mPresenter = new HealthPresenter(this);
         mPresenter.setView(this);
         mPresenter.setModel(new HealthModel(mPresenter));
@@ -56,7 +55,6 @@ public class HealthFragment extends PHRFragment<FragmentEventListener> implement
         });
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        dismissProgressDialog();
     }
 
     @Override
