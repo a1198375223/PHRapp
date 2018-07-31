@@ -82,9 +82,14 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                 .error(R.drawable.default_head)
                 .diskCacheStrategy(DiskCacheStrategy.NONE);
 
-        AVUser avUser = AVUser.getCurrentUser();
-        AVFile avFile = avUser.getAVFile("head_img");
-        initText(avUser);
+        AVQuery<AVUser> userQuery = new AVQuery<>("_User");
+        userQuery.whereEqualTo("objectId",AVUser.getCurrentUser().getObjectId());
+        userQuery.getFirstInBackground(new GetCallback<AVUser>() {
+            @Override
+            public void done(AVUser avUser, AVException e) {
+                initText(avUser);
+            }
+        });
         change_name = (RelativeLayout) findViewById(R.id.phr_modify_change_name);
         change_name.setOnClickListener(this);
         change_email = (RelativeLayout) findViewById(R.id.phr_modify_change_email);
@@ -104,6 +109,8 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
 
         head_back = (ImageView) findViewById(R.id.phr_modify_back);
         head_img = (ImageView) findViewById(R.id.phr_modify_head);
+
+        AVFile avFile = AVUser.getCurrentUser().getAVFile("head_img");
         Glide.with(this).load(avFile.getUrl())
                 .apply(options.bitmapTransform(new BlurTransformation(25, 3)))
                 .into(head_back);
