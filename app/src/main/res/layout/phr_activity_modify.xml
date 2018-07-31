@@ -36,7 +36,7 @@
                     android:id="@+id/phr_modify_change_head"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="30dp"
                     android:text="更换头像"
@@ -47,7 +47,7 @@
                     android:id="@+id/phr_modify_back"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="0dp"
                     android:fitsSystemWindows="true"
@@ -56,36 +56,10 @@
                     app:layout_collapseMode="parallax" />
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/phr_modify_head"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="170dp"
+                    android:layout_height="170dp"
                     android:layout_centerInParent="true"
                     android:src="@drawable/default_head"/>
-                <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/phr_modify_back"
-                android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/phr_modify_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="17sp"
-                        android:layout_gravity="center_horizontal"
-                        android:textColor="@color/phr_black"
-                        android:text="用户名"/>
-
-                    <TextView
-                        android:id="@+id/phr_modify_note"
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true"
-                        android:textSize="17sp"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center"
-                        android:textColor="@color/phr_black"
-                        android:text="个性签名"/>
-                </LinearLayout>
-
             </RelativeLayout>
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -100,81 +74,150 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/phr_modify_change_name">
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
                 android:src="@drawable/phr_modify_name" />
 
             <TextView
+                android:id="@+id/phr_modify_tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="修改用户名"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40dp"
+                android:text="用户名"
                 android:textSize="18sp" />
-        </LinearLayout>
 
-        <LinearLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:text="修改"
+                android:textSize="18sp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/phr_modify_right_arrow"/>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/phr_modify_change_phone">
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
                 android:src="@drawable/phr_modify_phone" />
 
             <TextView
+                android:id="@+id/phr_modify_tv_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="修改手机号"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40dp"
+                android:text="手机号"
                 android:textSize="18sp" />
-        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:text="修改"
+                android:textSize="18sp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/phr_modify_right_arrow"/>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/phr_modify_change_email">
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
                 android:src="@drawable/phr_modify_email" />
 
             <TextView
+                android:id="@+id/phr_modify_tv_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="修改邮箱"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40dp"
+                android:text="邮箱"
                 android:textSize="18sp" />
-        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:text="修改"
+                android:textSize="18sp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/phr_modify_right_arrow"/>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/phr_modify_change_note">
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
                 android:src="@drawable/phr_modify_note" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/phr_modify_tv_note"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40dp"
                 android:text="个性签名"
                 android:textSize="18sp" />
-        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:text="修改"
+                android:textSize="18sp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/phr_modify_right_arrow"/>
+        </RelativeLayout>
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

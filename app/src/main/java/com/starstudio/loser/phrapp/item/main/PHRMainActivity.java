@@ -22,10 +22,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.GetCallback;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -54,25 +56,14 @@ public class PHRMainActivity extends PHRActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phr_main_layout);
 
-        //通过检测Bundle来判断是否由Login启动，若不是再判断以前是否登录
-//        NavigationView navigationView =  (NavigationView) findViewById(R.id.phr_main_navigation_view);
-//        Bundle b = getIntent().getExtras();
-//        if (b==null){
-//            Map<String,String> map = get_user();
-//            if (map==null||map.get("name").equals("")){
-//                initView(navigationView);//以前没登陆则侧滑栏显示登录按钮
-//                Log.d(TAG, "onCreate: initView()启动方式");
-//            }else {
-//                set_head(map, navigationView);//以前登录过则用保存的字段设置navigationView的名字图片
-//                Log.d(TAG, "onCreate: set_head()启动方式");
-//            }
-//        }else{
-//            set_head_by_login(b,navigationView);//从登录页面跳转转来
-//            Log.d(TAG, "onCreate: set_head_by_login()启动方式");
-//        }
-//
-//        Log.d(TAG, "+++++++++++++++++++:----------------测试成功");
-
+        NavigationView navigationView =  (NavigationView) findViewById(R.id.phr_main_navigation_view);
+        if (getIntent().getExtras()==null){
+            initView(navigationView);//以前没登陆则侧滑栏显示登录按钮
+            Log.d(TAG, "onCreate: initView()启动方式");
+        }else {
+            set_head_by_login(navigationView);//从登录页面跳转转来
+            Log.d(TAG, "onCreate: set_head()启动方式");
+        }
 
         mPresenter = new MainPresenterImpl(this);
         mPresenter.setModel(new MainModelmpl());
@@ -105,33 +96,7 @@ public class PHRMainActivity extends PHRActivity{
         });
     }
 
-
-//    private void set_head(Map<String,String> map, NavigationView navigationView) {
-//        RequestOptions options = new RequestOptions()
-//                .placeholder(R.drawable.waiting)
-//                .error(R.drawable.default_head)
-//                .diskCacheStrategy(DiskCacheStrategy.NONE);
-//
-//        View headerView = navigationView.getHeaderView(0);
-//        logout = navigationView.getMenu();
-//        logout.findItem(R.id.phr_main_navigation_view_menu_item5).setVisible(true);
-//        logout.findItem(R.id.phr_main_navigation_view_menu_item4).setVisible(true);//登录后让“退出登录”和“个人信息管理可见”可见
-//        name = (TextView) headerView.findViewById(R.id.phr_main_navigation_view_header_name_text);
-//        note = (TextView) headerView.findViewById(R.id.phr_main_navigation_view_header_note_text);
-//        head_img = (ImageView) headerView.findViewById(R.id.phr_main_navigation_view_header_icon);
-//        head_img.setVisibility(View.VISIBLE);
-//        login = headerView.findViewById(R.id.phr_phr_main_navigation_view_login);
-//        login.setVisibility(View.GONE);
-//
-//        name.setText(map.get("name").toString());
-//        note.setText(map.get("note").toString());
-//        Glide.with(PHRMainActivity.this)
-//                .load(map.get("url").toString())
-//                .apply(options)
-//                .into(head_img);
-//    }
-
-    private void set_head(NavigationView navigationView) {
+    private void set_head(AVUser avUser,NavigationView navigationView) {
         RequestOptions options = new RequestOptions()
                 .placeholder(R.drawable.waiting)
                 .error(R.drawable.default_head)
@@ -148,8 +113,7 @@ public class PHRMainActivity extends PHRActivity{
         login = headerView.findViewById(R.id.phr_phr_main_navigation_view_login);
         login.setVisibility(View.GONE);
 
-        AVUser avUser = AVUser.getCurrentUser();
-        AVFile avFile = avUser.getAVFile("head");
+        AVFile avFile = avUser.getAVFile("head_img");
         name.setText(avUser.getUsername());
         note.setText(avUser.getString("note"));
 
@@ -160,40 +124,16 @@ public class PHRMainActivity extends PHRActivity{
 
     }
 
-    private void set_head_by_login(Bundle b,NavigationView navigationView){
-        set_head(navigationView);
+    private void set_head_by_login(NavigationView navigationView){
+        set_head(AVUser.getCurrentUser(),navigationView);
         save_user(true);
     }
-
-//    public  void set_head_after_modify(){
-//        Map<String,String> map = new HashMap();
-//        map.put("name", AVUser.getCurrentUser().getUsername());
-//        map.put("note",AVUser.getCurrentUser().getString("note"));
-//        AVFile file = AVUser.getCurrentUser().getAVFile("head_img");
-//        map.put("url", file.getUrl());
-//        set_head(map,(NavigationView) findViewById(R.id.phr_main_navigation_view));
-//        save_user(map);
-//    }
 
     private void save_user(boolean b){
         SharedPreferences.Editor editor = getSharedPreferences("user_data",MODE_PRIVATE).edit();
         editor.putBoolean("is_login",b);
         editor.apply();
     }
-
-//    private Map<String,String> get_user(){
-//        try {
-//            SharedPreferences pref = getSharedPreferences("user_data",MODE_PRIVATE );
-//            Map map = new HashMap();
-//            map.put("name",pref.getString("name",""));
-//            map.put("note",pref.getString("note",""));
-//            map.put("url",pref.getString("url",""));
-//            return map;
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
 
     private boolean is_login(){
         try {
@@ -207,23 +147,18 @@ public class PHRMainActivity extends PHRActivity{
 
     @Override
     protected void onResume() {
-        NavigationView navigationView =  (NavigationView) findViewById(R.id.phr_main_navigation_view);
-        Bundle b = getIntent().getExtras();
-        if (b==null){
-            if (!is_login()){
-                initView(navigationView);//以前没登陆则侧滑栏显示登录按钮
-                Log.d(TAG, "onCreate: initView()启动方式");
-            }else {
-                set_head(navigationView);//以前登录过则用保存的字段设置navigationView的名字图片
-                Log.d(TAG, "onCreate: set_head()启动方式");
-            }
-        }else{
-            set_head_by_login(b,navigationView);//从登录页面跳转转来
-            Log.d(TAG, "onCreate: set_head_by_login()启动方式");
-        }
+        if (is_login()) {//若登录了，每次回到栈顶就刷新
+            AVQuery<AVUser> userQuery = new AVQuery<>("_User");
+            userQuery.whereEqualTo("objectId",AVUser.getCurrentUser().getObjectId());
+            userQuery.getFirstInBackground(new GetCallback<AVUser>() {
+                @Override
+                public void done(AVUser avUser, AVException e) {
+                    set_head(avUser,(NavigationView) findViewById(R.id.phr_main_navigation_view));
+                }
+            }); //保存成功就更新当前页面的信息
 
-        Log.d(TAG, "+++++++++++++++++++:----------------测试成功");
+            Log.d(TAG, "onResume: set_head()启动方式");
+        }
         super.onResume();
-        Log.d(TAG, "onResume: 从个人信息页面启动！");
     }
 }

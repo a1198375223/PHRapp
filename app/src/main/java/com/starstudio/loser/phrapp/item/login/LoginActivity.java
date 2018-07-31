@@ -65,42 +65,11 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void done(AVUser avUser, AVException e) {
                             if (e == null) {
-                                final AVUser user = avUser;
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
-//                                            AVQuery<AVObject> avFileAVQuery = new AVQuery<>("_File");
-//                                            AVObject avFile=avFileAVQuery.get(user.getAVObject("head_img").getObjectId());
-//                                            Log.d(TAG, "直接获取文件："+avFile.get("url"));
-                                            Bundle b=new Bundle();
-//                                            b.putString("url",avFile.get("url").toString());
-//                                            b.putString("name",user.getUsername());
-//                                            b.putString("note",user.get("note").toString());
-                                            Intent intent = new Intent(LoginActivity.this, PHRMainActivity.class);
-                                            intent.putExtras(b);
-                                            startActivity(intent);
-                                            finish();
-                                        }catch (Exception ave){
-                                            ave.printStackTrace();
-                                        }
-                                    }
-                                }).start();
-//                                AVQuery<AVObject> query = new AVQuery<>("_User");
-//                                query.whereEqualTo("mobilePhoneNumber",phoneNumber);
-//                                query.include("head_img");
-//                                query.getFirstInBackground(new GetCallback<AVObject>() {
-//                                    @Override
-//                                    public void done(AVObject avObject, AVException e) {
-//                                        Bundle b=new Bundle();
-//                                        b.putString("url",avObject.getAVFile("head_img").getUrl());
-//                                        b.putString("name",avObject.getString("username"));
-//                                        b.putString("note",avObject.getString("email"));
-//                                        Intent intent = new Intent(LoginActivity.this, PHRMainActivity.class);
-//                                        intent.putExtras(b);
-//                                        startActivity(intent);
-//                                    }
-//                                });
+                                Bundle b=new Bundle();
+                                Intent intent = new Intent(LoginActivity.this, PHRMainActivity.class);
+                                intent.putExtras(b);
+                                startActivity(intent);
+                                finish();
                             } else {
                                 if (e.getCode() == 0) {
                                     Toast toast = Toast.makeText(LoginActivity.this, "无法连接到服务器！", Toast.LENGTH_SHORT);
