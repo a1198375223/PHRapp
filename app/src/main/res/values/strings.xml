@@ -4,7 +4,7 @@
     <string name="phr_main_navigation_view_header_note">备注</string>
     <string name="phr_main_navigation_view_menu_item1">item1</string>
     <string name="phr_main_navigation_view_menu_item2">item2</string>
-    <string name="phr_main_navigation_view_menu_item3">item3</string>
+    <string name="phr_main_navigation_view_menu_item3">个人PHR管理</string>
     <string name="phr_main_navigation_view_menu_item4">个人信息管理</string>
     <string name="phr_main_navigation_view_menu_item5">退出登录</string>
     <string name="phr_main_gridlayout_text1">健康咨询</string>

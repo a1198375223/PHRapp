@@ -45,6 +45,7 @@ dependencies {
     implementation 'jp.wasabeef:glide-transformations:3.3.0' //高斯模糊化
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.getbase:floatingactionbutton:1.10.1'//Float Action Button依赖包
 
     // LeanCloud 基础包
     implementation 'cn.leancloud.android:avoscloud-sdk:v4.6.4'

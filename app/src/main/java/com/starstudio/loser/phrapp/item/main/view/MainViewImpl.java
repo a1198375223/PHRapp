@@ -27,6 +27,7 @@ import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.common.base.PHRView;
 import com.starstudio.loser.phrapp.item.main.PHRMainActivity;
 import com.starstudio.loser.phrapp.item.main.contract.MainContract;
+import com.starstudio.loser.phrapp.item.management.ManageMainActivity;
 import com.starstudio.loser.phrapp.item.message.PHRMessageActivity;
 import com.starstudio.loser.phrapp.item.modify.ModifyActivity;
 
@@ -61,6 +62,7 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
                         Toast.makeText(activity, "click item2", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.phr_main_navigation_view_menu_item3:
+                        activity.startActivity(new Intent(activity, ManageMainActivity.class));
                         Toast.makeText(activity, "click item3", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.phr_main_navigation_view_menu_item4:
@@ -72,6 +74,7 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
                         pref_clean.edit().clear().commit();
                         activity.initView(navigationView);
                         navigationView.getMenu().findItem(R.id.phr_main_navigation_view_menu_item4).setVisible(false);
+                        navigationView.getMenu().findItem(R.id.phr_main_navigation_view_menu_item3).setVisible(false);
                         item.setVisible(false);
                         AVUser.logOut();
                         Toast.makeText(activity, "已退出登录", Toast.LENGTH_SHORT).show();
