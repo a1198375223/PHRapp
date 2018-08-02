@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/phr_white">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/phr_community_post_message_toolbar"
+        android:background="@color/phr_white"
+        app:navigationIcon="@drawable/phr_arrow_back_black_24"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/phr_community_post_message_title"
+        android:hint="@string/phr_community_title"
+        android:textColor="@color/color_text_title"
+        android:layout_marginLeft="@dimen/phr_margin_3"
+        android:layout_marginRight="@dimen/phr_margin_3"
+        android:layout_marginTop="@dimen/phr_margin_2"
+        android:layout_marginBottom="@dimen/phr_margin_2"
+        android:textColorHint="@color/color_text_hint"
+        style="@style/PHR.EditView"
+        android:textSize="@dimen/phr_text_size_20"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:text="@string/phr_community_text_test"
+        android:id="@+id/phr_community_post_message_text"
+        android:layout_marginLeft="@dimen/phr_margin_5"
+        android:layout_marginRight="@dimen/phr_margin_5"
+        android:layout_marginBottom="@dimen/phr_margin_2"
+        android:lineSpacingExtra="@dimen/phr_padding_5"
+        android:textSize="@dimen/phr_text_size_14"
+        android:textColor="@color/color_text_sub_title"
+        android:background="@null"
+        android:gravity="start|top"
+        android:hint="@string/phr_community_sub_title"
+        android:textColorHint="@color/color_text_hint"/>
+
+</LinearLayout>

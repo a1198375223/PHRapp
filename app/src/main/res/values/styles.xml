@@ -64,5 +64,11 @@
         <item name="android:textColor">@color/text</item>
     </style>
 
+    <!--edit view-->
+    <style name="PHR.EditView" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorControlNormal">@color/color_text_hint</item>
+        <item name="colorControlActivated">@color/color_text_hint</item>
+    </style>
+
 
 </resources>

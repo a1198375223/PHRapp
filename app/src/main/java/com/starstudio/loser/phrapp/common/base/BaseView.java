@@ -12,4 +12,10 @@ public interface BaseView<E extends BaseEventListener> {
     void showProgressDialog();
 
     void dismissProgressDialog();
+
+    void showErrorToast(String message);
+
+    void showWarningToast(String message);
+
+    void showSuccessToast(String message);
 }

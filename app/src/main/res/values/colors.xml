@@ -51,4 +51,9 @@
     <!--悬浮球-->
     <color name="black_semi_transparent">#B2000000</color>
     <color name="text">#FFFFFF</color>
+
+    <!--text color-->
+    <color name="color_text_title">#333333</color>
+    <color name="color_text_sub_title">#666666</color>
+    <color name="color_text_hint">#aaaaaa</color>
 </resources>

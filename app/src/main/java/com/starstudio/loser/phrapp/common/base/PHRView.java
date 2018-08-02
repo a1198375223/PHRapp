@@ -8,8 +8,11 @@ package com.starstudio.loser.phrapp.common.base;
 import android.app.Activity;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.widget.Toast;
 
 import com.starstudio.loser.phrapp.common.view.PHRProgressDialog;
+
+import es.dmoral.toasty.Toasty;
 
 
 public class PHRView<E extends BaseEventListener> implements BaseView<E> {
@@ -52,6 +55,21 @@ public class PHRView<E extends BaseEventListener> implements BaseView<E> {
             mDialog.dismiss();
             mDialog = null;
         }
+    }
+
+    @Override
+    public void showErrorToast(String message) {
+        Toasty.error(getActivity(), message, Toast.LENGTH_SHORT, true).show();
+    }
+
+    @Override
+    public void showWarningToast(String message) {
+        Toasty.warning(getActivity(), message, Toast.LENGTH_SHORT, true).show();
+    }
+
+    @Override
+    public void showSuccessToast(String message) {
+        Toasty.success(getActivity(), message, Toast.LENGTH_SHORT, true).show();
     }
 
 }

@@ -55,7 +55,7 @@ public class HealthModel extends PHRModel implements CommonContract.SimpleModel 
             mPresenter.loadView(mList);
         } else {
             AVQuery<AVObject> query = new AVQuery<>("HealthData");
-            query.addDescendingOrder("createAt");
+            query.addDescendingOrder("createdAt");
             query.findInBackground(new FindCallback<AVObject>() {
                 @Override
                 public void done(List<AVObject> list, AVException e) {
@@ -78,6 +78,7 @@ public class HealthModel extends PHRModel implements CommonContract.SimpleModel 
             usefulData.setImage1(item.getString("image1"));
             usefulData.setImage2(item.getString("image2"));
             usefulData.setImage3(item.getString("image3"));
+            usefulData.setAuthor(item.getString("author"));
             lists.add(usefulData);
         }
         return lists;
@@ -86,7 +87,7 @@ public class HealthModel extends PHRModel implements CommonContract.SimpleModel 
     private void checkRepeat(final List<BaseBean.ResultBean.DataBean> get) {
         mList = new ArrayList<>();
             AVQuery<AVObject> query = new AVQuery<>("HealthData");
-            query.limit(60);
+            query.limit(90);
             query.findInBackground(new FindCallback<AVObject>() {
                 @Override
                 public void done(List<AVObject> list, AVException e) {

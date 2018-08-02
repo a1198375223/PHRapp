@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.avos.avoscloud.AVUser;
 import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.common.base.PHRView;
+import com.starstudio.loser.phrapp.item.community.CommunityActivity;
 import com.starstudio.loser.phrapp.item.main.PHRMainActivity;
 import com.starstudio.loser.phrapp.item.main.contract.MainContract;
 import com.starstudio.loser.phrapp.item.management.ManageMainActivity;
@@ -120,10 +121,10 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = null;
                 switch (position) {
                     case 0:
-                        Toast.makeText(activity, "no 1", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent((PHRMainActivity) activity, PHRMessageActivity.class);
+                        intent = new Intent((PHRMainActivity) activity, PHRMessageActivity.class);
                         activity.startActivity(intent);
                         break;
                     case 1:
@@ -136,7 +137,8 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
                         Toast.makeText(activity, "no 4", Toast.LENGTH_SHORT).show();
                         break;
                     case 4:
-                        Toast.makeText(activity, "no 5", Toast.LENGTH_SHORT).show();
+                        intent = new Intent((PHRMainActivity) activity, CommunityActivity.class);
+                        activity.startActivity(intent);
                     default:
                 }
             }
