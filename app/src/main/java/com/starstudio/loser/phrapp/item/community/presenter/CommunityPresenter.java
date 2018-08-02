@@ -6,32 +6,45 @@ package com.starstudio.loser.phrapp.item.community.presenter;
 */
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.common.PHRActivity;
 import com.starstudio.loser.phrapp.common.base.PHRPresenter;
+import com.starstudio.loser.phrapp.item.community.child.contract.DynamicContract;
+import com.starstudio.loser.phrapp.item.community.child.contract.MyArticleContract;
+import com.starstudio.loser.phrapp.item.community.child.model.DynamicModel;
+import com.starstudio.loser.phrapp.item.community.child.model.MyArticleModel;
+import com.starstudio.loser.phrapp.item.community.child.presenter.DynamicPresenter;
+import com.starstudio.loser.phrapp.item.community.child.presenter.MyArticlePresenter;
+import com.starstudio.loser.phrapp.item.community.child.view.DynamicView;
+import com.starstudio.loser.phrapp.item.community.child.view.MyArticleView;
 import com.starstudio.loser.phrapp.item.community.contract.CommunityContract;
 import com.starstudio.loser.phrapp.item.community.fragment.view.WriteFragment;
 
 public class CommunityPresenter extends PHRPresenter<CommunityContract.CommunityView, CommunityContract.CommunityModel> implements CommunityContract.CommunityPresenter{
     private CommunityContract.CommunityView mView;
     private CommunityContract.CommunityModel mModel;
+    private DynamicView mDynamicView;
+    private MyArticleView mMyArticleView;
+
     private CommunityEventListener mListener = new CommunityEventListener() {
+
         @Override
-        public View getView(int position) {
-            View view = null;
+        public Fragment getFragment(int position) {
+            Fragment fragment = null;
             switch (position) {
                 case 0:
-                    view = mView == null ? null : new View(getActivity());
+                    fragment = mView == null ? null : mDynamicView;
                     break;
                 case 1:
-                    view = mView == null ? null : new View(getActivity());
+                    fragment = mView == null ? null : mMyArticleView;
                     break;
                 default:
             }
-            return view;
+            return fragment;
         }
 
         @Override
@@ -54,10 +67,20 @@ public class CommunityPresenter extends PHRPresenter<CommunityContract.Community
         mModel = getModel();
 
         mView.setEventListener(mListener);
+
+        mDynamicView = new DynamicView();
+
+        mMyArticleView = new MyArticleView();
     }
+
 
     @Override
     protected void onDetach() {
+    }
 
+    @Override
+    public void childRefresh() {
+        mDynamicView.tellToRefresh();
+        mMyArticleView.tellToRefresh();
     }
 }

@@ -9,24 +9,23 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-
-
 import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.common.PHRActivity;
+import com.starstudio.loser.phrapp.item.community.callback.AFCallback;
 import com.starstudio.loser.phrapp.item.community.contract.CommunityContract;
-import com.starstudio.loser.phrapp.item.community.fragment.view.WriteFragment;
 import com.starstudio.loser.phrapp.item.community.model.CommunityModel;
 import com.starstudio.loser.phrapp.item.community.presenter.CommunityPresenter;
 import com.starstudio.loser.phrapp.item.community.view.CommunityView;
-
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import java.util.Objects;
 
-public class CommunityActivity extends PHRActivity {
+public class CommunityActivity extends PHRActivity implements AFCallback{
     private CommunityContract.CommunityPresenter mPresenter;
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -36,6 +35,7 @@ public class CommunityActivity extends PHRActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.phr_community_toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+//        EventBus.getDefault().register(this);
         mPresenter = new CommunityPresenter(this);
         mPresenter.setModel(new CommunityModel());
         mPresenter.setView(new CommunityView(this));
@@ -43,8 +43,22 @@ public class CommunityActivity extends PHRActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.detach();
+//        if (EventBus.getDefault().isRegistered(this)) {
+//            EventBus.getDefault().unregister(this);
+//        }
+    }
+
+    @Override
+    public void tellToRefresh() {
+        mPresenter.childRefresh();
     }
 }

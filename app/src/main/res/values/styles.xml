@@ -4,7 +4,7 @@
     <style name="PHR.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/color_main_image_bg</item>
         <item name="colorAccent">@color/color_main_image_bg</item>
         <item name="android:windowBackground">@color/color_login_bg1</item>
         <!--菜单栏的颜色-->
@@ -55,6 +55,8 @@
         <item name="android:contentInsetStart" tools:targetApi="lollipop">0dp</item>
         <item name="android:contentInsetStartWithNavigation" tools:targetApi="n">0dp</item>
     </style>
+
+    <style name="ModifyActivityTheme" parent="PHR.AppTheme"/>
 
     <!--edit view-->
     <style name="PHR.EditView" parent="Theme.AppCompat.Light.NoActionBar">

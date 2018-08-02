@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
@@ -47,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         password=(EditText) findViewById(R.id.phr_login_password);
         login_btn=(Button) findViewById(R.id.phr_login_login);
         sign_in=(TextView) findViewById(R.id.tv_register);
+        AVOSCloud.initialize(this,"NUjpdRi6jqP1S2iAfQCs7YNU-gzGzoHsz","27zlhvjRBd155W8iAWSoNJiO");
         find_pwd=(TextView) findViewById(R.id.tv_find);
         AVOSCloud.setDebugLogEnabled(true);
         login_btn.setOnClickListener(new View.OnClickListener() {
@@ -63,21 +65,11 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void done(AVUser avUser, AVException e) {
                             if (e == null) {
-                                AVQuery<AVObject> query = new AVQuery<>("_User");
-                                query.whereEqualTo("mobilePhoneNumber",phoneNumber);
-                                query.include("head_img");
-                                query.getFirstInBackground(new GetCallback<AVObject>() {
-                                    @Override
-                                    public void done(AVObject avObject, AVException e) {
-                                        Bundle b=new Bundle();
-                                        b.putString("url",avObject.getAVFile("head_img").getUrl());
-                                        b.putString("name",avObject.getString("username"));
-                                        b.putString("note",avObject.getString("email"));
-                                        Intent intent = new Intent(LoginActivity.this, PHRMainActivity.class);
-                                        intent.putExtras(b);
-                                        startActivity(intent);
-                                    }
-                                });
+                                Bundle b=new Bundle();
+                                Intent intent = new Intent(LoginActivity.this, PHRMainActivity.class);
+                                intent.putExtras(b);
+                                startActivity(intent);
+                                finish();
                             } else {
                                 if (e.getCode() == 0) {
                                     Toast toast = Toast.makeText(LoginActivity.this, "无法连接到服务器！", Toast.LENGTH_SHORT);

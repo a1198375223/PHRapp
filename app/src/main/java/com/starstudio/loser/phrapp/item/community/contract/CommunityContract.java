@@ -20,7 +20,6 @@ public interface CommunityContract {
     }
 
     interface CommunityPresenter extends BasePresenter<CommunityView, CommunityModel> {
-
-
+        void childRefresh();
     }
 }

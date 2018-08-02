@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.starstudio.loser.phrapp">
 
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -23,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".item.register.RegisterActivity"/>
+        <activity android:name=".item.register.RegisterActivity" />
         <activity android:name=".common.PHRActivity" />
         <activity android:name=".item.message.PHRMessageActivity" />
         <activity android:name=".item.login.LoginActivity">
@@ -33,8 +34,11 @@
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".item.message.list.web.PHRWebActivity"/>
-        <activity android:name=".item.community.CommunityActivity"/>
+        <activity android:name=".item.message.list.web.PHRWebActivity" />
+        <activity android:name=".item.modify.ModifyActivity"
+            android:theme="@style/ModifyActivityTheme"/>
+        <activity android:name=".item.community.CommunityActivity"
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>

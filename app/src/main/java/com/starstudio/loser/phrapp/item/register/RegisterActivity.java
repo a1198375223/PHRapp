@@ -35,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button sign_up;
     private RadioGroup sexGroup;
     private RadioButton boy,girl;
-    private String sex;
+    private static String sex;
     private android.support.v7.widget.Toolbar toolbar;
 
     @Override
@@ -82,12 +82,11 @@ public class RegisterActivity extends AppCompatActivity {
         sexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if (boy.getId()==i){
-                    sex=boy.getText().toString();
-                }else{
-                    sex=girl.getText().toString();
-                }
-                //Toast.makeText(RegisterActivity.this,"性别"+sex,Toast.LENGTH_SHORT).show();
+                int id = radioGroup.getCheckedRadioButtonId();
+                // 通过id实例化选中的这个RadioButton
+                RadioButton choise = (RadioButton) findViewById(id);
+                sex=choise.getText().toString();
+                Toast.makeText(RegisterActivity.this,"性别"+sex,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -122,8 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
                     } else {
-
-                        AVUser user = new AVUser();// 新建 AVUser 对象实例
+                        final AVUser user = new AVUser();// 新建 AVUser 对象实例
                         user.setUsername(name);// 设置用户名
                         user.setPassword(password);// 设置密码
                         user.setEmail(mail);
@@ -135,11 +133,12 @@ public class RegisterActivity extends AppCompatActivity {
                                 if (e == null) {
                                     Bundle b = new Bundle();
                                     b.putString("url", "");
-                                    b.putString("name", username.getText().toString());
-                                    b.putString("note", email.getText().toString());
+                                    b.putString("name", user.getUsername());
+                                    b.putString("note", user.getString("note"));
                                     Intent intent = new Intent(RegisterActivity.this, PHRMainActivity.class);
                                     intent.putExtras(b);
                                     startActivity(intent);
+                                    finish();
                                 } else {
                                     Log.d(TAG, "done: " + e.getCode());
                                     if (e.getCode()==0){

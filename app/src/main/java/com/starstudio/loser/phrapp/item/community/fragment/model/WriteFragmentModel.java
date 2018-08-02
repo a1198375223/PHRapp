@@ -6,7 +6,9 @@ package com.starstudio.loser.phrapp.item.community.fragment.model;
 */
 
 import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.SaveCallback;
 import com.starstudio.loser.phrapp.common.base.PHRModel;
 import com.starstudio.loser.phrapp.item.community.fragment.contract.WriteFragmentContract;
@@ -22,16 +24,15 @@ public class WriteFragmentModel extends PHRModel implements WriteFragmentContrac
     }
 
     @Override
-    public void saveToDataBase(String title, String text, String name, String image) {
+    public void saveToDataBase(String title, String text, AVUser avUser) {
         Calendar calendar = Calendar.getInstance();
         int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         String date = month + "月" + day + "日";
         AVObject article = new AVObject("Article");
-        article.put("name", name);
-        article.put("image", image);
         article.put("title", title);
         article.put("text", text);
+        article.put("article_user", avUser);
         article.put("date", date);
         article.put("like", 0);
         article.put("dislike", 0);

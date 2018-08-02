@@ -19,7 +19,8 @@
     <item
         android:icon="@mipmap/ic_launcher"
         android:title="@string/phr_main_navigation_view_menu_item4"
-        android:id="@+id/phr_main_navigation_view_menu_item4" />
+        android:id="@+id/phr_main_navigation_view_menu_item4"
+        android:visible="false"/>
 
     <item
         android:id="@+id/phr_main_navigation_view_menu_item5"

@@ -6,6 +6,8 @@ package com.starstudio.loser.phrapp.item.community.fragment.view;
 */
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
@@ -26,11 +28,17 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.common.base.BaseFragment;
+import com.starstudio.loser.phrapp.item.community.CommunityActivity;
+import com.starstudio.loser.phrapp.item.community.callback.AFCallback;
+import com.starstudio.loser.phrapp.item.community.callback.MessageEventBus;
 import com.starstudio.loser.phrapp.item.community.fragment.contract.WriteFragmentContract;
 import com.starstudio.loser.phrapp.item.community.fragment.model.WriteFragmentModel;
 import com.starstudio.loser.phrapp.item.community.fragment.presenter.WriteFragmentEventListener;
 import com.starstudio.loser.phrapp.item.community.fragment.presenter.WriteFragmentPresenter;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.Objects;
 
 public class WriteFragment extends BaseFragment<WriteFragmentEventListener> implements WriteFragmentContract.WriteView{
@@ -38,6 +46,7 @@ public class WriteFragment extends BaseFragment<WriteFragmentEventListener> impl
     private EditText mTitle;
     private EditText mText;
     private MaterialDialog mPostDialog;
+    private AFCallback mCallback;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Nullable
@@ -64,6 +73,12 @@ public class WriteFragment extends BaseFragment<WriteFragmentEventListener> impl
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mCallback = (AFCallback) context;
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         mPresenter.detach();
@@ -80,31 +95,37 @@ public class WriteFragment extends BaseFragment<WriteFragmentEventListener> impl
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.phr_community_post_message_goon:
-                mPostDialog = new MaterialDialog.Builder(Objects.requireNonNull(getActivity()))
-                        .title(mTitle.getText().toString())
-                        .content(mText.getText().toString())
-                        .titleColor(getResources().getColor(R.color.color_text_title, null))
-                        .contentColor(getResources().getColor(R.color.color_text_sub_title, null))
-                        .positiveText(R.string.phr_write_positive)
-                        .negativeText(R.string.phr_write_negative)
-                        .onAny(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                switch (which) {
-                                    case NEGATIVE:
-                                        dialog.dismiss();
-                                        showErrorToast("取消发布");
-                                        break;
-                                    case POSITIVE:
-                                        showProgressDialog();
-                                        getListener().post(mTitle.getText().toString(), mText.getText().toString());
-                                        break;
-                                    default:
+                if (!mTitle.getText().toString().equals("") && !mText.getText().toString().equals("")){
+                    mPostDialog = new MaterialDialog.Builder(Objects.requireNonNull(getActivity()))
+                            .title(mTitle.getText().toString())
+                            .content(mText.getText().toString())
+                            .titleColor(getResources().getColor(R.color.color_text_title, null))
+                            .contentColor(getResources().getColor(R.color.color_text_sub_title, null))
+                            .positiveText(R.string.phr_write_positive)
+                            .negativeText(R.string.phr_write_negative)
+                            .onAny(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    switch (which) {
+                                        case NEGATIVE:
+                                            dialog.dismiss();
+                                            showErrorToast("取消发布");
+                                            break;
+                                        case POSITIVE:
+                                            showProgressDialog();
+                                            getListener().post(mTitle.getText().toString(), mText.getText().toString());
+                                            break;
+                                        default:
+                                    }
                                 }
-                            }
-                        })
-                        .canceledOnTouchOutside(true)
-                        .show();
+                            })
+                            .canceledOnTouchOutside(true)
+                            .show();
+                } else if (mTitle.getText().toString().equals("")){
+                    showErrorToast("标题不能为空");
+                } else if (mText.getText().toString().equals("")) {
+                    showErrorToast("内容不能为空");
+                }
 
                 break;
             default:
@@ -117,6 +138,9 @@ public class WriteFragment extends BaseFragment<WriteFragmentEventListener> impl
     public void destroySelf() {
         dismissProgressDialog();
         showSuccessToast("发布成功");
+        if (mCallback != null) {
+            mCallback.tellToRefresh();
+        }
         //销毁自己
         Objects.requireNonNull(getActivity()).onBackPressed();
     }
@@ -125,6 +149,11 @@ public class WriteFragment extends BaseFragment<WriteFragmentEventListener> impl
     @Override
     public void showErrorDialog() {
         dismissProgressDialog();
+
+        if (mPostDialog != null && mPostDialog.isShowing()) {
+            mPostDialog.dismiss();
+        }
+
         new MaterialDialog.Builder(Objects.requireNonNull(getActivity()))
                 .canceledOnTouchOutside(false)
                 .titleColor(Color.RED)

@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+
+import com.avos.avoscloud.AVUser;
 import com.starstudio.loser.phrapp.common.PHRActivity;
 import com.starstudio.loser.phrapp.common.base.PHRFragmentPresenter;
 import com.starstudio.loser.phrapp.item.community.fragment.contract.WriteFragmentContract;
@@ -23,13 +25,11 @@ public class WriteFragmentPresenter extends PHRFragmentPresenter<WriteFragmentCo
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public void post(String title, String text) {
-            SharedPreferences sharedPreferences = Objects.requireNonNull((PHRActivity)getFragment().getActivity()).getSharedPreferences("user_data", MODE_PRIVATE);
-            String name = sharedPreferences.getString("name", "");
-            String image = sharedPreferences.getString("image", "");
-            if (name.equals("") && image.equals("")) {
+            AVUser avUser = AVUser.getCurrentUser();
+            if (avUser == null) {
                 mView.showErrorDialog();
-            }else {
-                mModel.saveToDataBase(title, text, name, image);
+            } else {
+                mModel.saveToDataBase(title, text, avUser);
             }
         }
     };

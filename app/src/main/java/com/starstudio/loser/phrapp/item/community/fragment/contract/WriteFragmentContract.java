@@ -5,6 +5,7 @@ package com.starstudio.loser.phrapp.item.community.fragment.contract;
     date:2018/7/31 14:38
 */
 
+import com.avos.avoscloud.AVUser;
 import com.starstudio.loser.phrapp.common.base.BaseModel;
 import com.starstudio.loser.phrapp.common.base.BasePresenter;
 import com.starstudio.loser.phrapp.common.base.BaseView;
@@ -18,7 +19,7 @@ public interface WriteFragmentContract {
     }
 
     interface WriteModel extends BaseModel {
-        void saveToDataBase(String title, String text, String name, String image);
+        void saveToDataBase(String title, String text, AVUser avUser);
     }
 
     interface WritePresenter extends BasePresenter<WriteView, WriteModel> {
