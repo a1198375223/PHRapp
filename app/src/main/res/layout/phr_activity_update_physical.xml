@@ -92,7 +92,7 @@
                 android:id="@+id/phr_physical_content"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:hint="在这里输入体检结果哦！"
                 android:gravity="top"
                 android:layout_gravity="center_horizontal"

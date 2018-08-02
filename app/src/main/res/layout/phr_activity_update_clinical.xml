@@ -121,7 +121,7 @@
                 android:id="@+id/phr_clinical_content"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:hint="在这里输入临床信息结果哦！"
                 android:gravity="top"
                 android:layout_gravity="center_horizontal"

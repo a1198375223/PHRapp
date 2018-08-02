@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import java.util.regex.*;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
@@ -19,6 +20,7 @@ public class UpdatePhysicalActivity extends AppCompatActivity {
     private EditText date,hospital,content;
     private Button submit;
     private Toolbar toolbar;
+    private String pattern = "^\\d\\d\\d\\d/\\d{1,2}/\\d{1,2}";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,8 @@ public class UpdatePhysicalActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (date.getText().toString().equals("")||hospital.getText().toString().equals("")||content.getText().toString().equals("")){
                     Toast.makeText(UpdatePhysicalActivity.this,"请输入完整体检信息！",Toast.LENGTH_SHORT).show();
+                }else if (!Pattern.matches(pattern,date.getText().toString())){
+                    Toast.makeText(UpdatePhysicalActivity.this,"请输入正确的时间格式！",Toast.LENGTH_SHORT).show();
                 }else{
                     AVObject physicalRecord = new AVObject("Record");// 构建对象
                     physicalRecord.put("date", date.getText());

@@ -58,6 +58,7 @@ public class ManageFragment extends Fragment {
         AVQuery<AVObject> query = new AVQuery<>("Record");
         query.whereEqualTo("owner", AVUser.getCurrentUser().getObjectId());
         query.whereEqualTo("type",type);
+        query.addDescendingOrder("date");
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {

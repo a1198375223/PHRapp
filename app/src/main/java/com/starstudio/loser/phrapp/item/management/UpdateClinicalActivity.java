@@ -14,11 +14,14 @@ import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.SaveCallback;
 import com.starstudio.loser.phrapp.R;
 
+import java.util.regex.Pattern;
+
 public class UpdateClinicalActivity extends AppCompatActivity {
     private static final String TAG = "UpdateClinicalActivity";
     private EditText date,hospital,content,money;
     private Button submit;
     private Toolbar toolbar;
+    private String pattern = "^\\d\\d\\d\\d/\\d{1,2}/\\d{1,2}";
 
 
     @Override
@@ -50,7 +53,9 @@ public class UpdateClinicalActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (money.getText().toString().equals("")||date.getText().toString().equals("")||hospital.getText().toString().equals("")||content.getText().toString().equals("")){
                     Toast.makeText(UpdateClinicalActivity.this,"请输入完整信息",Toast.LENGTH_SHORT).show();
-                }else{
+                }else if (!Pattern.matches(pattern,date.getText().toString())){
+                    Toast.makeText(UpdateClinicalActivity.this,"请输入正确的时间格式！",Toast.LENGTH_SHORT).show();
+                } else{
                     AVObject clinicalRecord = new AVObject("Record");// 构建对象
                     clinicalRecord.put("date", date.getText());
                     clinicalRecord.put("hospitalName", hospital.getText());
