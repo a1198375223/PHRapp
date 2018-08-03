@@ -35,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button sign_up;
     private RadioGroup sexGroup;
     private RadioButton boy,girl;
-    private String sex;
+    private static String sex;
     private android.support.v7.widget.Toolbar toolbar;
 
     @Override
@@ -82,12 +82,11 @@ public class RegisterActivity extends AppCompatActivity {
         sexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if (boy.getId()==i){
-                    sex=boy.getText().toString();
-                }else{
-                    sex=girl.getText().toString();
-                }
-                //Toast.makeText(RegisterActivity.this,"性别"+sex,Toast.LENGTH_SHORT).show();
+                int id = radioGroup.getCheckedRadioButtonId();
+                // 通过id实例化选中的这个RadioButton
+                RadioButton choise = (RadioButton) findViewById(id);
+                sex=choise.getText().toString();
+                Toast.makeText(RegisterActivity.this,"性别"+sex,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -101,7 +100,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void signUp(){
-        AVOSCloud.initialize(this,"NUjpdRi6jqP1S2iAfQCs7YNU-gzGzoHsz","27zlhvjRBd155W8iAWSoNJiO");
         AVOSCloud.setDebugLogEnabled(true);
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,8 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
                     } else {
-
-                        AVUser user = new AVUser();// 新建 AVUser 对象实例
+                        final AVUser user = new AVUser();// 新建 AVUser 对象实例
                         user.setUsername(name);// 设置用户名
                         user.setPassword(password);// 设置密码
                         user.setEmail(mail);
@@ -136,19 +133,20 @@ public class RegisterActivity extends AppCompatActivity {
                                 if (e == null) {
                                     Bundle b = new Bundle();
                                     b.putString("url", "");
-                                    b.putString("name", username.getText().toString());
-                                    b.putString("note", email.getText().toString());
+                                    b.putString("name", user.getUsername());
+                                    b.putString("note", user.getString("note"));
                                     Intent intent = new Intent(RegisterActivity.this, PHRMainActivity.class);
                                     intent.putExtras(b);
                                     startActivity(intent);
+                                    finish();
                                 } else {
                                     Log.d(TAG, "done: " + e.getCode());
                                     if (e.getCode()==0){
                                         Toast toast = Toast.makeText(RegisterActivity.this, "无法连接到服务器！", Toast.LENGTH_SHORT);
                                         toast.setGravity(Gravity.CENTER, 0, 0);
                                         toast.show();
-                                    }else if (e.getCode()==202||e.getCode()==214){
-                                        Toast toast = Toast.makeText(RegisterActivity.this, "该账号已注册！", Toast.LENGTH_SHORT);
+                                    }else if (e.getCode()==202){
+                                        Toast toast = Toast.makeText(RegisterActivity.this, "该用户名已注册！", Toast.LENGTH_SHORT);
                                         toast.setGravity(Gravity.CENTER, 0, 0);
                                         toast.show();
                                     }else if (e.getCode()==125){
@@ -157,6 +155,18 @@ public class RegisterActivity extends AppCompatActivity {
                                         toast.show();
                                     }else if (e.getCode()==127){
                                         Toast toast = Toast.makeText(RegisterActivity.this, "手机号无效！", Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+                                    }else if (e.getCode() == 203){
+                                        Toast toast = Toast.makeText(RegisterActivity.this, "该邮箱已注册！", Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+                                    }else if (e.getCode() == 214){
+                                        Toast toast = Toast.makeText(RegisterActivity.this, "该手机号已注册！", Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+                                    }else if (e.getCode() == 217){
+                                        Toast toast = Toast.makeText(RegisterActivity.this, "用户名不能有空格！", Toast.LENGTH_SHORT);
                                         toast.setGravity(Gravity.CENTER, 0, 0);
                                         toast.show();
                                     }

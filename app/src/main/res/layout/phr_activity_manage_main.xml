@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/phr_manage_toolbar"/>
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tayLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:tabIndicatorColor="@color/color_main_image_bg"
+            app:tabSelectedTextColor="@color/color_main_image_bg"
+            app:tabTextColor="@color/color_main_image_bg">
+        </android.support.design.widget.TabLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/fab_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/phr_height_10"
+        fab:fab_addButtonColorNormal="@color/color_main_image_bg"
+        fab:fab_icon="@drawable/ic_add_24dp"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        fab:fab_labelsPosition="left">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/phr_update_physical_record"
+            fab:fab_colorNormal="@color/color_main_image_bg"
+            fab:fab_size="mini"
+            fab:fab_icon="@drawable/ic_physical_24dp"
+            fab:fab_title="上传体检记录"/>
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/phr_update_clinical_record"
+            fab:fab_colorNormal="@color/color_main_image_bg"
+            fab:fab_size="mini"
+            fab:fab_icon="@drawable/ic_hospital_24dp"
+            fab:fab_title="上传临床记录"/>
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>
+
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--xmlns:tools="http://schemas.android.com/tools"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:background="@color/phr_white"-->
+<!--android:orientation="vertical"-->
+<!--tools:context=".item.management.ManageMainActivity">-->
+
+<!--<include layout="@layout/phr_manage_toolbar"/>-->
+
+<!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="70dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:id="@+id/phr_manage_physical_examination">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:text="查看体检记录"-->
+            <!--android:textSize="20sp" />-->
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:src="@drawable/phr_modify_right_arrow"/>-->
+    <!--</RelativeLayout>-->
+
+    <!--<View  android:layout_height="3px"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="@color/color_main_image_bg" />-->
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="70dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:id="@+id/phr_manage_clinical_examination">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:text="查看临床记录"-->
+            <!--android:textSize="20sp" />-->
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:src="@drawable/phr_modify_right_arrow"/>-->
+    <!--</RelativeLayout>-->
+
+    <!--<View  android:layout_height="3px"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="@color/color_main_image_bg" />-->
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="70dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:id="@+id/phr_manage_update_physical_examination">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:text="上传体检记录"-->
+            <!--android:textSize="20sp" />-->
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:src="@drawable/phr_modify_right_arrow"/>-->
+    <!--</RelativeLayout>-->
+
+    <!--<View  android:layout_height="3px"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="@color/color_main_image_bg" />-->
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="70dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:id="@+id/phr_manage_update_clinical_examination">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:text="上传临床记录"-->
+            <!--android:textSize="20sp" />-->
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:src="@drawable/phr_modify_right_arrow"/>-->
+    <!--</RelativeLayout>-->
+    <!--<View  android:layout_height="3px"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="@color/color_main_image_bg" />-->
+
+<!--</LinearLayout>-->
+
+<!--</LinearLayout>-->

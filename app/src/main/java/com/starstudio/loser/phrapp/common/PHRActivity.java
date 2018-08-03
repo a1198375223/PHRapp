@@ -8,15 +8,20 @@ package com.starstudio.loser.phrapp.common;
 import android.app.Activity;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.starstudio.loser.phrapp.common.base.BaseEventListener;
 import com.starstudio.loser.phrapp.common.base.BaseView;
 import com.starstudio.loser.phrapp.common.view.PHRProgressDialog;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
+import es.dmoral.toasty.Toasty;
+
 public class PHRActivity<E extends BaseEventListener> extends RxAppCompatActivity implements BaseView<E>{
     private E mListener;
     private PHRProgressDialog mDialog;
+    private static final String TAG = "PHRActivity";
 
     @Override
     public void setEventListener(E eventListener) {
@@ -42,6 +47,8 @@ public class PHRActivity<E extends BaseEventListener> extends RxAppCompatActivit
                 mDialog.dismiss();
                 mDialog = null;
             }
+        } else if (mDialog != null && !this.isFinishing()) {
+            mDialog.showProgressDialog();
         }
     }
 
@@ -51,5 +58,20 @@ public class PHRActivity<E extends BaseEventListener> extends RxAppCompatActivit
             mDialog.dismiss();
             mDialog = null;
         }
+    }
+
+    @Override
+    public void showErrorToast(String message) {
+        Toasty.error(this, message, Toast.LENGTH_SHORT, true).show();
+    }
+
+    @Override
+    public void showWarningToast(String message) {
+        Toasty.warning(this, message, Toast.LENGTH_SHORT, true).show();
+    }
+
+    @Override
+    public void showSuccessToast(String message) {
+        Toasty.success(this, message, Toast.LENGTH_SHORT, true).show();
     }
 }

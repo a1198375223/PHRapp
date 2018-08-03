@@ -14,5 +14,6 @@ public class PHRApplication extends Application {
     public void onCreate() {
         super.onCreate();
         AVOSCloud.initialize(this,"NUjpdRi6jqP1S2iAfQCs7YNU-gzGzoHsz","27zlhvjRBd155W8iAWSoNJiO");
+        AppContext.init(this);
     }
 }

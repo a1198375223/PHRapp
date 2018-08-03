@@ -76,18 +76,20 @@ public class CommonPresenter extends PHRFragmentPresenter<CommonContract.View, C
                     @Override
                     public void onNext(BaseBean baseBean) {
                         if (baseBean.getResult() != null) {
+                            mView.showProgressDialog();
                             mModel.convertToUsefulDataAndLoadView(baseBean);
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mView.dismissProgressDialog();
+                        mView.showErrorToast("加载失败");
                     }
 
                     @Override
                     public void onComplete() {
-
+                        mView.dismissProgressDialog();
                     }
                 });
     }
@@ -100,5 +102,7 @@ public class CommonPresenter extends PHRFragmentPresenter<CommonContract.View, C
     @Override
     public void loadView(List<UsefulData> list) {
         mView.loadRecyclerView(list);
+        mView.dismissProgressDialog();
+        mView.showSuccessToast("加载成功");
     }
 }

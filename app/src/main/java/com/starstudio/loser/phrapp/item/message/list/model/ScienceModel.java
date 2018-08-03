@@ -51,9 +51,4 @@ public class ScienceModel extends PHRModel implements CommonContract.Model {
         }
         mPresenter.loadView(list);
     }
-
-
-    public boolean isRepeat() {
-        return false;
-    }
 }

@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -21,6 +22,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVFile;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.GetCallback;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -49,24 +56,14 @@ public class PHRMainActivity extends PHRActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phr_main_layout);
 
-        //通过检测Bundle来判断是否由Login启动，若不是再判断以前是否登录
-        Bundle b = getIntent().getExtras();
-        if (b==null){
-            Map<String,String> map = get_user();
-            if (map==null||map.get("name").equals("")){
-                initView((NavigationView) findViewById(R.id.phr_main_navigation_view));//以前没登陆则侧滑栏显示登录按钮
-                Log.d(TAG, "onCreate: initView()启动方式");
-            }else {
-                set_head(map, (NavigationView) findViewById(R.id.phr_main_navigation_view));//以前登录过则用保存的字段设置navigationView的名字图片
-                Log.d(TAG, "onCreate: set_head()启动方式");
-            }
-        }else{
-            set_head_by_login(b,(NavigationView) findViewById(R.id.phr_main_navigation_view));//从登录页面跳转转来
-            Log.d(TAG, "onCreate: set_head_by_login()启动方式");
+        NavigationView navigationView =  (NavigationView) findViewById(R.id.phr_main_navigation_view);
+        if (getIntent().getExtras()==null){
+            initView(navigationView);//以前没登陆则侧滑栏显示登录按钮
+            Log.d(TAG, "onCreate: initView()启动方式");
+        }else {
+            set_head_by_login(navigationView);//从登录页面跳转转来
+            Log.d(TAG, "onCreate: set_head()启动方式");
         }
-
-        Log.d(TAG, "+++++++++++++++++++:----------------测试成功");
-
 
         mPresenter = new MainPresenterImpl(this);
         mPresenter.setModel(new MainModelmpl());
@@ -94,12 +91,12 @@ public class PHRMainActivity extends PHRActivity{
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(PHRMainActivity.this, LoginActivity.class));
+                finish();
             }
         });
     }
 
-
-    private void set_head(Map<String,String> map, NavigationView navigationView) {
+    private void set_head(AVUser avUser,NavigationView navigationView) {
         RequestOptions options = new RequestOptions()
                 .placeholder(R.drawable.waiting)
                 .error(R.drawable.default_head)
@@ -107,7 +104,9 @@ public class PHRMainActivity extends PHRActivity{
 
         View headerView = navigationView.getHeaderView(0);
         menu = navigationView.getMenu();
-        menu.findItem(R.id.phr_main_navigation_view_menu_item5).setVisible(true);//登录后让“退出登录”可见
+        menu.findItem(R.id.phr_main_navigation_view_menu_item5).setVisible(true);
+        menu.findItem(R.id.phr_main_navigation_view_menu_item4).setVisible(true);
+        menu.findItem(R.id.phr_main_navigation_view_menu_item3).setVisible(true);//登录后让“退出登录”和“个人信息管理可见”可见
         name = (TextView) headerView.findViewById(R.id.phr_main_navigation_view_header_name_text);
         note = (TextView) headerView.findViewById(R.id.phr_main_navigation_view_header_note_text);
         head_img = (ImageView) headerView.findViewById(R.id.phr_main_navigation_view_header_icon);
@@ -115,43 +114,52 @@ public class PHRMainActivity extends PHRActivity{
         login = headerView.findViewById(R.id.phr_phr_main_navigation_view_login);
         login.setVisibility(View.GONE);
 
-        name.setText(map.get("name").toString());
-        note.setText(map.get("note").toString());
+        AVFile avFile = avUser.getAVFile("head_img");
+        name.setText(avUser.getUsername());
+        note.setText(avUser.getString("note"));
+
         Glide.with(PHRMainActivity.this)
-                .load(map.get("url").toString())
+                .load(avFile.getUrl())
                 .apply(options)
                 .into(head_img);
+
     }
 
-    private void set_head_by_login(Bundle b,NavigationView navigationView){
-        Map<String,String> map = get_user();
-        map.put("name",b.getString("name"));
-        map.put("note",b.getString("note"));
-        map.put("url",b.getString("url"));
-        set_head(map,navigationView);
-        save_user(map);
+    private void set_head_by_login(NavigationView navigationView){
+        set_head(AVUser.getCurrentUser(),navigationView);
+        save_user(true);
     }
 
-    private void save_user(Map<String,String> map){
+    private void save_user(boolean b){
         SharedPreferences.Editor editor = getSharedPreferences("user_data",MODE_PRIVATE).edit();
-        editor.putString("name",map.get("name"));
-        editor.putString("note",map.get("note"));
-        editor.putString("url",map.get("url"));
+        editor.putBoolean("is_login",b);
         editor.apply();
     }
 
-    private Map<String,String> get_user(){
+    private boolean is_login(){
         try {
             SharedPreferences pref = getSharedPreferences("user_data",MODE_PRIVATE );
-            Map map = new HashMap();
-            map.put("name",pref.getString("name",""));
-            map.put("note",pref.getString("note",""));
-            map.put("url",pref.getString("url",""));
-            return map;
+            return pref.getBoolean("is_login",false);
         }catch (Exception e){
             e.printStackTrace();
-            return null;
+            return false;
         }
     }
 
+    @Override
+    protected void onResume() {
+        if (is_login()) {//若用户已经登录了，则主活动每次回到栈顶就刷新，因为其他活动可能更新头像、用户名
+            AVQuery<AVUser> userQuery = new AVQuery<>("_User");
+            userQuery.whereEqualTo("objectId",AVUser.getCurrentUser().getObjectId());
+            userQuery.getFirstInBackground(new GetCallback<AVUser>() {
+                @Override
+                public void done(AVUser avUser, AVException e) {
+                    set_head(avUser,(NavigationView) findViewById(R.id.phr_main_navigation_view));
+                }
+            }); //保存成功就更新当前页面的信息
+
+            Log.d(TAG, "onResume: set_head()启动方式");
+        }
+        super.onResume();
+    }
 }
