@@ -23,7 +23,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/D:/Program%20Files%20(x86)/AndroidStudio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_delete_forever_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/D:/Program%20Files%20(x86)/AndroidStudio/plugins/android/lib/android.jar!/images/material_design_icons/communication/ic_location_on_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -33,7 +33,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="phr_record_delete" />
+                                      <entry key="outputName" value="map_maker" />
+                                      <entry key="theme" value="CUSTOM" />
+                                      <entry key="themeColor" value="e51718" />
                                     </map>
                                   </option>
                                 </PersistentState>

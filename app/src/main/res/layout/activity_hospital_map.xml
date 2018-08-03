@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".item.map.HospitalMapActivity">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/color_main_image_bg"
+        app:title="附近的医院"
+        app:navigationIcon="@drawable/phr_arrow_back_black_24"
+        android:id="@+id/phr_hospital_map_toolbar">
+    </android.support.v7.widget.Toolbar>
+    
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/baidumap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true">
+
+    </com.baidu.mapapi.map.MapView>
+
+</LinearLayout>

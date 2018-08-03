@@ -2,12 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.starstudio.loser.phrapp">
 
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <!-- 百度地图SDK所需权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".common.PHRApplication"
@@ -17,6 +22,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/PHR.AppTheme">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="OI8TQCuSsXjNIiUAzkeEuyKBIl3mGntc" />
+
         <activity android:name=".item.main.PHRMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,16 +46,24 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".item.message.list.web.PHRWebActivity" />
-        <activity android:name=".item.modify.ModifyActivity"
-            android:theme="@style/ModifyActivityTheme"/>
-        <activity android:name=".item.community.CommunityActivity"
-            android:launchMode="singleTask"/>
-
+        <activity
+            android:name=".item.modify.ModifyActivity"
+            android:theme="@style/ModifyActivityTheme" />
+        <activity
+            android:name=".item.community.CommunityActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".item.management.ManageMainActivity" />
         <activity android:name=".item.management.UpdatePhysicalActivity" />
         <activity android:name=".item.management.PhysicalRecordActivity" />
         <activity android:name=".item.management.UpdateClinicalActivity" />
-        <activity android:name=".item.management.ClinicalRecordActivity"></activity>
+        <activity android:name=".item.management.ClinicalRecordActivity" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"></service> <!-- 百度SDK服务 -->
+
+        <activity android:name=".item.map.HospitalMapActivity"></activity>
     </application>
 
 </manifest>
