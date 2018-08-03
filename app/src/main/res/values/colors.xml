@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="phr_main_page_text_color">#75BAFF</color>
+    <color name="phr_register_bg1">#00ffff</color>
+    <color name="phr_white">#ffffff</color>
+    <color name="phr_black">#000000</color>
+    <color name="color_gradient_start_end">#7b34b9f7</color>
+    <color name="color_gradient_center">#005361</color>
+    <!--注册图标背景颜色-->
+    <color name="color_register_bg1">#414141</color>
+    <!--主界面图片的颜色-->
+    <color name="color_main_image_bg">#75BAFF</color>
+    <!--背景色-->
+    <color name="color_login_bg1">#eeeeee</color>
+    <!--前景色-->
+    <color name="color_login_bg2">#fdfdfd</color>
+    <!--前景色2-->
+    <color name="color_login_bg3">#e6e6e6</color>
+    <!--标题，正文颜色-->
+    <color name="color_login_text1">#333333</color>
+    <!--副标题颜色-->
+    <color name="color_login_text2">#666666</color>
+    <!--说明-->
+    <color name="color_login_text3">#aaaaaa</color>
+    <!--说明-->
+    <color name="color_login_text4">#bebebe</color>
+    <!--图片背景-->
+    <color name="color_login_img_bg1">#eeeeee</color>
+    <!--button颜色-->
+    <color name="color_login_button">#75BAFF</color>
+    <color name="color_button_disable">#bebebe</color>
+    <color name="color_login_button_normal">#3594F2</color>
+    <color name="color_login_button_normal_press">#75BAFF</color>
+    <color name="color_submit_button_normal">#caad18</color>
+    <color name="color_submit_button_normal_press">#b3c60a</color>
+    <!--blue-->
+    <color name="color_7bf_blue">#75BAFF</color>
+
+    <!--rv text color-->
+    <color name="color_rv_text">#0d0c0c</color>
+
+    <!--message line color-->
+    <color name="color_line_color">#32aca1a1</color>
+
+    <!--progress bg-->
+    <color name="color_progress_bg">#00d6cfcf</color>
+</resources>

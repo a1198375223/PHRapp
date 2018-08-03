@@ -1,0 +1,60 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="PHR.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/color_main_image_bg</item>
+        <item name="android:windowBackground">@color/color_login_bg1</item>
+        <!--菜单栏的颜色-->
+        <item name="android:textColorSecondary">@color/color_main_image_bg</item>
+        <item name="searchViewStyle" tools:targetApi="lollipop">@style/PHR.SearchView</item>
+
+    </style>
+
+    
+    <!--phr button-->
+    <style name="PHR.Button.Blue" parent="">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/phr_white</item>
+        <item name="android:background">@drawable/phr_selector_button_blue</item>
+    </style>
+
+    <style name="PHR.Button.Yellow"  parent="">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/phr_white</item>
+        <item name="android:background">@drawable/phr_selector_button_yellow</item>
+    </style>
+
+    <!--web dialog-->
+    <style name="PHR.ProgressDialog" parent="Base.Theme.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/phr_progress_dialog</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <!--search view-->
+    <style name="PHR.SearchView" parent="Widget.AppCompat.SearchView">
+        <item name="searchIcon">@drawable/phr_appbar_search</item>
+        <item name="searchHintIcon">@null</item>
+    </style>
+
+    <!--toolbar-->
+    <style name="PHR.Toolbar" parent="Widget.AppCompat.Toolbar" >
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
+
+    <!--appbar layout-->
+    <style name="PHR.AppbarLayout" parent="Widget.Design.AppBarLayout">
+        <item name="android:contentInsetStart" tools:targetApi="lollipop">0dp</item>
+        <item name="android:contentInsetStartWithNavigation" tools:targetApi="n">0dp</item>
+    </style>
+
+
+</resources>
