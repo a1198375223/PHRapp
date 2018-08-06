@@ -29,11 +29,24 @@ public interface DynamicContract {
         void setData(List<AVObject> list);
 
         void load(List<AVObject> list, boolean hasMore);
+
+        void tellToRefresh();
     }
 
     interface DynamicContractPresenter extends BasePresenter<DynamicContractView, DynamicContractModel> {
         void setViewData(List<AVObject> list);
 
         void toLoadView(List<AVObject> list);
+    }
+
+    interface DynamicChildPresenter extends BasePresenter<DynamicChildView, DynamicContractModel> {
+        void setViewData(List<AVObject> list);
+
+        void toLoadView(List<AVObject> list);
+    }
+
+
+    interface DynamicChildView extends DynamicContractView{
+        View getView();
     }
 }

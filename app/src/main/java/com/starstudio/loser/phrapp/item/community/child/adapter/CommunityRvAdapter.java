@@ -24,8 +24,18 @@ import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.GetCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
+import com.nightonke.boommenu.BoomButtons.HamButton;
+import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
+import com.nightonke.boommenu.BoomButtons.SimpleCircleButton;
+import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
+import com.nightonke.boommenu.BoomButtons.TextOutsideCircleButton;
+import com.nightonke.boommenu.BoomMenuButton;
+import com.nightonke.boommenu.ButtonEnum;
+import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 import com.sackcentury.shinebuttonlib.ShineButton;
 import com.starstudio.loser.phrapp.R;
+import com.starstudio.loser.phrapp.common.utils.DateUtils;
 import com.starstudio.loser.phrapp.common.utils.GlideUtils;
 import com.starstudio.loser.phrapp.common.utils.ToastyUtils;
 
@@ -85,10 +95,11 @@ public class CommunityRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             ((MyHolder) holder).mUsername.setText(avUser.getUsername());
             ((MyHolder) holder).mTitle.setText(mList.get(position).getString("title"));
             ((MyHolder) holder).mText.setText(mList.get(position).getString("text"));
-            ((MyHolder) holder).mDate.setText(mList.get(position).getString("date"));
+            ((MyHolder) holder).mDate.setText(DateUtils.parseDate(mList.get(position).getDate("time")));
             ((MyHolder) holder).mLikeCount.setText(mList.get(position).getInt("like")+"");
             ((MyHolder) holder).mDislikeCount.setText(mList.get(position).getInt("dislike")+"");
             ((MyHolder) holder).mMessageCount.setText(mList.get(position).getInt("reply")+"");
+            initBoomButton((MyHolder)holder);
             ((MyHolder) holder).mLike.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(View view, boolean checked) {
@@ -99,19 +110,21 @@ public class CommunityRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         avObject.fetchInBackground(key, new GetCallback<AVObject>() {
                             @Override
                             public void done(AVObject avObject, AVException e) {
-                                AVSaveOption option = new AVSaveOption();
-                                option.query(new AVQuery("Article").whereEqualTo("like", like));
-                                option.setFetchWhenSave(true);
-                                avObject.increment("like", 1);
-                                avObject.saveInBackground(option, new SaveCallback() {
-                                    @SuppressLint("SetTextI18n")
-                                    @Override
-                                    public void done(AVException e) {
-                                        if (e == null) {
-                                            ((MyHolder) holder).mLikeCount.setText(like + 1 + "");
+                                if (e == null && avObject != null) {
+                                    AVSaveOption option = new AVSaveOption();
+                                    option.query(new AVQuery("Article").whereEqualTo("like", like));
+                                    option.setFetchWhenSave(true);
+                                    avObject.increment("like", 1);
+                                    avObject.saveInBackground(option, new SaveCallback() {
+                                        @SuppressLint("SetTextI18n")
+                                        @Override
+                                        public void done(AVException e) {
+                                            if (e == null) {
+                                                ((MyHolder) holder).mLikeCount.setText(like + 1 + "");
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                                }
                             }
                         });
                     } else {
@@ -121,19 +134,21 @@ public class CommunityRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         avObject.fetchInBackground(key, new GetCallback<AVObject>() {
                             @Override
                             public void done(AVObject avObject, AVException e) {
-                                AVSaveOption option = new AVSaveOption();
-                                option.query(new AVQuery("Article").whereEqualTo("like", like));
-                                option.setFetchWhenSave(true);
-                                avObject.increment("like", -1);
-                                avObject.saveInBackground(option, new SaveCallback() {
-                                    @SuppressLint("SetTextI18n")
-                                    @Override
-                                    public void done(AVException e) {
-                                        if (e == null) {
-                                            ((MyHolder) holder).mLikeCount.setText(like - 1 + "");
+                                if (e == null && avObject != null) {
+                                    AVSaveOption option = new AVSaveOption();
+                                    option.query(new AVQuery("Article").whereEqualTo("like", like));
+                                    option.setFetchWhenSave(true);
+                                    avObject.increment("like", -1);
+                                    avObject.saveInBackground(option, new SaveCallback() {
+                                        @SuppressLint("SetTextI18n")
+                                        @Override
+                                        public void done(AVException e) {
+                                            if (e == null) {
+                                                ((MyHolder) holder).mLikeCount.setText(like - 1 + "");
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                                }
                             }
                         });
                     }
@@ -149,19 +164,21 @@ public class CommunityRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         avObject.fetchInBackground(key, new GetCallback<AVObject>() {
                             @Override
                             public void done(AVObject avObject, AVException e) {
-                                AVSaveOption option = new AVSaveOption();
-                                option.query(new AVQuery("Article").whereEqualTo("dislike", dislike));
-                                option.setFetchWhenSave(true);
-                                avObject.increment("dislike", 1);
-                                avObject.saveInBackground(option, new SaveCallback() {
-                                    @SuppressLint("SetTextI18n")
-                                    @Override
-                                    public void done(AVException e) {
-                                        if (e == null) {
-                                            ((MyHolder) holder).mDislikeCount.setText(dislike + 1 + "");
+                                if (e == null && avObject != null) {
+                                    AVSaveOption option = new AVSaveOption();
+                                    option.query(new AVQuery("Article").whereEqualTo("dislike", dislike));
+                                    option.setFetchWhenSave(true);
+                                    avObject.increment("dislike", 1);
+                                    avObject.saveInBackground(option, new SaveCallback() {
+                                        @SuppressLint("SetTextI18n")
+                                        @Override
+                                        public void done(AVException e) {
+                                            if (e == null) {
+                                                ((MyHolder) holder).mDislikeCount.setText(dislike + 1 + "");
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                                }
                             }
                         });
                     } else {
@@ -171,25 +188,105 @@ public class CommunityRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         avObject.fetchInBackground(key, new GetCallback<AVObject>() {
                             @Override
                             public void done(AVObject avObject, AVException e) {
-                                AVSaveOption option = new AVSaveOption();
-                                option.query(new AVQuery("Article").whereEqualTo("dislike", dislike));
-                                option.setFetchWhenSave(true);
-                                avObject.increment("dislike", -1);
-                                avObject.saveInBackground(option, new SaveCallback() {
-                                    @SuppressLint("SetTextI18n")
-                                    @Override
-                                    public void done(AVException e) {
-                                        if (e == null) {
-                                            ((MyHolder) holder).mDislikeCount.setText(dislike - 1 + "");
+                                if (e == null && avObject != null) {
+                                    AVSaveOption option = new AVSaveOption();
+                                    option.query(new AVQuery("Article").whereEqualTo("dislike", dislike));
+                                    option.setFetchWhenSave(true);
+                                    avObject.increment("dislike", -1);
+                                    avObject.saveInBackground(option, new SaveCallback() {
+                                        @SuppressLint("SetTextI18n")
+                                        @Override
+                                        public void done(AVException e) {
+                                            if (e == null) {
+                                                ((MyHolder) holder).mDislikeCount.setText(dislike - 1 + "");
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                                }
                             }
                         });
                     }
                 }
             });
         }
+    }
+
+    private void initBoomButton(MyHolder holder) {
+        holder.mShare.setButtonEnum(ButtonEnum.TextOutsideCircle);
+        holder.mShare.setPiecePlaceEnum(PiecePlaceEnum.DOT_4_1);
+        holder.mShare.setButtonPlaceEnum(ButtonPlaceEnum.SC_4_1);
+        holder.mShare.clearBuilders();
+        TextOutsideCircleButton.Builder blue = new TextOutsideCircleButton.Builder()
+                //图片
+                .normalImageRes(R.mipmap.phr_boom_delete_normal)
+                .highlightedImageRes(R.mipmap.phr_boom_delete_highlight)
+                //文字
+                .normalTextRes(R.string.phr_message_menu_delete)
+                .normalTextColorRes(R.color.avoscloud_feedback_white)
+                .highlightedTextColorRes(R.color.color_text_title)
+                //按钮
+                .normalColorRes(R.color.color_boom_blue_normal_color)
+                .highlightedColorRes(R.color.color_boom_blue_highlight_color)
+                .listener(new OnBMClickListener() {
+                    @Override
+                    public void onBoomButtonClick(int index) {
+                        ToastyUtils.showSuccess("click: " + index);
+                    }
+                });
+
+        TextOutsideCircleButton.Builder purple = new TextOutsideCircleButton.Builder()
+                //图片
+                .normalImageRes(R.mipmap.phr_boom_share_normal)
+                .highlightedImageRes(R.mipmap.phr_boom_share_highlight)
+                //文字
+                .normalTextRes(R.string.phr_boom_share_text)
+                .normalTextColorRes(R.color.avoscloud_feedback_white)
+                .highlightedTextColorRes(R.color.color_text_title)
+                //按钮
+                .normalColorRes(R.color.color_boom_purple_normal_color)
+                .highlightedColorRes(R.color.color_boom_purple_highlight_color)
+                .listener(new OnBMClickListener() {
+                    @Override
+                    public void onBoomButtonClick(int index) {
+                        ToastyUtils.showSuccess("click: " + index);
+                    }
+                });
+        TextOutsideCircleButton.Builder yellow = new TextOutsideCircleButton.Builder()
+                .normalImageRes(R.mipmap.phr_boom_warn_normal)
+                .highlightedImageRes(R.mipmap.phr_boom_warn_highlight)
+                //文字
+                .normalTextRes(R.string.phr_boom_complain_text)
+                .normalTextColorRes(R.color.avoscloud_feedback_white)
+                .highlightedTextColorRes(R.color.color_text_title)
+                //按钮
+                .normalColorRes(R.color.color_boom_yellow_normal_color)
+                .highlightedColorRes(R.color.color_boom_yellow_highlight_color)
+                .listener(new OnBMClickListener() {
+                    @Override
+                    public void onBoomButtonClick(int index) {
+                        ToastyUtils.showSuccess("click: " + index);
+                    }
+                });
+        TextOutsideCircleButton.Builder red = new TextOutsideCircleButton.Builder()
+                .normalImageRes(R.mipmap.phr_boom_collect_normal)
+                .highlightedImageRes(R.mipmap.phr_boom_collect_highlight)
+                //文字
+                .normalTextRes(R.string.phr_boom_get_text)
+                .normalTextColorRes(R.color.avoscloud_feedback_white)
+                .highlightedTextColorRes(R.color.color_text_title)
+                //按钮
+                .normalColorRes(R.color.color_boom_red_normal_color)
+                .highlightedColorRes(R.color.color_boom_red_highlight_color)
+                .listener(new OnBMClickListener() {
+                    @Override
+                    public void onBoomButtonClick(int index) {
+                        ToastyUtils.showSuccess("click: " + index);
+                    }
+                });
+        holder.mShare.addBuilder(purple);
+        holder.mShare.addBuilder(blue);
+        holder.mShare.addBuilder(yellow);
+        holder.mShare.addBuilder(red);
     }
 
 
@@ -203,7 +300,7 @@ public class CommunityRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         RoundedImageView mHeadIcon;
         TextView mUsername;
         TextView mDescription;
-        ImageView mShare;
+        BoomMenuButton mShare;
         TextView mDate;
         TextView mTitle;
         TextView mText;
@@ -218,7 +315,7 @@ public class CommunityRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             mHeadIcon = (RoundedImageView) itemView.findViewById(R.id.phr_rv_community_message_icon);
             mUsername = (TextView) itemView.findViewById(R.id.phr_rv_community_message_name);
             mDescription = (TextView) itemView.findViewById(R.id.phr_rv_community_message_description);
-            mShare = (ImageView) itemView.findViewById(R.id.phr_rv_community_message_share);
+            mShare = (BoomMenuButton) itemView.findViewById(R.id.phr_rv_community_message_share);
             mDate = (TextView) itemView.findViewById(R.id.phr_rv_community_message_time);
             mTitle = (TextView) itemView.findViewById(R.id.phr_rv_community_message_title);
             mText = (TextView) itemView.findViewById(R.id.phr_rv_community_message_body_text);

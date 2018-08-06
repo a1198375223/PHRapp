@@ -2,36 +2,34 @@ package com.starstudio.loser.phrapp.item.community.child.model;
 
 /*
     create by:loser
-    date:2018/7/31 20:07
+    date:2018/8/3 21:44
 */
-
-import android.util.Log;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
 import com.starstudio.loser.phrapp.common.base.PHRModel;
 import com.starstudio.loser.phrapp.common.utils.ToastyUtils;
-import com.starstudio.loser.phrapp.item.community.child.contract.DynamicContract;
+import com.starstudio.loser.phrapp.item.community.child.contract.MyArticleContract;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.makeramen.roundedimageview.RoundedDrawable.TAG;
+public class MyArticleViewModel extends PHRModel implements MyArticleContract.MyArticleContractModel {
+    private MyArticleContract.MyArticleChildPresenter mPresenter;
 
-public class DynamicModel extends PHRModel implements DynamicContract.DynamicContractModel {
-    private DynamicContract.DynamicContractPresenter mPresenter;
-
-    public DynamicModel(DynamicContract.DynamicContractPresenter presenter) {
+    public MyArticleViewModel(MyArticleContract.MyArticleChildPresenter presenter) {
         this.mPresenter = presenter;
     }
 
     @Override
     public void getDataFromLeanCloud() {
         AVQuery<AVObject> query = new AVQuery<>("Article");
-        query.addDescendingOrder("createdAt");
+        query.addDescendingOrder("createdBy");
         query.limit(10);
+        query.whereEqualTo("article_user", AVUser.getCurrentUser());
         query.include("article_user");
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
@@ -44,7 +42,6 @@ public class DynamicModel extends PHRModel implements DynamicContract.DynamicCon
             }
         });
     }
-
     @Override
     public void getRefreshData(int size) {
         AVQuery<AVObject> query = new AVQuery<>("Article");
@@ -54,6 +51,7 @@ public class DynamicModel extends PHRModel implements DynamicContract.DynamicCon
         } else {
             query.limit(size);
         }
+        query.whereEqualTo("article_user", AVUser.getCurrentUser());
         query.include("article_user");
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
@@ -71,6 +69,7 @@ public class DynamicModel extends PHRModel implements DynamicContract.DynamicCon
     public void getDataSkip(final int size) {
         AVQuery<AVObject> query = new AVQuery<>("Article");
         query.addDescendingOrder("createdBy");
+        query.whereEqualTo("article_user", AVUser.getCurrentUser());
         query.include("article_user");
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
@@ -88,3 +87,4 @@ public class DynamicModel extends PHRModel implements DynamicContract.DynamicCon
         });
     }
 }
+

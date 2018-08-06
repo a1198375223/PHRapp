@@ -6,7 +6,6 @@ package com.starstudio.loser.phrapp.item.community.presenter;
 */
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
@@ -15,10 +14,10 @@ import com.starstudio.loser.phrapp.common.PHRActivity;
 import com.starstudio.loser.phrapp.common.base.PHRPresenter;
 import com.starstudio.loser.phrapp.item.community.child.contract.DynamicContract;
 import com.starstudio.loser.phrapp.item.community.child.contract.MyArticleContract;
-import com.starstudio.loser.phrapp.item.community.child.model.DynamicModel;
-import com.starstudio.loser.phrapp.item.community.child.model.MyArticleModel;
-import com.starstudio.loser.phrapp.item.community.child.presenter.DynamicPresenter;
-import com.starstudio.loser.phrapp.item.community.child.presenter.MyArticlePresenter;
+import com.starstudio.loser.phrapp.item.community.child.model.DynamicViewModel;
+import com.starstudio.loser.phrapp.item.community.child.model.MyArticleViewModel;
+import com.starstudio.loser.phrapp.item.community.child.presenter.DynamicViewPresenter;
+import com.starstudio.loser.phrapp.item.community.child.presenter.MyArticleViewPresenter;
 import com.starstudio.loser.phrapp.item.community.child.view.DynamicView;
 import com.starstudio.loser.phrapp.item.community.child.view.MyArticleView;
 import com.starstudio.loser.phrapp.item.community.contract.CommunityContract;
@@ -27,25 +26,11 @@ import com.starstudio.loser.phrapp.item.community.fragment.view.WriteFragment;
 public class CommunityPresenter extends PHRPresenter<CommunityContract.CommunityView, CommunityContract.CommunityModel> implements CommunityContract.CommunityPresenter{
     private CommunityContract.CommunityView mView;
     private CommunityContract.CommunityModel mModel;
-    private DynamicView mDynamicView;
-    private MyArticleView mMyArticleView;
+
+    private DynamicContract.DynamicChildView mDynamicChildView;
+    private MyArticleContract.MyArticleChildView mMyArticleChildView;
 
     private CommunityEventListener mListener = new CommunityEventListener() {
-
-        @Override
-        public Fragment getFragment(int position) {
-            Fragment fragment = null;
-            switch (position) {
-                case 0:
-                    fragment = mView == null ? null : mDynamicView;
-                    break;
-                case 1:
-                    fragment = mView == null ? null : mMyArticleView;
-                    break;
-                default:
-            }
-            return fragment;
-        }
 
         @Override
         public void startWriteFragment() {
@@ -54,6 +39,21 @@ public class CommunityPresenter extends PHRPresenter<CommunityContract.Community
             ft.add(R.id.community_container, fragment);
             ft.addToBackStack("add fragment");
             ft.commit();
+        }
+
+        @Override
+        public View getView(int position) {
+            View view = null;
+            switch (position) {
+                case 0:
+                    view = mView == null ? null : mDynamicChildView.getView();
+                    break;
+                case 1:
+                    view = mView == null ? null : mMyArticleChildView.getView();
+                    break;
+                default:
+            }
+            return view;
         }
     };
 
@@ -68,10 +68,22 @@ public class CommunityPresenter extends PHRPresenter<CommunityContract.Community
 
         mView.setEventListener(mListener);
 
-        mDynamicView = new DynamicView();
-
-        mMyArticleView = new MyArticleView();
+        init();
     }
+
+    private void init(){
+        mDynamicChildView = new DynamicView(getActivity());
+        DynamicContract.DynamicChildPresenter presenter = new DynamicViewPresenter(getActivity());
+        presenter.setView(mDynamicChildView);
+        presenter.setModel(new DynamicViewModel(presenter));
+        presenter.attach();
+
+        mMyArticleChildView = new MyArticleView(getActivity());
+        MyArticleContract.MyArticleChildPresenter presenter1 = new MyArticleViewPresenter(getActivity());
+        presenter1.setView(mMyArticleChildView);
+        presenter1.setModel(new MyArticleViewModel(presenter1));
+        presenter1.attach();
+    } 
 
 
     @Override
@@ -80,7 +92,7 @@ public class CommunityPresenter extends PHRPresenter<CommunityContract.Community
 
     @Override
     public void childRefresh() {
-        mDynamicView.tellToRefresh();
-        mMyArticleView.tellToRefresh();
+        mMyArticleChildView.tellToRefresh();
+        mDynamicChildView.tellToRefresh();
     }
 }

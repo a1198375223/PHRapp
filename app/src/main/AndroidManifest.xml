@@ -41,6 +41,9 @@
             android:theme="@style/ModifyActivityTheme"/>
         <activity android:name=".item.community.CommunityActivity"
             android:launchMode="singleTask"/>
+
+        <activity android:name=".item.community.comment.ArticleActivity"
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>

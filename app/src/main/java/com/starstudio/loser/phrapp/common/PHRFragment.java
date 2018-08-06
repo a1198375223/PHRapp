@@ -80,7 +80,6 @@ public abstract class PHRFragment<E extends BaseEventListener> extends RxFragmen
         if (mDialog == null) {
             mDialog = new PHRProgressDialog(Objects.requireNonNull(getFragment().getActivity()));
             mDialog.showProgressDialog();
-            Log.d(TAG, "showProgressDialog: show show show show show show show hahahahahaha  " + mDialog.isShowing());
         }
         mDialog.showProgressDialog();
     }
