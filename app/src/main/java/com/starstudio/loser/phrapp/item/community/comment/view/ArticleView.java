@@ -151,7 +151,7 @@ public class ArticleView extends PHRView<ArticleEventListener> implements Articl
         GlideUtils.loadRoundImage(getActivity(), avUser.getAVFile("head_img").getUrl(), mIcon);
         mName.setText(avUser.getUsername());
         mDescribe.setText(data.getString("describe"));
-        mDate.setText(DateUtils.parseDate(data.getDate("date")));
+        mDate.setText(DateUtils.parseDate(data.getDate("time")));
         if (comment != null) {
             mAdapter.setList(comment);
         } else {

@@ -31,6 +31,7 @@ public class GlideUtils {
     //加载正常图片
 
     public static void loadImage(Context context, String url, ImageView imageView) {
+        Glide.with(context).asBitmap().load(url).into(imageView);
         Glide.with(context)
                 .asBitmap()
                 .load(url)

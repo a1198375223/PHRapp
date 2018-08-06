@@ -28,8 +28,10 @@ import com.starstudio.loser.phrapp.common.base.PHRView;
 import com.starstudio.loser.phrapp.item.community.CommunityActivity;
 import com.starstudio.loser.phrapp.item.main.PHRMainActivity;
 import com.starstudio.loser.phrapp.item.main.contract.MainContract;
+import com.starstudio.loser.phrapp.item.management.ManageMainActivity;
 import com.starstudio.loser.phrapp.item.message.PHRMessageActivity;
 import com.starstudio.loser.phrapp.item.modify.ModifyActivity;
+import com.starstudio.loser.phrapp.item.treatment.TreatmentActiity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,6 +64,7 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
                         Toast.makeText(activity, "click item2", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.phr_main_navigation_view_menu_item3:
+                        activity.startActivity(new Intent(activity, ManageMainActivity.class));
                         Toast.makeText(activity, "click item3", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.phr_main_navigation_view_menu_item4:
@@ -73,6 +76,7 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
                         pref_clean.edit().clear().commit();
                         activity.initView(navigationView);
                         navigationView.getMenu().findItem(R.id.phr_main_navigation_view_menu_item4).setVisible(false);
+                        navigationView.getMenu().findItem(R.id.phr_main_navigation_view_menu_item3).setVisible(false);
                         item.setVisible(false);
                         AVUser.logOut();
                         Toast.makeText(activity, "已退出登录", Toast.LENGTH_SHORT).show();
@@ -132,6 +136,8 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
                         break;
                     case 3:
                         Toast.makeText(activity, "no 4", Toast.LENGTH_SHORT).show();
+                        Intent intent4 = new Intent((PHRMainActivity) activity, TreatmentActiity.class);
+                        activity.startActivity(intent4);
                         break;
                     case 4:
                         intent = new Intent((PHRMainActivity) activity, CommunityActivity.class);

@@ -48,7 +48,7 @@ public class PHRMainActivity extends PHRActivity{
     TextView name,note;
     ImageView head_img;
     Button login;
-    Menu logout;
+    Menu menu;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -103,9 +103,10 @@ public class PHRMainActivity extends PHRActivity{
                 .diskCacheStrategy(DiskCacheStrategy.NONE);
 
         View headerView = navigationView.getHeaderView(0);
-        logout = navigationView.getMenu();
-        logout.findItem(R.id.phr_main_navigation_view_menu_item5).setVisible(true);
-        logout.findItem(R.id.phr_main_navigation_view_menu_item4).setVisible(true);//登录后让“退出登录”和“个人信息管理可见”可见
+        menu = navigationView.getMenu();
+        menu.findItem(R.id.phr_main_navigation_view_menu_item5).setVisible(true);
+        menu.findItem(R.id.phr_main_navigation_view_menu_item4).setVisible(true);
+        menu.findItem(R.id.phr_main_navigation_view_menu_item3).setVisible(true);//登录后让“退出登录”和“个人信息管理可见”可见
         name = (TextView) headerView.findViewById(R.id.phr_main_navigation_view_header_name_text);
         note = (TextView) headerView.findViewById(R.id.phr_main_navigation_view_header_note_text);
         head_img = (ImageView) headerView.findViewById(R.id.phr_main_navigation_view_header_icon);
@@ -147,7 +148,7 @@ public class PHRMainActivity extends PHRActivity{
 
     @Override
     protected void onResume() {
-        if (is_login()) {//若登录了，每次回到栈顶就刷新
+        if (is_login()) {//若用户已经登录了，则主活动每次回到栈顶就刷新，因为其他活动可能更新头像、用户名
             AVQuery<AVUser> userQuery = new AVQuery<>("_User");
             userQuery.whereEqualTo("objectId",AVUser.getCurrentUser().getObjectId());
             userQuery.getFirstInBackground(new GetCallback<AVUser>() {

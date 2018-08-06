@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/phr_white"
+    tools:context=".item.management.UpdatePhysicalActivity">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/phr_white"
+        app:title="上传体检记录"
+        app:navigationIcon="@drawable/phr_arrow_back_black_24"
+        android:id="@+id/phr_update_physical_record_toolbar">
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/phr_padding_12"
+        android:paddingRight="@dimen/phr_padding_12">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_30"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/phr_height_20"
+                android:layout_height="@dimen/phr_height_20"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:src="@drawable/phr_update_date" />
+
+            <EditText
+                android:id="@+id/phr_physical_date"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/phr_margin_3"
+                android:layout_marginStart="@dimen/phr_margin_3"
+                android:background="@null"
+                android:hint="输入2018/1/1格式的日期"
+                android:inputType="text"
+                android:textColorHint="@color/color_login_text4" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_1"
+            android:background="@drawable/phr_shape_gradient_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_30"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/phr_height_20"
+                android:layout_height="@dimen/phr_height_20"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:src="@drawable/phr_update_hospital" />
+
+            <EditText
+                android:id="@+id/phr_physical_hospital"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/phr_margin_3"
+                android:layout_marginStart="@dimen/phr_margin_3"
+                android:background="@null"
+                android:hint="请输入体检的医院"
+                android:inputType="text"
+                android:textColorHint="@color/color_login_text4" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_1"
+            android:background="@drawable/phr_shape_gradient_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
+            <EditText
+                android:id="@+id/phr_physical_content"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:inputType="textMultiLine"
+                android:hint="在这里输入体检结果哦！"
+                android:gravity="top"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/color_line_color"/>
+            <Button
+                android:id="@+id/phr_physical_submit"
+                style="@style/PHR.Button.Blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/phr_height_15"
+                android:text="@string/phr_register_submit"
+                android:textSize="@dimen/phr_text_size_20" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

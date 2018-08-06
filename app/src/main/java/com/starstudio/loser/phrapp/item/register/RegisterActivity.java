@@ -145,8 +145,8 @@ public class RegisterActivity extends AppCompatActivity {
                                         Toast toast = Toast.makeText(RegisterActivity.this, "无法连接到服务器！", Toast.LENGTH_SHORT);
                                         toast.setGravity(Gravity.CENTER, 0, 0);
                                         toast.show();
-                                    }else if (e.getCode()==202||e.getCode()==214){
-                                        Toast toast = Toast.makeText(RegisterActivity.this, "该账号已注册！", Toast.LENGTH_SHORT);
+                                    }else if (e.getCode()==202){
+                                        Toast toast = Toast.makeText(RegisterActivity.this, "该用户名已注册！", Toast.LENGTH_SHORT);
                                         toast.setGravity(Gravity.CENTER, 0, 0);
                                         toast.show();
                                     }else if (e.getCode()==125){
@@ -155,6 +155,18 @@ public class RegisterActivity extends AppCompatActivity {
                                         toast.show();
                                     }else if (e.getCode()==127){
                                         Toast toast = Toast.makeText(RegisterActivity.this, "手机号无效！", Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+                                    }else if (e.getCode() == 203){
+                                        Toast toast = Toast.makeText(RegisterActivity.this, "该邮箱已注册！", Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+                                    }else if (e.getCode() == 214){
+                                        Toast toast = Toast.makeText(RegisterActivity.this, "该手机号已注册！", Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+                                    }else if (e.getCode() == 217){
+                                        Toast toast = Toast.makeText(RegisterActivity.this, "用户名不能有空格！", Toast.LENGTH_SHORT);
                                         toast.setGravity(Gravity.CENTER, 0, 0);
                                         toast.show();
                                     }

@@ -58,6 +58,12 @@
 
     <style name="ModifyActivityTheme" parent="PHR.AppTheme"/>
 
+    <!--悬浮球-->
+    <style name="menu_labels_style">
+        <item name="android:background">@drawable/fab_label_background</item>
+        <item name="android:textColor">@color/text</item>
+    </style>
+
     <!--edit view-->
     <style name="PHR.EditView" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorControlNormal">@color/color_text_hint</item>

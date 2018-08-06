@@ -263,7 +263,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                 if (edit.getText().toString().equals("")){
                     Toast.makeText(ModifyActivity.this, "请填入要修改的内容", Toast.LENGTH_SHORT).show();
                 }else {
-                    AVUser avUser = AVUser.getCurrentUser();
+                    AVObject avUser = AVObject.createWithoutData("_User", AVUser.getCurrentUser().getObjectId());
                     avUser.put(type, edit.getText());
                     avUser.saveInBackground(new SaveCallback() {
                         @Override
@@ -285,6 +285,12 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                                     Toast.makeText(ModifyActivity.this, "请输入正确格式的手机号！", Toast.LENGTH_SHORT).show();
                                 }else if (e.getCode() == 125){
                                     Toast.makeText(ModifyActivity.this, "请输入正确格式的邮箱！", Toast.LENGTH_SHORT).show();
+                                }else if (e.getCode() == 202){
+                                    Toast.makeText(ModifyActivity.this, "该用户名已经存在！", Toast.LENGTH_SHORT).show();
+                                }else if (e.getCode() == 214){
+                                    Toast.makeText(ModifyActivity.this, "该手机号已经注册！", Toast.LENGTH_SHORT).show();
+                                }else if (e.getCode() == 203){
+                                    Toast.makeText(ModifyActivity.this, "该邮箱已经注册！", Toast.LENGTH_SHORT).show();
                                 }
                                 Log.d(TAG, "done: +++++++++++++++错误代码：" + e.getCode());
                             }
