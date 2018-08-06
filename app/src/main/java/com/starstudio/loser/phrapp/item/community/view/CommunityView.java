@@ -52,7 +52,7 @@ public class CommunityView extends PHRView<CommunityEventListener> implements Co
 
         mList = new ArrayList<>();
         mList.add("动  态");
-        mList.add("推  荐");
+        mList.add("自  己");
 
         for (String title : mList) {
             tabLayout.addTab(tabLayout.newTab().setText(title));
