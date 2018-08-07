@@ -57,6 +57,13 @@
     <string name="phr_treatment_dept_choice">选择科室</string>
     <string name="phr_treatment_doc_choice">医生列表</string>
     <string name="phr_treatment_doc_work_time">坐诊时间 :</string>
+    <string name="phr_treatment_appointment">确认挂号单</string>
+    <string name="phr_treatment_user_name">患者</string>
+    <string name="phr_treatment_hosp_name">医院名</string>
+    <string name="phr_treatment_dept_name">就诊科室</string>
+    <string name="phr_treatment_doctor_name">预约医生</string>
+    <string name="phr_treatment_appoint_time">预约时间</string>
+    <string name="phr_treatment_doc_page">医生主页</string>
 
     <!--write fragment string-->
     <string name="phr_write_positive">发布</string>

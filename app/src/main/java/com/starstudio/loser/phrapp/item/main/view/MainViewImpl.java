@@ -31,6 +31,7 @@ import com.starstudio.loser.phrapp.item.main.contract.MainContract;
 import com.starstudio.loser.phrapp.item.management.ManageMainActivity;
 import com.starstudio.loser.phrapp.item.message.PHRMessageActivity;
 import com.starstudio.loser.phrapp.item.modify.ModifyActivity;
+import com.starstudio.loser.phrapp.item.treatment.TreatmentActiity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
