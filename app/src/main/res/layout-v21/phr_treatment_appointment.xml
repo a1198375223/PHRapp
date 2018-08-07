@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/phr_treatment_appointment_toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/phr_margin_7"
+        android:layout_marginLeft="@dimen/phr_margin_20"
+        android:layout_marginRight="@dimen/phr_margin_20">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/phr_margin_5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phr_treatment_user_name"
+                android:textSize="@dimen/phr_text_size_14"/>
+
+            <TextView
+                android:id="@+id/user_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/phr_text_size_16"
+                android:layout_marginLeft="@dimen/phr_margin_18"
+                android:textColor="@color/phr_black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/phr_margin_5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phr_treatment_hosp_name"
+                android:textSize="@dimen/phr_text_size_14"/>
+
+            <TextView
+                android:id="@+id/hosp_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/phr_text_size_16"
+                android:layout_marginLeft="@dimen/phr_margin_12"
+                android:textColor="@color/phr_black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/phr_margin_5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phr_treatment_dept_name"
+                android:textSize="@dimen/phr_text_size_14"/>
+
+            <TextView
+                android:id="@+id/dept_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/phr_text_size_16"
+                android:layout_marginLeft="@dimen/phr_margin_5"
+                android:textColor="@color/phr_black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/phr_margin_5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phr_treatment_doctor_name"
+                android:textSize="@dimen/phr_text_size_14"/>
+
+            <TextView
+                android:id="@+id/doctor_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/phr_text_size_16"
+                android:layout_marginLeft="@dimen/phr_margin_5"
+                android:textColor="@color/phr_black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/phr_margin_5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phr_treatment_appoint_time"
+                android:textSize="@dimen/phr_text_size_14"/>
+
+            <TextView
+                android:id="@+id/appointment_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/phr_text_size_16"
+                android:layout_marginLeft="@dimen/phr_margin_5"
+                android:textColor="@color/phr_black"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/concert_appoint_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phr_write_error_ok"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/phr_margin_8"/>
+
+</LinearLayout>

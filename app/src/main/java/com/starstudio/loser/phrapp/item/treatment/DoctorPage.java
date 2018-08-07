@@ -51,20 +51,20 @@ public class DoctorPage extends AppCompatActivity{
         }
         fragmentList = new ArrayList<>();
         for (int i = 0; i < titleList.size(); i++) {
-            fragmentList.add(TabFragment.newInstance(i));
+            fragmentList.add(TabFragment.newInstance(i,null,null,null,null,null));// index  0: 简介; 1：评价; 2：预约
         }
         adapter = new FragmentAdapter(getSupportFragmentManager(), fragmentList, titleList);
         viewPager.setAdapter(adapter);//给ViewPager设置适配器
         tabLayout.setupWithViewPager(viewPager);//将TabLayout和ViewPager关联起来
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.phr_community_post_message_menu,menu);
         return true;
     }
 
-    /*@Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.tab_add:
