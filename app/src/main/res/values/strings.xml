@@ -88,6 +88,7 @@
     <string name="phr_rv_my_article_comment_date">日  期</string>
     <string name="phr_rv_my_article_comment_like_count">喜欢(1)</string>
     <string name="phr_rv_my_article_comment_reply">回复</string>
+    <string name="phr_rv_my_article_comment_show_reply">查看回复</string>
     <string name="phr_rv_my_article_comment_id">#1</string>
     <string name="phr_article_fragment_submit">发  布</string>
     <string name="phr_article_fragment_reply">写回复</string>

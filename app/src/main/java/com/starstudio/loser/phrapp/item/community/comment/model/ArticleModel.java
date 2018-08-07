@@ -87,6 +87,8 @@ public class ArticleModel extends PHRModel implements ArticleContract.ArticleCon
             avObject.put("is_author", avUser.equals(mCurrentAuthor.getAVUser("article_user")));
             avObject.put("article", mCurrentAuthor);
             avObject.put("date", new Date(System.currentTimeMillis()));
+            reply.increment("reply");
+            reply.setFetchWhenSave(true);
             avObject.saveInBackground();
         }
     }

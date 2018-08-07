@@ -100,21 +100,62 @@ public class MyArticleViewModel extends PHRModel implements MyArticleContract.My
     @Override
     public void toDelete(AVObject avObject) {
         final AVObject article = AVObject.createWithoutData("Article", avObject.getObjectId());
-        AVQuery<AVObject> comment = new AVQuery<>("Comment");
+        final AVQuery<AVObject> comment = new AVQuery<>("Comment");
         AVQuery<AVObject> like = new AVQuery<>("Like");
         AVQuery<AVObject> dislike = new AVQuery<>("Dislike");
         AVQuery<AVObject> complaint = new AVQuery<>("Complaint");
+        AVQuery<AVObject> comment_like = new AVQuery<>("CommentLike");
+        AVQuery<AVObject> comment_dislike = new AVQuery<>("CommentDislike");
+        AVQuery<AVObject> comment_complaints = new AVQuery<>("CommentComplaints");
+        comment_like.include("comment").include("comment_like_user");
         like.include("article").include("like_user").whereEqualTo("article", avObject);
         dislike.include("article").include("dislike_user").whereEqualTo("article", avObject);
         complaint.include("article").include("complaints_user").whereEqualTo("article", avObject);
         comment.include("article");
         comment.whereEqualTo("article", article);
-        comment.deleteAllInBackground(new DeleteCallback() {
+        comment.findInBackground(new FindCallback<AVObject>() {
             @Override
-            public void done(AVException e) {
-                if (e != null) {
-                    mPresenter.showError("出错啦");
+            public void done(List<AVObject> list, AVException e) {
+                for (AVObject object : list) {
+                    AVQuery<AVObject> comment_like = new AVQuery<>("CommentLike");
+                    AVQuery<AVObject> comment_dislike = new AVQuery<>("CommentDislike");
+                    AVQuery<AVObject> comment_complaints = new AVQuery<>("CommentComplaints");
+                    comment_like.include("comment").include("comment_like_user").whereEqualTo("comment", object);
+                    comment_dislike.include("comment").include("comment_dislike_user").whereEqualTo("comment", object);
+                    comment_complaints.include("comment").include("comment_complaints_user").whereEqualTo("comment", object);
+                    comment_like.deleteAllInBackground(new DeleteCallback() {
+                        @Override
+                        public void done(AVException e) {
+                            if (e != null) {
+                                mPresenter.showError("出错啦");
+                            }
+                        }
+                    });
+                    comment_complaints.deleteAllInBackground(new DeleteCallback() {
+                        @Override
+                        public void done(AVException e) {
+                            if (e != null) {
+                                mPresenter.showError("出错啦");
+                            }
+                        }
+                    });
+                    comment_dislike.deleteAllInBackground(new DeleteCallback() {
+                        @Override
+                        public void done(AVException e) {
+                            if (e != null) {
+                                mPresenter.showError("出错啦");
+                            }
+                        }
+                    });
                 }
+                comment.deleteAllInBackground(new DeleteCallback() {
+                    @Override
+                    public void done(AVException e) {
+                        if (e != null) {
+                            mPresenter.showError("出错啦");
+                        }
+                    }
+                });
             }
         });
         like.deleteAllInBackground(new DeleteCallback() {

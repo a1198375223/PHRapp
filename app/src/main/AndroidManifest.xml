@@ -52,7 +52,7 @@
         <activity android:name=".item.management.UpdatePhysicalActivity" />
         <activity android:name=".item.management.PhysicalRecordActivity" />
         <activity android:name=".item.management.UpdateClinicalActivity" />
-        <activity android:name=".item.management.ClinicalRecordActivity"></activity>
+        <activity android:name=".item.management.ClinicalRecordActivity"/>
 
         <activity android:name=".item.community.comment.ArticleActivity"
             android:launchMode="singleTask"/>

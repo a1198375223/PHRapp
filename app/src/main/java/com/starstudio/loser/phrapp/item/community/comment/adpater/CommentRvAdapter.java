@@ -272,6 +272,11 @@ public class CommentRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((MyHolder) holder).mDate.setText(DateUtils.parseDate(mList.get(position).getDate("date")));
             ((MyHolder) holder).mComment.setText(mList.get(position).getString("comment"));
             ((MyHolder) holder).mId.setText("#" + mList.get(position).getInt("id"));
+            if (mList.get(position).getInt("reply") != 0) {
+                ((MyHolder) holder).mShowReply.setText("查看回复(" + mList.get(position).getInt("reply") + ")");
+            } else {
+                ((MyHolder) holder).mShowReply.setVisibility(View.INVISIBLE);
+            }
 
             ((MyHolder) holder).mReply.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -308,6 +313,8 @@ public class CommentRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         TextView mReply;
         TextView mReplyTo;
 
+        TextView mShowReply;
+
         ShineButton mLike;
         TextView mLikeCount;
         ImageView mMore;
@@ -333,6 +340,8 @@ public class CommentRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             mCanSee = (LinearLayout) itemView.findViewById(R.id.phr_rv_my_article_is_reply_see);
             mReplyTo = (TextView) itemView.findViewById(R.id.phr_rv_my_article_comment_reply_other);
             mReference = (TextView) itemView.findViewById(R.id.phr_rv_my_article_comment_reference);
+
+            mShowReply = (TextView) itemView.findViewById(R.id.phr_rv_my_article_comment_show_reply);
         }
     }
 
