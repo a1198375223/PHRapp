@@ -1,8 +1,8 @@
-package com.starstudio.loser.phrapp.item.community.comment.adpater;
+package com.starstudio.loser.phrapp.item.community.comment.show.adapter;
 
 /*
     create by:loser
-    date:2018/8/3 16:46
+    date:2018/8/7 17:15
 */
 
 import android.annotation.SuppressLint;
@@ -11,7 +11,6 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,22 +37,18 @@ import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
-import static com.avos.avoscloud.AVAnalytics.TAG;
-
-public class CommentRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ShowReplyRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<AVObject> mList;
     private OnReplyClickListener mListener;
 
-    public CommentRvAdapter(Context context) {
+    public ShowReplyRvAdapter(Context context) {
         this.mContext = context;
         this.mList = new ArrayList<>();
     }
 
     public interface OnReplyClickListener{
-        void onReplyClickListener(int id, String name);
-
-        void onShowReplyClickListener(int position);
+        void onReplyClickListener(int id, String name, int position);
     }
 
     public void setListener(OnReplyClickListener listener) {
@@ -277,27 +272,12 @@ public class CommentRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((MyHolder) holder).mDate.setText(DateUtils.parseDate(mList.get(position).getDate("date")));
             ((MyHolder) holder).mComment.setText(mList.get(position).getString("comment"));
             ((MyHolder) holder).mId.setText("#" + mList.get(position).getInt("id"));
-            Log.d(TAG, "onBindViewHolder:  position:" + position + "  reply:" + mList.get(position).getInt("reply"));
-            if (mList.get(position).getInt("reply") != 0) {
-                ((MyHolder) holder).mShowReply.setVisibility(View.VISIBLE);
-                ((MyHolder) holder).mShowReply.setText("查看回复(" + mList.get(position).getInt("reply") + ")");
-                ((MyHolder) holder).mShowReply.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (mListener != null) {
-                            mListener.onShowReplyClickListener(position);
-                        }
-                    }
-                });
-            } else {
-                ((MyHolder) holder).mShowReply.setVisibility(View.INVISIBLE);
-            }
 
             ((MyHolder) holder).mReply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mListener != null) {
-                        mListener.onReplyClickListener(mList.get(position).getInt("id"),mList.get(position).getAVUser("comment_user").getUsername()) ;
+                        mListener.onReplyClickListener(mList.get(position).getInt("id"),mList.get(position).getAVUser("comment_user").getUsername(), position) ;
                     }
                 }
             });
@@ -328,8 +308,6 @@ public class CommentRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         TextView mReply;
         TextView mReplyTo;
 
-        TextView mShowReply;
-
         ShineButton mLike;
         TextView mLikeCount;
         ImageView mMore;
@@ -355,8 +333,6 @@ public class CommentRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             mCanSee = (LinearLayout) itemView.findViewById(R.id.phr_rv_my_article_is_reply_see);
             mReplyTo = (TextView) itemView.findViewById(R.id.phr_rv_my_article_comment_reply_other);
             mReference = (TextView) itemView.findViewById(R.id.phr_rv_my_article_comment_reference);
-
-            mShowReply = (TextView) itemView.findViewById(R.id.phr_rv_my_article_comment_show_reply);
         }
     }
 

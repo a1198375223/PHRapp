@@ -56,6 +56,9 @@
 
         <activity android:name=".item.community.comment.ArticleActivity"
             android:launchMode="singleTask"/>
+        <activity
+            android:name=".item.community.comment.show.ShowReplyActivity"
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

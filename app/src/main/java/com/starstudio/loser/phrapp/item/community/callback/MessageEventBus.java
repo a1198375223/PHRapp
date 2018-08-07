@@ -6,17 +6,17 @@ package com.starstudio.loser.phrapp.item.community.callback;
 */
 
 public class MessageEventBus {
-    private boolean delete;
+    private boolean todo;
 
-    public MessageEventBus(boolean delete) {
-        this.delete = delete;
+    public MessageEventBus(boolean todo) {
+        this.todo = todo;
     }
 
-    public boolean isDelete() {
-        return delete;
+    public boolean isTodo() {
+        return todo;
     }
 
-    public void setDelete(boolean delete) {
-        this.delete = delete;
+    public void setTodo(boolean todo) {
+        this.todo = todo;
     }
 }

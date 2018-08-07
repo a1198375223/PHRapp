@@ -16,11 +16,16 @@ import android.widget.EditText;
 
 import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.common.PHRActivity;
+import com.starstudio.loser.phrapp.common.utils.EventBusUtils;
 import com.starstudio.loser.phrapp.common.utils.KeyBoardUtils;
+import com.starstudio.loser.phrapp.item.community.callback.MessageEventBus;
 import com.starstudio.loser.phrapp.item.community.comment.contract.ArticleContract;
 import com.starstudio.loser.phrapp.item.community.comment.model.ArticleModel;
 import com.starstudio.loser.phrapp.item.community.comment.presenter.ArticleViewPresenter;
 import com.starstudio.loser.phrapp.item.community.comment.view.ArticleView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class ArticleActivity extends PHRActivity {
     private ArticleContract.ArticleContractPresenter mPresenter;
@@ -32,17 +37,25 @@ public class ArticleActivity extends PHRActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phr_article_fragment_layout);
-
+        EventBusUtils.register(this);
         mPresenter = new ArticleViewPresenter(getActivity());
         mPresenter.setView(new ArticleView(getActivity()));
         mPresenter.setModel(new ArticleModel(mPresenter));
         mPresenter.attach();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refresh(MessageEventBus eventBus) {
+        if (eventBus.isTodo()) {
+            mPresenter.toRefresh();
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.detach();
+        EventBusUtils.unregister(this);
     }
 
     @Override

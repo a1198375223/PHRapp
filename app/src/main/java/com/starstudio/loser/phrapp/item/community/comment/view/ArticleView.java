@@ -132,7 +132,6 @@ public class ArticleView extends PHRView<ArticleEventListener> implements Articl
                 editText.setText("");
                 editText.setFocusable(false);
                 KeyBoardUtils.closeKeyBoard(editText, getActivity());
-                getListener().loadComment();
                 ((ArticleActivity) getActivity()).isReply = false;
             }
         });
@@ -148,6 +147,11 @@ public class ArticleView extends PHRView<ArticleEventListener> implements Articl
                 editText.setFocusableInTouchMode(true);
                 editText.requestFocus();
                 KeyBoardUtils.openKeyBoard(editText, getActivity());
+            }
+
+            @Override
+            public void onShowReplyClickListener(int position) {
+                getListener().startShowReplyActivity(position);
             }
         });
         recyclerView.setAdapter(mAdapter);
@@ -171,16 +175,7 @@ public class ArticleView extends PHRView<ArticleEventListener> implements Articl
     }
 
     @Override
-    public void showError(String error) {
-        showErrorToast(error);
-        dismissProgressDialog();
-    }
-
-    @Override
     public void load(List<AVObject> list) {
-        if (list == null) {
-            mAdapter.setList(new ArrayList<AVObject>());
-        }
         mAdapter.setList(list);
         dismissProgressDialog();
     }
