@@ -82,10 +82,7 @@ public class TreatmentActiity  extends Activity{
                                     //Toast.makeText(TreatmentActiity.this,"点击："+name,Toast.LENGTH_SHORT).show();
                                     try {
                                         for(AVObject avObject1 : list) {
-
-                                            JSONArray jsonArray = new JSONArray();
-
-                                            jsonArray = avObject1.getJSONArray("hospDept");
+                                            JSONArray jsonArray = avObject1.getJSONArray("hospDept");
 
                                             //Toast.makeText(TreatmentActiity.this, "jsonArray length: " + jsonArray.length(), Toast.LENGTH_SHORT).show();
 

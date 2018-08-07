@@ -1,9 +1,11 @@
 package com.starstudio.loser.phrapp.item.treatment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
@@ -56,20 +58,23 @@ public class DoctorListAdapter extends BaseAdapter{
         TextView doctorName=convertView.findViewById(R.id.doctor_name_tv);
         TextView doctorTitle=convertView.findViewById(R.id.doctor_title_tv);
         TextView doctorProfile=convertView.findViewById(R.id.doctor_profile_tv);
+        final String hospName=doctorList.get(position).getHosp();
+        final String docName=doctorList.get(position).getDoctorName();
+        final String deptName=doctorList.get(position).getDept();
         final GridView doctorWorkTime=convertView.findViewById(R.id.doctor_work_time_grid_view);
+        final List<String> workList=new ArrayList<>();
         RequestOptions options = new RequestOptions()
                 .placeholder(R.drawable.waiting)
                 .error(R.drawable.default_head)
                 .diskCacheStrategy(DiskCacheStrategy.NONE);
 
         Glide.with(context).load(doctorList.get(position).getDoctorImagId()).apply(options).into(doctorImage);
-        doctorName.setText(doctorList.get(position).getDoctorName());
+        doctorName.setText(docName);
         doctorTitle.setText(doctorList.get(position).getDoctorTitle());
         doctorProfile.setText(doctorList.get(position).getProfile());
 
         try {
             JSONArray jsonArray = doctorList.get(position).getWorkArray();
-            List<String> workList=new ArrayList<>();
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject=jsonArray.getJSONObject(i);
                 String date=jsonObject.getString("date");
@@ -77,12 +82,32 @@ public class DoctorListAdapter extends BaseAdapter{
                 String reserved=jsonObject.getString("reserved");
                 workList.add(date+"\n预约数："+reserved+"/"+total);
             }
-            ArrayAdapter<String> adapter=new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,workList);
-            doctorWorkTime.setAdapter(adapter);
         }catch (Exception e1){
             e1.printStackTrace();
         }
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,workList);
+        doctorWorkTime.setAdapter(adapter);
+        doctorWorkTime.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(context,AppointmentActivity.class);
+                intent.putExtra("hospName",hospName);
+                intent.putExtra("deptName",deptName);
+                intent.putExtra("docName",docName);
+                intent.putExtra("time",workList.get(position));
+                context.startActivity(intent);
+            }
+        });
 
+        doctorImage.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                //根据docnName 跳转到医生主页
+                Intent intent=new Intent(context,DoctorPage.class);
+                context.startActivity(intent);
+            }
+        });
         return convertView;
     }
 }

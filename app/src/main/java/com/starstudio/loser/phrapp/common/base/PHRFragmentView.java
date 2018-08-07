@@ -13,7 +13,7 @@ import com.starstudio.loser.phrapp.common.view.PHRProgressDialog;
 
 import java.util.Objects;
 
-public class PHRFragmentView<E extends BaseEventListener> implements BaseView<E>{
+public abstract class PHRFragmentView<E extends BaseEventListener> implements BaseView<E>{
     private Fragment mFragment;
     private E mListener;
     private PHRProgressDialog mDialog;

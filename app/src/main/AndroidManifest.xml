@@ -32,6 +32,8 @@
         <activity android:name=".item.treatment.TreatmentActiity" />
         <activity android:name=".item.treatment.DoctorListActivity" />
         <activity android:name=".item.treatment.ChoiceDeptActivity" />
+        <activity android:name=".item.treatment.DoctorPage" />
+        <activity android:name=".item.treatment.AppointmentActivity" />
         <activity android:name=".item.login.LoginActivity">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
