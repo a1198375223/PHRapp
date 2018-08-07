@@ -81,42 +81,51 @@ public class AppointmentActivity extends Activity{
             public void done(AVObject avObject, AVException e) {
                 if(e==null) {
                     // object 就是符合条件的第一个 AVObject
-                    Toast.makeText(AppointmentActivity.this,"查找成功",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(AppointmentActivity.this,"查找成功",Toast.LENGTH_SHORT).show();
                     try {
-                        AVObject object=avObject.getAVObject("workTime");
-                        JSONArray jsonArray = object.getJSONArray("workTime");
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject=jsonArray.getJSONObject(i);
-                            if(jsonObject.getString("date").equals(time)){
-                                int reserved=Integer.valueOf(jsonObject.getString("reserved"));
-                                int reminder=Integer.valueOf(jsonObject.getString("reminder"));
-                                Toast.makeText(AppointmentActivity.this,"reserved:"+reserved+",reminder:"+reminder,Toast.LENGTH_SHORT).show();
-                                if(reminder!=0) {
-                                    reserved++;
-                                    reminder--;
-                                    jsonObject.put("reserved", String.valueOf(reserved));
-                                    jsonObject.put("reminder", String.valueOf(reminder));
-                                    Toast.makeText(AppointmentActivity.this,"reserved:"+jsonObject.getString("reserved"),Toast.LENGTH_SHORT).show();
-
-                                    object.put("workTime",jsonArray);
-                                    object.saveInBackground(new SaveCallback() {
-                                        @Override
-                                        public void done(AVException e2) {
-                                            if(e2==null){
-                                                Toast.makeText(AppointmentActivity.this,"存储成功",Toast.LENGTH_SHORT).show();
-                                            }else{
-                                                Toast.makeText(AppointmentActivity.this,"存储失败",Toast.LENGTH_SHORT).show();
-                                                Log.e("test:",e2.getCode()+"  ");
-                                                Log.e("test",Log.getStackTraceString(e2));
+                        AVQuery<AVObject> query = new AVQuery<>("WorkTime");
+                        query.whereEqualTo("doctorID",avObject.getObjectId());
+                        query.getFirstInBackground(new GetCallback<AVObject>() {
+                            @Override
+                            public void done(AVObject avObject, AVException e) {
+                                try {
+                                    JSONArray jsonArray = avObject.getJSONArray("workTime");
+                                    for (int i = 0; i < jsonArray.length(); i++) {
+                                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                        if (jsonObject.getString("date").equals(time)) {
+                                            int reserved = Integer.valueOf(jsonObject.getString("reserved"));
+                                            int reminder = Integer.valueOf(jsonObject.getString("reminder"));
+                                            Toast.makeText(AppointmentActivity.this, "reserved:" + reserved + ",reminder:" + reminder, Toast.LENGTH_SHORT).show();
+                                            if (reminder != 0) {
+                                                reserved++;
+                                                reminder--;
+                                                jsonObject.put("reserved", String.valueOf(reserved));
+                                                jsonObject.put("reminder", String.valueOf(reminder));
+                                                //Toast.makeText(AppointmentActivity.this, "reserved:" + jsonObject.getString("reserved"), Toast.LENGTH_SHORT).show();
+                                                avObject.put("workTime", jsonArray);
+                                                avObject.saveInBackground(new SaveCallback() {
+                                                    @Override
+                                                    public void done(AVException e2) {
+                                                        if (e2 == null) {
+                                                            //Toast.makeText(AppointmentActivity.this, "存储成功", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(AppointmentActivity.this, "预约成功", Toast.LENGTH_SHORT).show();
+                                                        } else {
+                                                            Toast.makeText(AppointmentActivity.this, "存储失败", Toast.LENGTH_SHORT).show();
+                                                            Log.e("test:", e2.getCode() + "  ");
+                                                            Log.e("test", Log.getStackTraceString(e2));
+                                                        }
+                                                    }
+                                                });
+                                            } else {
+                                                Toast.makeText(AppointmentActivity.this, "预约失败，该时段已预约满", Toast.LENGTH_SHORT).show();
                                             }
                                         }
-                                    });
-                                    Toast.makeText(AppointmentActivity.this,"预约成功",Toast.LENGTH_SHORT).show();
-                                }else{
-                                    Toast.makeText(AppointmentActivity.this,"预约失败，该时段已预约满",Toast.LENGTH_SHORT).show();
+                                    }
+                                }catch (Exception e3){
+                                    e3.printStackTrace();
                                 }
                             }
-                        }
+                        });
                     }catch (Exception e1){
                         e1.printStackTrace();
                     }
