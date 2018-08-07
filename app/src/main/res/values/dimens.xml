@@ -449,4 +449,6 @@
     <dimen name="phr_height_98">196dp</dimen>
     <dimen name="phr_height_99">198dp</dimen>
     <dimen name="phr_height_100">200dp</dimen>
+
+    <dimen name="phr_divide_1">1dp</dimen>
 </resources>

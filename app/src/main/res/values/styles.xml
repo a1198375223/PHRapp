@@ -56,7 +56,6 @@
         <item name="android:contentInsetStartWithNavigation" tools:targetApi="n">0dp</item>
     </style>
 
-    <style name="ModifyActivityTheme" parent="PHR.AppTheme"></style>
 
     <!--悬浮球-->
     <style name="menu_labels_style">
@@ -69,6 +68,28 @@
         <item name="colorControlNormal">@color/color_text_hint</item>
         <item name="colorControlActivated">@color/color_text_hint</item>
     </style>
+
+    <!--bottom dialog-->
+    <style name="PHR.BottomDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!--bottom dialog animation-->
+    <style name="PHR.BottomDialog.Animator" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/phr_bottom_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/phr_bottom_dialog_out</item>
+    </style>
+
+    <!--&lt;!&ndash;reply edit&ndash;&gt;-->
+    <!--<style name="PHR.Button.Submit" parent="">-->
+        <!--<item name="android:gravity">center</item>-->
+        <!--<item name="android:background">@drawable/phr_article_reply_button_bg</item>-->
+    <!--</style>-->
 
 
 </resources>

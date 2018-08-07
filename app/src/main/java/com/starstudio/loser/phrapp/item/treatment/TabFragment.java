@@ -26,13 +26,13 @@ public class TabFragment extends Fragment {
         return fragment;
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.phr_treatment_tab_fragment, null);
-        textView = view.findViewById(R.id.content_tv);
-        textView.setText(String.valueOf((char) getArguments().getInt("index")));
-        return view;
-
-    }
+//    @Nullable
+//    @Override
+//    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//        //View view = inflater.inflate(R.layout.phr_treatment_tab_fragment, null);
+//       // textView = view.findViewById(R.id.content_tv);
+//        //textView.setText(String.valueOf((char) getArguments().getInt("index")));
+//        return view;
+//
+//    }
 }

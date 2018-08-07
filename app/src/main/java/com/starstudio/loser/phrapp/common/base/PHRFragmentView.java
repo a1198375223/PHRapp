@@ -49,6 +49,21 @@ public abstract class PHRFragmentView<E extends BaseEventListener> implements Ba
         }
     }
 
+    @Override
+    public void showErrorToast(String message) {
+
+    }
+
+    @Override
+    public void showWarningToast(String message) {
+
+    }
+
+    @Override
+    public void showSuccessToast(String message) {
+
+    }
+
     public E getListener() {
         return mListener;
     }

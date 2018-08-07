@@ -52,76 +52,61 @@ public class CommunityView extends PHRView<CommunityEventListener> implements Co
 
         mList = new ArrayList<>();
         mList.add("动  态");
-        mList.add("推  荐");
+        mList.add("自  己");
 
         for (String title : mList) {
             tabLayout.addTab(tabLayout.newTab().setText(title));
         }
-        mAdapter = new MyAdapter(((PHRActivity)getActivity()).getSupportFragmentManager());
+        mAdapter = new MyAdapter();
         mViewPager.setAdapter(mAdapter);
         tabLayout.setupWithViewPager(mViewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
     }
 
 
-    private class MyAdapter extends FragmentPagerAdapter {
-        public MyAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-//        @Override
-//        public int getCount() {
-//            return mList.size();
-//        }
-//
-//        @Override
-//        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-//            return view == object;
-//        }
-//
-//        @Override
-//        public int getItemPosition(@NonNull Object object) {
-//            return super.getItemPosition(object);
-//        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return getListener().getFragment(position);
-        }
+    private class MyAdapter extends PagerAdapter {
 
         @Override
         public int getCount() {
             return mList.size();
         }
 
-//        @NonNull
-//        @Override
-//        public Object instantiateItem(@NonNull ViewGroup container, int position) {
-//            View view = null;
-//            if (getListener() != null) {
-//                view = getListener().getView(position);
-//            }
-//            container.addView(view);
-//            return view;
-//        }
-//
-//        @Override
-//        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-//            container.removeView((View)object);
-//        }
-//
-//        @Nullable
-//        @Override
-//        public CharSequence getPageTitle(int position) {
-//            return mList.get(position);
-//        }
+        @Override
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+            return view == object;
+        }
 
+        @Override
+        public int getItemPosition(@NonNull Object object) {
+            return super.getItemPosition(object);
+        }
+
+
+
+        @NonNull
+        @Override
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
+            View view = null;
+            if (getListener() != null) {
+                view = getListener().getView(position);
+            }
+            container.addView(view);
+            return view;
+        }
+
+        @Override
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+            container.removeView((View)object);
+        }
 
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
             return mList.get(position);
         }
+
+
+
     }
 
 }

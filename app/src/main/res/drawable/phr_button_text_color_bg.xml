@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--不能用时显示的图片-->
+    <item
+        android:state_enabled="true"
+        android:drawable="@color/color_text_title"/>
+
+    <item
+        android:state_enabled="false"
+        android:drawable="@color/color_text_hint"/>
+</selector>

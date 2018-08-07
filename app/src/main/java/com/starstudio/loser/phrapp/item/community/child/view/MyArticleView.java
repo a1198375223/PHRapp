@@ -7,15 +7,11 @@ package com.starstudio.loser.phrapp.item.community.child.view;
 
 import android.app.Activity;
 import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.avos.avoscloud.AVObject;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -25,27 +21,24 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.RefreshState;
 import com.scwang.smartrefresh.layout.listener.OnMultiPurposeListener;
 import com.starstudio.loser.phrapp.R;
-import com.starstudio.loser.phrapp.common.base.BaseFragment;
 import com.starstudio.loser.phrapp.common.base.PHRView;
-import com.starstudio.loser.phrapp.item.community.child.adapter.CommunityRvAdapter;
+import com.starstudio.loser.phrapp.item.community.child.adapter.MyArticleRvAdapter;
 import com.starstudio.loser.phrapp.item.community.child.contract.MyArticleContract;
-import com.starstudio.loser.phrapp.item.community.child.model.MyArticleModel;
 import com.starstudio.loser.phrapp.item.community.child.presenter.ChildEventListener;
-import com.starstudio.loser.phrapp.item.community.child.presenter.MyArticlePresenter;
 
 import java.util.List;
 
-public class MyArticleView extends BaseFragment<ChildEventListener> implements MyArticleContract.MyArticleContractView {
-    private CommunityRvAdapter mAdapter;
+public class MyArticleView extends PHRView<ChildEventListener> implements MyArticleContract.MyArticleChildView {
+    private MyArticleRvAdapter mAdapter;
     private SmartRefreshLayout mLayout;
     private MyArticleContract.MyArticleContractPresenter mPresenter;
+    private View mRootView;
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.phr_my_article_rv_layout, container, false);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.phr_my_article_recycler_view);
-        mLayout = (SmartRefreshLayout) view.findViewById(R.id.phr_my_article_smart_refresh);
+    public MyArticleView(Activity activity) {
+        super(activity);
+        mRootView = LayoutInflater.from(activity).inflate(R.layout.phr_my_article_rv_layout, null);
+        RecyclerView recyclerView = (RecyclerView) mRootView.findViewById(R.id.phr_my_article_recycler_view);
+        mLayout = (SmartRefreshLayout) mRootView.findViewById(R.id.phr_my_article_smart_refresh);
         mLayout.setOnMultiPurposeListener(new OnMultiPurposeListener() {
             @Override
             public void onHeaderPulling(RefreshHeader header, float percent, int offset, int headerHeight, int extendHeight) {
@@ -125,43 +118,29 @@ public class MyArticleView extends BaseFragment<ChildEventListener> implements M
             }
         });
 
-//        FloatingActionButton floatingActionButton = (FloatingActionButton) mRootView.findViewById(R.id.phr_my_article_floating_button);
-//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                FragmentTransaction ft = ((CommunityActivity)activity).getSupportFragmentManager().beginTransaction();
-////                WriteFragment fragment = new WriteFragment();
-////                ft.add(R.id.phr_my_article_rv_container, fragment);
-////                ft.commit();
-//                getListener().startFragment();
-//            }
-//        });
-
-        mAdapter = new CommunityRvAdapter(getContext());
-        mAdapter.setListener(new CommunityRvAdapter.OnItemClickListener() {
+        mAdapter = new MyArticleRvAdapter(activity);
+        mAdapter.setListener(new MyArticleRvAdapter.OnItemClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onItemClickListener(int position) {
                 showSuccessToast("click no:" + position);
+//                getListener().startArticleFragment(position);
+                getListener().startArticleActivity(position);
             }
         });
+
         recyclerView.setAdapter(mAdapter);
         recyclerView.setHasFixedSize(true);
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        LinearLayoutManager manager = new LinearLayoutManager(activity);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
-
-        mPresenter = new MyArticlePresenter(this);
-        mPresenter.setView(this);
-        mPresenter.setModel(new MyArticleModel(mPresenter));
-        mPresenter.attach();
-        return view;
     }
 
     @Override
     public void setData(List<AVObject> list) {
         mAdapter.setList(list);
         mLayout.finishRefresh();
+        dismissProgressDialog();
     }
 
     @Override
@@ -173,5 +152,10 @@ public class MyArticleView extends BaseFragment<ChildEventListener> implements M
     @Override
     public void tellToRefresh() {
         getListener().toRefresh();
+    }
+
+    @Override
+    public View getView() {
+        return mRootView;
     }
 }

@@ -2,26 +2,30 @@ package com.starstudio.loser.phrapp.item.community.child.presenter;
 
 /*
     create by:loser
-    date:2018/7/31 20:08
+    date:2018/8/3 21:30
 */
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.FragmentTransaction;
 
 import com.avos.avoscloud.AVObject;
-import com.starstudio.loser.phrapp.common.base.PHRFragmentPresenter;
+import com.starstudio.loser.phrapp.R;
+import com.starstudio.loser.phrapp.common.PHRActivity;
 import com.starstudio.loser.phrapp.common.base.PHRPresenter;
-import com.starstudio.loser.phrapp.item.community.child.contract.DynamicContract;
+import com.starstudio.loser.phrapp.item.community.child.contract.MyArticleContract;
+import com.starstudio.loser.phrapp.item.community.comment.ArticleActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-import static com.avos.avoscloud.AVAnalytics.TAG;
-
-public class DynamicPresenter extends PHRFragmentPresenter<DynamicContract.DynamicContractView, DynamicContract.DynamicContractModel> implements DynamicContract.DynamicContractPresenter {
-    private DynamicContract.DynamicContractView mView;
-    private DynamicContract.DynamicContractModel mModel;
+public class MyArticleViewPresenter extends PHRPresenter<MyArticleContract.MyArticleChildView, MyArticleContract.MyArticleContractModel> implements MyArticleContract.MyArticleChildPresenter {
+    private MyArticleContract.MyArticleContractView mView;
+    private MyArticleContract.MyArticleContractModel mModel;
     private List<AVObject> mList;
 
     private ChildEventListener mListener = new ChildEventListener() {
@@ -34,20 +38,30 @@ public class DynamicPresenter extends PHRFragmentPresenter<DynamicContract.Dynam
         public void toLoadMore() {
             mModel.getDataSkip(mList.size());
         }
+
+        @Override
+        public void startArticleActivity(int position) {
+            Bundle bundle = new Bundle();
+            bundle.putString("data", mList.get(position).toString());
+            Intent intent = new Intent(getActivity(), ArticleActivity.class);
+            intent.putExtras(bundle);
+            getActivity().startActivity(intent);
+        }
     };
 
-    public DynamicPresenter(Fragment fragment) {
-        super(fragment);
+    public MyArticleViewPresenter(Activity activity) {
+        super(activity);
         mList = new ArrayList<>();
     }
+
 
     @Override
     protected void onAttach() {
         mView = getView();
         mModel = getModel();
+        mView.setEventListener(mListener);
 
         mModel.getDataFromLeanCloud();
-        mView.setEventListener(mListener);
     }
 
     @Override

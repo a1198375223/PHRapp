@@ -140,7 +140,8 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
                         activity.startActivity(intent4);
                         break;
                     case 4:
-                        Toast.makeText(activity, "no 5", Toast.LENGTH_SHORT).show();
+                        intent = new Intent((PHRMainActivity) activity, CommunityActivity.class);
+                        activity.startActivity(intent);
                     default:
                 }
             }

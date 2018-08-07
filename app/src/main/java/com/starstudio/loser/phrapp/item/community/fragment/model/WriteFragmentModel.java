@@ -33,7 +33,8 @@ public class WriteFragmentModel extends PHRModel implements WriteFragmentContrac
         article.put("title", title);
         article.put("text", text);
         article.put("article_user", avUser);
-        article.put("date", date);
+        //article.put("date", date);
+        article.put("time", new Date(System.currentTimeMillis()));
         article.put("like", 0);
         article.put("dislike", 0);
         article.put("reply", 0);

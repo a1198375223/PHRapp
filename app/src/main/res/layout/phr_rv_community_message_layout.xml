@@ -15,8 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/phr_width_25">
         <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_width="@dimen/phr_width_22"
-            android:layout_height="@dimen/phr_width_22"
+            android:layout_width="@dimen/phr_width_20"
+            android:layout_height="@dimen/phr_width_20"
             tools:src="@mipmap/phr_logo_fl"
             android:scaleType="centerCrop"
             android:layout_centerVertical="true"
@@ -38,7 +38,7 @@
                 android:layout_weight="1"
                 tools:text="@string/phr_community_name"
                 android:textColor="@color/color_text_title"
-                android:padding="@dimen/phr_padding_2"
+                android:padding="@dimen/phr_padding_1"
                 android:textSize="@dimen/phr_text_size_12"
                 android:id="@+id/phr_rv_community_message_name"/>
             <TextView
@@ -52,15 +52,14 @@
                 android:id="@+id/phr_rv_community_message_description"/>
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="@dimen/phr_width_15"
-            android:layout_height="@dimen/phr_width_15"
-            android:scaleType="fitXY"
-            android:src="@mipmap/phr_community_more_fl"
+        <com.nightonke.boommenu.BoomMenuButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bmb_inList="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:id="@+id/phr_rv_community_message_share" />
+            android:id="@+id/phr_rv_community_message_share"/>
 
         <TextView
             android:layout_width="wrap_content"

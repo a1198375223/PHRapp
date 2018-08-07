@@ -38,4 +38,15 @@ public interface MyArticleContract {
         void toLoadView(List<AVObject> list);
     }
 
+    interface MyArticleChildPresenter extends BasePresenter<MyArticleChildView, MyArticleContractModel> {
+        void setViewData(List<AVObject> list);
+
+        void toLoadView(List<AVObject> list);
+    }
+
+    interface MyArticleChildView extends MyArticleContractView {
+        View getView();
+    }
+
+
 }
