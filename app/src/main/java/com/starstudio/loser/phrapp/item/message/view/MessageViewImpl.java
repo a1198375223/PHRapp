@@ -35,10 +35,10 @@ public class MessageViewImpl extends PHRView<MessageEventListener> implements Me
         TabLayout tabLayout = (TabLayout) activity.findViewById(R.id.phr_message_tab_layout);
 
         mTitle = new ArrayList<>();
-        mTitle.add("健康");
-        mTitle.add("心理");
+        mTitle.add("身心健康");
+        mTitle.add("运动健康");
+        mTitle.add("心理健康");
         mTitle.add("头条");
-        mTitle.add("体育");
         mTitle.add("社会");
         mTitle.add("国内");
         mTitle.add("娱乐");

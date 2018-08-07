@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="PHR.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/color_main_image_bg</item>
         <item name="colorPrimaryDark">@color/color_main_image_bg</item>
         <item name="colorAccent">@color/color_main_image_bg</item>
         <item name="android:windowBackground">@color/color_login_bg1</item>

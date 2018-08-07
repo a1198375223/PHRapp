@@ -15,8 +15,10 @@
         android:id="@+id/phr_record_content"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:maxLines="2"
+        android:ellipsize="end"
         android:text="内容体检记录、临床记录各项内容"
-        android:textSize="23sp"/>
+        android:textSize="20sp"/>
     <TextView
         android:id="@+id/phr_record_hospital_name"
         android:layout_width="match_parent"

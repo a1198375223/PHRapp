@@ -26,6 +26,7 @@ import com.avos.avoscloud.RequestMobileCodeCallback;
 import com.avos.avoscloud.RequestPasswordResetCallback;
 import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.item.main.PHRMainActivity;
+import com.starstudio.loser.phrapp.item.register.DoctorRegisterActivity;
 import com.starstudio.loser.phrapp.item.register.RegisterActivity;
 
 
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private EditText phone,password;
     private Button login_btn;
-    private TextView sign_in,find_pwd;
+    private TextView sign_in,find_pwd,doctor_sign;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +45,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initLogin(){
-        phone=(EditText) findViewById(R.id.phr_login_username);
-        password=(EditText) findViewById(R.id.phr_login_password);
-        login_btn=(Button) findViewById(R.id.phr_login_login);
-        sign_in=(TextView) findViewById(R.id.tv_register);
-        find_pwd=findViewById(R.id.tv_find);
+        phone = (EditText) findViewById(R.id.phr_login_username);
+        password = (EditText) findViewById(R.id.phr_login_password);
+        login_btn = (Button) findViewById(R.id.phr_login_login);
+        sign_in = (TextView) findViewById(R.id.tv_register);
+        doctor_sign = (TextView) findViewById(R.id.tv_doctor_register);
+        find_pwd = findViewById(R.id.tv_find);
         AVOSCloud.initialize(this,"NUjpdRi6jqP1S2iAfQCs7YNU-gzGzoHsz","27zlhvjRBd155W8iAWSoNJiO");
         AVOSCloud.setDebugLogEnabled(true);
         login_btn.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +98,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent=new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        doctor_sign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this,DoctorRegisterActivity.class));
             }
         });
 

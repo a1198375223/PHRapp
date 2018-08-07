@@ -54,16 +54,21 @@
             android:launchMode="singleTask" />
         <activity android:name=".item.management.ManageMainActivity" />
         <activity android:name=".item.management.UpdatePhysicalActivity" />
-        <activity android:name=".item.management.PhysicalRecordActivity" />
         <activity android:name=".item.management.UpdateClinicalActivity" />
-        <activity android:name=".item.management.ClinicalRecordActivity" />
 
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"></service> <!-- 百度SDK服务 -->
+            android:process=":remote" /> <!-- 百度SDK服务 -->
 
-        <activity android:name=".item.map.HospitalMapActivity"></activity>
+        <activity android:name=".item.map.HospitalMapActivity" />
+        <activity android:name=".item.message.list.web.SimpleWebActivity" />
+        <activity android:name=".item.register.DoctorRegisterActivity" />
+        <activity
+            android:name=".item.immune.DoctorImmuneActivity"
+            android:theme="@style/ModifyActivityTheme" />
+        <activity android:name=".item.immune.UpdateImmuneActivity" />
+        <activity android:name=".item.immune.ImmuneDetailActivity"></activity>
     </application>
 
 </manifest>
