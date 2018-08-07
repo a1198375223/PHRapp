@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -23,6 +24,8 @@ import com.starstudio.loser.phrapp.item.community.comment.view.ArticleView;
 
 public class ArticleActivity extends PHRActivity {
     private ArticleContract.ArticleContractPresenter mPresenter;
+    public boolean isReply = false;
+    private static final String TAG = "ArticleActivity";
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -48,7 +51,9 @@ public class ArticleActivity extends PHRActivity {
             View v = getCurrentFocus();
             if (KeyBoardUtils.shouldHideKeyBoard(v, ev)) {
                 v.setFocusable(false);
+                ((EditText)v).setHint("写回复");
                 KeyBoardUtils.closeKeyBoard((EditText)v, this);
+                isReply = false;
             }
         }
         return super.dispatchTouchEvent(ev);

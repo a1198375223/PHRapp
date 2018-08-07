@@ -39,11 +39,8 @@ public class MainActivity extends PHRActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editText.setFocusable(true);
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (imm != null) {
-                    imm.showSoftInput(editText, InputMethodManager.SHOW_FORCED);
-                }
+                PHRProgressDialog dialog = new PHRProgressDialog(MainActivity.this);
+                dialog.showProgressDialog();
             }
         });
 

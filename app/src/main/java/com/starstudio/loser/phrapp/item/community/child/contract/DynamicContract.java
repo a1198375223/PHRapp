@@ -11,7 +11,7 @@ import com.avos.avoscloud.AVObject;
 import com.starstudio.loser.phrapp.common.base.BaseModel;
 import com.starstudio.loser.phrapp.common.base.BasePresenter;
 import com.starstudio.loser.phrapp.common.base.BaseView;
-import com.starstudio.loser.phrapp.item.community.child.presenter.ChildEventListener;
+import com.starstudio.loser.phrapp.item.community.child.presenter.DynamicEventListener;
 
 import java.util.List;
 
@@ -22,31 +22,43 @@ public interface DynamicContract {
         void getRefreshData(int size);
 
         void getDataSkip(int size);
+
+        void toTransfer(AVObject avObject);
+
+        void toComplaints(AVObject avObject);
+
+        void toCollect(AVObject avObject);
+
+        void toShare(AVObject avObject);
     }
 
-    interface DynamicContractView extends BaseView<ChildEventListener> {
+
+    interface DynamicChildPresenter extends BasePresenter<DynamicChildView, DynamicContractModel> {
+        void setViewData(List<AVObject> list);
+
+        void toLoadView(List<AVObject> list);
+
+        void showSuccess(String success);
+
+        void showError(String error);
+
+        void showWarning(String warning);
+    }
+
+
+    interface DynamicChildView extends BaseView<DynamicEventListener>{
+        View getView();
 
         void setData(List<AVObject> list);
 
         void load(List<AVObject> list, boolean hasMore);
 
         void tellToRefresh();
-    }
 
-    interface DynamicContractPresenter extends BasePresenter<DynamicContractView, DynamicContractModel> {
-        void setViewData(List<AVObject> list);
+        void success(String success);
 
-        void toLoadView(List<AVObject> list);
-    }
+        void error(String error);
 
-    interface DynamicChildPresenter extends BasePresenter<DynamicChildView, DynamicContractModel> {
-        void setViewData(List<AVObject> list);
-
-        void toLoadView(List<AVObject> list);
-    }
-
-
-    interface DynamicChildView extends DynamicContractView{
-        View getView();
+        void warning(String warning);
     }
 }

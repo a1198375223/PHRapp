@@ -25,14 +25,13 @@ import com.starstudio.loser.phrapp.common.base.PHRView;
 import com.starstudio.loser.phrapp.item.community.callback.AFCallback;
 import com.starstudio.loser.phrapp.item.community.child.adapter.CommunityRvAdapter;
 import com.starstudio.loser.phrapp.item.community.child.contract.DynamicContract;
-import com.starstudio.loser.phrapp.item.community.child.presenter.ChildEventListener;
+import com.starstudio.loser.phrapp.item.community.child.presenter.DynamicEventListener;
 
 import java.util.List;
 
-public class DynamicView extends PHRView<ChildEventListener> implements DynamicContract.DynamicChildView , AFCallback{
+public class DynamicView extends PHRView<DynamicEventListener> implements DynamicContract.DynamicChildView , AFCallback{
     private CommunityRvAdapter mAdapter;
     private SmartRefreshLayout mLayout;
-    private DynamicContract.DynamicContractPresenter mPresenter;
     private static final String TAG = "DynamicView";
     private View mRootView;
 
@@ -126,9 +125,30 @@ public class DynamicView extends PHRView<ChildEventListener> implements DynamicC
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onItemClickListener(int position) {
-                showSuccessToast("click no:" + position);
-                //getListener().startArticleFragment(position);
                 getListener().startArticleActivity(position);
+            }
+
+            @Override
+            public void onMenuItemClickListener(int position, int index) {
+                switch (index) {
+                    case 0://分享
+                        showProgressDialog();
+                        getListener().toShare(position);
+                        break;
+                    case 1://转发
+                        showProgressDialog();
+                        getListener().toTransfer(position);
+                        break;
+                    case 2://举报
+                        showProgressDialog();
+                        getListener().toComplaints(position);
+                        break;
+                    case 3://收藏
+                        showProgressDialog();
+                        getListener().toCollect(position);
+                        break;
+                    default:
+                }
             }
         });
         recyclerView.setAdapter(mAdapter);
@@ -155,6 +175,24 @@ public class DynamicView extends PHRView<ChildEventListener> implements DynamicC
     @Override
     public void tellToRefresh() {
         getListener().toRefresh();
+    }
+
+    @Override
+    public void success(String success) {
+        showSuccessToast(success);
+        dismissProgressDialog();
+    }
+
+    @Override
+    public void error(String error) {
+        showErrorToast(error);
+        dismissProgressDialog();
+    }
+
+    @Override
+    public void warning(String warning) {
+        showWarningToast(warning);
+        dismissProgressDialog();
     }
 
     @Override

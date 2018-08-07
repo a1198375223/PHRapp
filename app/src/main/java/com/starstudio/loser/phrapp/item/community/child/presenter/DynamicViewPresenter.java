@@ -16,6 +16,7 @@ import com.avos.avoscloud.AVObject;
 import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.common.PHRActivity;
 import com.starstudio.loser.phrapp.common.base.PHRPresenter;
+import com.starstudio.loser.phrapp.item.community.callback.ChildCallBack;
 import com.starstudio.loser.phrapp.item.community.child.contract.DynamicContract;
 import com.starstudio.loser.phrapp.item.community.comment.ArticleActivity;
 
@@ -24,11 +25,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class DynamicViewPresenter extends PHRPresenter<DynamicContract.DynamicChildView, DynamicContract.DynamicContractModel> implements DynamicContract.DynamicChildPresenter {
-    private DynamicContract.DynamicContractView mView;
+    private DynamicContract.DynamicChildView mView;
     private DynamicContract.DynamicContractModel mModel;
     private List<AVObject> mList;
 
-    private ChildEventListener mListener = new ChildEventListener() {
+    private DynamicEventListener mListener = new DynamicEventListener() {
         @Override
         public void toRefresh() {
             mModel.getRefreshData(mList.size());
@@ -47,6 +48,34 @@ public class DynamicViewPresenter extends PHRPresenter<DynamicContract.DynamicCh
             intent.putExtras(bundle);
             getActivity().startActivity(intent);
         }
+
+        @Override
+        public void toTransfer(int position) {
+            if (mList.get(position) != null) {
+                mModel.toTransfer(mList.get(position));
+            }
+        }
+
+        @Override
+        public void toShare(int position) {
+            if (mList.get(position) != null) {
+                mModel.toShare(mList.get(position));
+            }
+        }
+
+        @Override
+        public void toComplaints(int position) {
+            if (mList.get(position) != null) {
+                mModel.toComplaints(mList.get(position));
+            }
+        }
+
+        @Override
+        public void toCollect(int position) {
+            if (mList.get(position) != null) {
+                mModel.toCollect(mList.get(position));
+            }
+        }
     };
 
     public DynamicViewPresenter(Activity activity) {
@@ -58,14 +87,18 @@ public class DynamicViewPresenter extends PHRPresenter<DynamicContract.DynamicCh
     protected void onAttach() {
         mView = getView();
         mModel = getModel();
-
-        mModel.getDataFromLeanCloud();
         mView.setEventListener(mListener);
+
+        mView.showProgressDialog();
+        mModel.getDataFromLeanCloud();
     }
 
     @Override
     protected void onDetach() {
-
+        if (mList != null) {
+            mList.clear();
+            mList = null;
+        }
     }
 
     @Override
@@ -85,5 +118,20 @@ public class DynamicViewPresenter extends PHRPresenter<DynamicContract.DynamicCh
             mList.addAll(list);
             mView.load(list, true);
         }
+    }
+
+    @Override
+    public void showSuccess(String success) {
+        mView.success(success);
+    }
+
+    @Override
+    public void showError(String error) {
+        mView.error(error);
+    }
+
+    @Override
+    public void showWarning(String warning) {
+        mView.warning(warning);
     }
 }

@@ -34,6 +34,7 @@ import com.starstudio.loser.phrapp.common.base.PHRView;
 import com.starstudio.loser.phrapp.common.utils.DateUtils;
 import com.starstudio.loser.phrapp.common.utils.GlideUtils;
 import com.starstudio.loser.phrapp.common.utils.KeyBoardUtils;
+import com.starstudio.loser.phrapp.item.community.comment.ArticleActivity;
 import com.starstudio.loser.phrapp.item.community.comment.adpater.CommentRvAdapter;
 import com.starstudio.loser.phrapp.item.community.comment.contract.ArticleContract;
 import com.starstudio.loser.phrapp.item.community.comment.presenter.ArticleEventListener;
@@ -52,6 +53,7 @@ public class ArticleView extends PHRView<ArticleEventListener> implements Articl
     private TextView mDate;
     private TextView mBody;
     private CommentRvAdapter mAdapter;
+    private int mId = -1;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -121,12 +123,17 @@ public class ArticleView extends PHRView<ArticleEventListener> implements Articl
             @Override
             public void onClick(View v) {
                 showProgressDialog();
-                getListener().saveComment(editText.getText().toString());
+                if (((ArticleActivity) getActivity()).isReply) {
+                    getListener().saveComment(editText.getText().toString(), mId);
+                } else {
+                    getListener().saveComment(editText.getText().toString(), -1);
+                }
+
                 editText.setText("");
                 editText.setFocusable(false);
                 KeyBoardUtils.closeKeyBoard(editText, getActivity());
                 getListener().loadComment();
-                dismissProgressDialog();
+                ((ArticleActivity) getActivity()).isReply = false;
             }
         });
         //--------------------------------------------------------------------------------------//
@@ -134,6 +141,9 @@ public class ArticleView extends PHRView<ArticleEventListener> implements Articl
         mAdapter.setListener(new CommentRvAdapter.OnReplyClickListener() {
             @Override
             public void onReplyClickListener(int id, String name) {
+                ((ArticleActivity) getActivity()).isReply = true;
+                mId = id;
+                editText.setHint("引用" + id +"楼 @" + name);
                 editText.setFocusable(true);
                 editText.setFocusableInTouchMode(true);
                 editText.requestFocus();
@@ -157,11 +167,13 @@ public class ArticleView extends PHRView<ArticleEventListener> implements Articl
         } else {
             mAdapter.setList(new ArrayList<AVObject>());
         }
+        dismissProgressDialog();
     }
 
     @Override
-    public void showError() {
-        showErrorToast("请先登入");
+    public void showError(String error) {
+        showErrorToast(error);
+        dismissProgressDialog();
     }
 
     @Override
@@ -170,5 +182,6 @@ public class ArticleView extends PHRView<ArticleEventListener> implements Articl
             mAdapter.setList(new ArrayList<AVObject>());
         }
         mAdapter.setList(list);
+        dismissProgressDialog();
     }
 }

@@ -13,6 +13,7 @@ import com.avos.avoscloud.AVObject;
 import com.starstudio.loser.phrapp.common.base.PHRPresenter;
 import com.starstudio.loser.phrapp.item.community.comment.contract.ArticleContract;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
@@ -21,11 +22,20 @@ public class ArticleViewPresenter extends PHRPresenter<ArticleContract.ArticleCo
     private ArticleContract.ArticleContractView mView;
     private ArticleContract.ArticleContractModel mModel;
     private AVObject mInitData;
+    private List<AVObject> mComment;
 
     private ArticleEventListener mListener = new ArticleEventListener() {
         @Override
-        public void saveComment(String text) {
-            mModel.saveComment(text);
+        public void saveComment(String text, int id) {
+            if (id != -1) {
+                if (mComment.get(id - 1) == null) {
+                    mView.showError("出错啦");
+                } else {
+                    mModel.saveReply(text, mComment.get(id - 1));
+                }
+            } else {
+                mModel.saveComment(text);
+            }
         }
 
         @Override
@@ -57,6 +67,7 @@ public class ArticleViewPresenter extends PHRPresenter<ArticleContract.ArticleCo
         } catch (Exception e) {
             e.printStackTrace();
         }
+        mView.showProgressDialog();
         mModel.getCommentFromLeanCloud(mInitData);
     }
 
@@ -67,6 +78,11 @@ public class ArticleViewPresenter extends PHRPresenter<ArticleContract.ArticleCo
 
     @Override
     public void toLoadView(List<AVObject> list) {
+        if (list == null) {
+            mComment = new ArrayList<>();
+        } else {
+            mComment = list;
+        }
         mView.setData(mInitData, list);
     }
 
@@ -77,6 +93,6 @@ public class ArticleViewPresenter extends PHRPresenter<ArticleContract.ArticleCo
 
     @Override
     public void error() {
-        mView.showError();
+        mView.showError("请先登入");
     }
 }

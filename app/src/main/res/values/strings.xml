@@ -70,6 +70,7 @@
     <string name="phr_boom_share_text">分  享</string>
     <string name="phr_boom_complain_text">举  报</string>
     <string name="phr_boom_get_text">收  藏</string>
+    <string name="phr_boom_transfer_text">转  发</string>
 
     <!--article string-->
     <string name="phr_article_fragment_toolbar_title">文  章</string>
@@ -89,7 +90,7 @@
     <!--bottom dialog string-->
     <string name="phr_bottom_dialog_exit">退  出</string>
     <string name="phr_bottom_dialog_warn">举  报</string>
-    <string name="phr_bottom_dialog_collect">收  藏</string>
+    <string name="phr_bottom_dialog_dislike">点  灭</string>
 
 
     <string name="phr_community_text_test">静夜思\n

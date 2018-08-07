@@ -25,7 +25,7 @@ import es.dmoral.toasty.Toasty;
 public class PHRBottomDialog extends Dialog{
     private Context mContext;
     public static final int EXIT = 1;
-    public static final int COLLECT = 2;
+    public static final int DISLIKE = 2;
     public static final int WARN = 3;
     private OnItemClickListener mListener;
 
@@ -50,9 +50,6 @@ public class PHRBottomDialog extends Dialog{
             public void onClick(View v) {
                 if (mListener != null) {
                     mListener.onItemClickListener(EXIT);
-                    if (isShowing()) {
-                        dismiss();
-                    }
                 } else {
                     Toasty.warning(mContext, "没有设置监听器", Toast.LENGTH_SHORT, true).show();
                 }
@@ -62,7 +59,7 @@ public class PHRBottomDialog extends Dialog{
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    mListener.onItemClickListener(COLLECT);
+                    mListener.onItemClickListener(DISLIKE);
                 } else {
                     Toasty.warning(mContext, "没有设置监听器", Toast.LENGTH_SHORT, true).show();
                 }

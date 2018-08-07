@@ -15,12 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVSaveOption;
 import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.GetCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -41,6 +43,8 @@ import com.starstudio.loser.phrapp.common.utils.ToastyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 import static com.makeramen.roundedimageview.RoundedDrawable.TAG;
 
@@ -70,6 +74,8 @@ public class CommunityRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public interface OnItemClickListener {
         void onItemClickListener(int position);
+
+        void onMenuItemClickListener(int position, int index);
     }
 
     public void setListener(OnItemClickListener listener) {
@@ -99,58 +105,56 @@ public class CommunityRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             ((MyHolder) holder).mLikeCount.setText(mList.get(position).getInt("like")+"");
             ((MyHolder) holder).mDislikeCount.setText(mList.get(position).getInt("dislike")+"");
             ((MyHolder) holder).mMessageCount.setText(mList.get(position).getInt("reply")+"");
-            initBoomButton((MyHolder)holder);
+            initBoomButton((MyHolder)holder, position);
             ((MyHolder) holder).mLike.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(View view, boolean checked) {
                     if (checked) {
-                        AVObject avObject = AVObject.createWithoutData("Article", mList.get(position).getObjectId());
-                        String key = "like";
-                        final int like = avObject.getInt("like");
-                        avObject.fetchInBackground(key, new GetCallback<AVObject>() {
-                            @Override
-                            public void done(AVObject avObject, AVException e) {
-                                if (e == null && avObject != null) {
-                                    AVSaveOption option = new AVSaveOption();
-                                    option.query(new AVQuery("Article").whereEqualTo("like", like));
-                                    option.setFetchWhenSave(true);
-                                    avObject.increment("like", 1);
-                                    avObject.saveInBackground(option, new SaveCallback() {
-                                        @SuppressLint("SetTextI18n")
-                                        @Override
-                                        public void done(AVException e) {
-                                            if (e == null) {
-                                                ((MyHolder) holder).mLikeCount.setText(like + 1 + "");
+                        if (AVUser.getCurrentUser() == null) {
+                            showError("请先登入");
+                        } else {
+                            AVQuery<AVObject> like = new AVQuery<>("Like");
+                            like.include("like_user").include("article").whereEqualTo("article", mList.get(position));
+                            like.findInBackground(new FindCallback<AVObject>() {
+                                @Override
+                                public void done(final List<AVObject> list, AVException e) {
+                                    if (e == null) {
+                                        boolean isContain = false;
+                                        if (list.size() == 0) {
+                                            isContain = false;
+                                        } else {
+                                            for (AVObject av : list) {
+                                                if (av.getAVUser("like_user").equals(AVUser.getCurrentUser())) {
+                                                    isContain = true;
+                                                    break;
+                                                }
                                             }
                                         }
-                                    });
-                                }
-                            }
-                        });
-                    } else {
-                        AVObject avObject = AVObject.createWithoutData("Article", mList.get(position).getObjectId());
-                        String key = "like";
-                        final int like = avObject.getInt("like");
-                        avObject.fetchInBackground(key, new GetCallback<AVObject>() {
-                            @Override
-                            public void done(AVObject avObject, AVException e) {
-                                if (e == null && avObject != null) {
-                                    AVSaveOption option = new AVSaveOption();
-                                    option.query(new AVQuery("Article").whereEqualTo("like", like));
-                                    option.setFetchWhenSave(true);
-                                    avObject.increment("like", -1);
-                                    avObject.saveInBackground(option, new SaveCallback() {
-                                        @SuppressLint("SetTextI18n")
-                                        @Override
-                                        public void done(AVException e) {
-                                            if (e == null) {
-                                                ((MyHolder) holder).mLikeCount.setText(like - 1 + "");
-                                            }
+                                        if (isContain) {
+                                            showWarning("亲,您已经点亮过了!");
+                                        } else {
+                                            AVObject like = new AVObject("Like");
+                                            like.put("like_user", AVUser.getCurrentUser());
+                                            like.put("article", mList.get(position));
+                                            mList.get(position).increment("like");
+                                            mList.get(position).setFetchWhenSave(true);
+                                            like.saveInBackground(new SaveCallback() {
+                                                @Override
+                                                public void done(AVException e) {
+                                                    if (e == null) {
+                                                        ((MyHolder) holder).mLikeCount.setText(mList.get(position).getInt("like") + "");
+                                                    } else {
+                                                        showError("出错啦");
+                                                    }
+                                                }
+                                            });
                                         }
-                                    });
+                                    } else {
+                                        showError("出错啦");
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
                 }
             });
@@ -158,60 +162,58 @@ public class CommunityRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 @Override
                 public void onCheckedChanged(View view, boolean checked) {
                     if (checked) {
-                        AVObject avObject = AVObject.createWithoutData("Article", mList.get(position).getObjectId());
-                        String key = "dislike";
-                        final int dislike = avObject.getInt("dislike");
-                        avObject.fetchInBackground(key, new GetCallback<AVObject>() {
-                            @Override
-                            public void done(AVObject avObject, AVException e) {
-                                if (e == null && avObject != null) {
-                                    AVSaveOption option = new AVSaveOption();
-                                    option.query(new AVQuery("Article").whereEqualTo("dislike", dislike));
-                                    option.setFetchWhenSave(true);
-                                    avObject.increment("dislike", 1);
-                                    avObject.saveInBackground(option, new SaveCallback() {
-                                        @SuppressLint("SetTextI18n")
-                                        @Override
-                                        public void done(AVException e) {
-                                            if (e == null) {
-                                                ((MyHolder) holder).mDislikeCount.setText(dislike + 1 + "");
+                        if (AVUser.getCurrentUser() == null) {
+                            showError("请先登入");
+                        } else {
+                            AVQuery<AVObject> dislike = new AVQuery<>("Dislike");
+                            dislike.include("dislike_user").include("article").whereEqualTo("article", mList.get(position));
+                            dislike.findInBackground(new FindCallback<AVObject>() {
+                                @Override
+                                public void done(final List<AVObject> list, AVException e) {
+                                    if (e == null) {
+                                        boolean isContain = false;
+                                        if (list.size() == 0) {
+                                            isContain = false;
+                                        } else {
+                                            for (AVObject av : list) {
+                                                if (av.getAVUser("dislike_user").equals(AVUser.getCurrentUser())) {
+                                                    isContain = true;
+                                                    break;
+                                                }
                                             }
                                         }
-                                    });
-                                }
-                            }
-                        });
-                    } else {
-                        AVObject avObject = AVObject.createWithoutData("Article", mList.get(position).getObjectId());
-                        String key = "dislike";
-                        final int dislike = avObject.getInt("dislike");
-                        avObject.fetchInBackground(key, new GetCallback<AVObject>() {
-                            @Override
-                            public void done(AVObject avObject, AVException e) {
-                                if (e == null && avObject != null) {
-                                    AVSaveOption option = new AVSaveOption();
-                                    option.query(new AVQuery("Article").whereEqualTo("dislike", dislike));
-                                    option.setFetchWhenSave(true);
-                                    avObject.increment("dislike", -1);
-                                    avObject.saveInBackground(option, new SaveCallback() {
-                                        @SuppressLint("SetTextI18n")
-                                        @Override
-                                        public void done(AVException e) {
-                                            if (e == null) {
-                                                ((MyHolder) holder).mDislikeCount.setText(dislike - 1 + "");
-                                            }
+                                        if (isContain) {
+                                            showWarning("亲,您已经点灭过了!");
+                                        } else {
+                                            AVObject like = new AVObject("Dislike");
+                                            like.put("dislike_user", AVUser.getCurrentUser());
+                                            like.put("article", mList.get(position));
+                                            mList.get(position).increment("dislike");
+                                            mList.get(position).setFetchWhenSave(true);
+                                            like.saveInBackground(new SaveCallback() {
+                                                @Override
+                                                public void done(AVException e) {
+                                                    if (e == null) {
+                                                        ((MyHolder) holder).mDislikeCount.setText(mList.get(position).getInt("dislike") + "");
+                                                    } else {
+                                                        showError("出错啦");
+                                                    }
+                                                }
+                                            });
                                         }
-                                    });
+                                    } else {
+                                        showError("出错啦");
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
                 }
             });
         }
     }
 
-    private void initBoomButton(MyHolder holder) {
+    private void initBoomButton(MyHolder holder, final int position) {
         holder.mShare.setButtonEnum(ButtonEnum.TextOutsideCircle);
         holder.mShare.setPiecePlaceEnum(PiecePlaceEnum.DOT_4_1);
         holder.mShare.setButtonPlaceEnum(ButtonPlaceEnum.SC_4_1);
@@ -221,7 +223,7 @@ public class CommunityRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 .normalImageRes(R.mipmap.phr_boom_delete_normal)
                 .highlightedImageRes(R.mipmap.phr_boom_delete_highlight)
                 //文字
-                .normalTextRes(R.string.phr_message_menu_delete)
+                .normalTextRes(R.string.phr_boom_transfer_text)
                 .normalTextColorRes(R.color.avoscloud_feedback_white)
                 .highlightedTextColorRes(R.color.color_text_title)
                 //按钮
@@ -230,7 +232,9 @@ public class CommunityRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        ToastyUtils.showSuccess("click: " + index);
+                        if (mListener != null) {
+                            mListener.onMenuItemClickListener(position, index);
+                        }
                     }
                 });
 
@@ -248,7 +252,9 @@ public class CommunityRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        ToastyUtils.showSuccess("click: " + index);
+                        if (mListener != null) {
+                            mListener.onMenuItemClickListener(position, index);
+                        }
                     }
                 });
         TextOutsideCircleButton.Builder yellow = new TextOutsideCircleButton.Builder()
@@ -264,7 +270,9 @@ public class CommunityRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        ToastyUtils.showSuccess("click: " + index);
+                        if (mListener != null) {
+                            mListener.onMenuItemClickListener(position, index);
+                        }
                     }
                 });
         TextOutsideCircleButton.Builder red = new TextOutsideCircleButton.Builder()
@@ -280,13 +288,27 @@ public class CommunityRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        ToastyUtils.showSuccess("click: " + index);
+                        if (mListener != null) {
+                            mListener.onMenuItemClickListener(position, index);
+                        }
                     }
                 });
         holder.mShare.addBuilder(purple);
         holder.mShare.addBuilder(blue);
         holder.mShare.addBuilder(yellow);
         holder.mShare.addBuilder(red);
+    }
+
+    private void showError(String error) {
+        Toasty.error(mContext, error, Toast.LENGTH_SHORT, true).show();
+    }
+
+    private void showSuccess(String success) {
+        Toasty.success(mContext,success, Toast.LENGTH_SHORT, true).show();
+    }
+
+    private void showWarning(String warning) {
+        Toasty.warning(mContext, warning, Toast.LENGTH_SHORT, true).show();
     }
 
 

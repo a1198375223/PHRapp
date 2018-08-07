@@ -4,8 +4,6 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingRight="@dimen/phr_padding_5"
-    android:paddingLeft="@dimen/phr_padding_5"
     android:layout_marginTop="@dimen/phr_margin_1"
     android:background="@color/phr_white"
     android:orientation="vertical">
@@ -121,7 +119,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/phr_margin_22"
-        android:layout_marginBottom="@dimen/phr_margin_1"
+        android:layout_marginTop="@dimen/phr_margin_3"
+        android:layout_marginBottom="@dimen/phr_margin_3"
         android:layout_marginStart="@dimen/phr_margin_22">
         <LinearLayout
             android:layout_width="wrap_content"
@@ -178,6 +177,11 @@
             android:clickable="true"
             android:id="@+id/phr_rv_my_article_comment_more"
             tools:ignore="KeyboardInaccessibleWidget" />
-
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/phr_divide_1"
+        android:background="@color/color_view_divide_bg_color"
+        android:layout_marginTop="@dimen/phr_margin_1"/>
 </LinearLayout>

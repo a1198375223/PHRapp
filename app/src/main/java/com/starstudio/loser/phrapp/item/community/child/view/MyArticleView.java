@@ -24,14 +24,13 @@ import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.common.base.PHRView;
 import com.starstudio.loser.phrapp.item.community.child.adapter.MyArticleRvAdapter;
 import com.starstudio.loser.phrapp.item.community.child.contract.MyArticleContract;
-import com.starstudio.loser.phrapp.item.community.child.presenter.ChildEventListener;
+import com.starstudio.loser.phrapp.item.community.child.presenter.MyArticleEventListener;
 
 import java.util.List;
 
-public class MyArticleView extends PHRView<ChildEventListener> implements MyArticleContract.MyArticleChildView {
+public class MyArticleView extends PHRView<MyArticleEventListener> implements MyArticleContract.MyArticleChildView {
     private MyArticleRvAdapter mAdapter;
     private SmartRefreshLayout mLayout;
-    private MyArticleContract.MyArticleContractPresenter mPresenter;
     private View mRootView;
 
     public MyArticleView(Activity activity) {
@@ -123,9 +122,29 @@ public class MyArticleView extends PHRView<ChildEventListener> implements MyArti
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onItemClickListener(int position) {
-                showSuccessToast("click no:" + position);
-//                getListener().startArticleFragment(position);
                 getListener().startArticleActivity(position);
+            }
+
+            @Override
+            public void onMenuItemClickListener(int position, int index) {
+                switch (index) {
+                    case 0://分享
+                        showProgressDialog();
+                        getListener().toShare(position);
+                        break;
+                    case 1://删除
+                        showProgressDialog();
+                        getListener().toDelete(position);
+                        break;
+                    case 2://举报
+                        showProgressDialog();
+                        getListener().toComplaints(position);
+                        break;
+                    case 3://收藏
+                        showProgressDialog();
+                        getListener().toCollect(position);
+                        break;
+                }
             }
         });
 
@@ -152,6 +171,24 @@ public class MyArticleView extends PHRView<ChildEventListener> implements MyArti
     @Override
     public void tellToRefresh() {
         getListener().toRefresh();
+    }
+
+    @Override
+    public void error(String error) {
+        showErrorToast(error);
+        dismissProgressDialog();
+    }
+
+    @Override
+    public void success(String success) {
+        showSuccessToast(success);
+        dismissProgressDialog();
+    }
+
+    @Override
+    public void warning(String warning) {
+        showWarningToast(warning);
+        dismissProgressDialog();
     }
 
     @Override
