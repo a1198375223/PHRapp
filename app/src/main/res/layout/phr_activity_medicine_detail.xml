@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/phr_white"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/phr_detail_medicine_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/phr_white"
+        app:navigationIcon="@drawable/phr_arrow_back_black_24"
+        app:title="药品信息">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/phr_padding_12"
+        android:paddingRight="@dimen/phr_padding_12">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_25"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/phr_height_15"
+                android:layout_height="@dimen/phr_height_15"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:src="@mipmap/phr_medicine_name" />
+
+            <TextView
+                android:id="@+id/phr_detail_medicine_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/phr_margin_3"
+                android:layout_marginStart="@dimen/phr_margin_3"
+                android:gravity="center_vertical"
+                android:text="药品名称"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_1"
+            android:background="@drawable/phr_shape_gradient_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_25"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/phr_height_15"
+                android:layout_height="@dimen/phr_height_15"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:src="@mipmap/phr_medicine_money" />
+
+            <TextView
+                android:id="@+id/phr_detail_medicine_money"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/phr_margin_3"
+                android:layout_marginStart="@dimen/phr_margin_3"
+                android:gravity="center_vertical"
+                android:text="药品价格"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_1"
+            android:background="@drawable/phr_shape_gradient_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_25"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/phr_height_15"
+                android:layout_height="@dimen/phr_height_15"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:src="@mipmap/phr_medicine_factory" />
+
+            <TextView
+                android:id="@+id/phr_detail_medicine_factory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/phr_margin_3"
+                android:layout_marginStart="@dimen/phr_margin_3"
+                android:gravity="center_vertical"
+                android:text="制药厂"
+                android:textSize="18dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_1"
+            android:background="@drawable/phr_shape_gradient_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/phr_detail_medicine_content"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/color_line_color"
+                android:scrollbars="vertical"
+                android:text="药品详情" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

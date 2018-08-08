@@ -12,7 +12,7 @@
     <string name="phr_main_gridlayout_text3">就医地图</string>
     <string name="phr_main_gridlayout_text4">自动挂号</string>
     <string name="phr_main_gridlayout_text5">社  区</string>
-    <string name="phr_main_gridlayout_text6">开发中</string>
+    <string name="phr_main_gridlayout_text6">药品信息</string>
 
     <!--login string-->
     <string name="phr_login_app_name">PHR健康社区</string>
@@ -71,7 +71,7 @@
     <string name="phr_write_error_title">出错啦~</string>
     <string name="phr_write_error_content">请先登入</string>
     <string name="phr_write_error_ok">确认</string>
-    
+
     <!--boom menu string-->
     <string name="phr_boom_delete_text">删  除</string>
     <string name="phr_boom_share_text">分  享</string>

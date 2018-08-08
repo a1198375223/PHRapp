@@ -1,4 +1,4 @@
-package com.starstudio.loser.phrapp.item.immune;
+package com.starstudio.loser.phrapp.item.medicine;
 
 import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -19,28 +19,28 @@ import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
 import com.starstudio.loser.phrapp.R;
 
-import java.text.SimpleDateFormat;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoctorImmuneActivity extends AppCompatActivity{
+public class MedicineMainActivity extends AppCompatActivity {
     private static final String TAG = "DoctorImmuneActivity";
     private FloatingActionButton add;
     private Toolbar toolbar;
-    private List<Immune> immuneList = new ArrayList<>();
-    private ImmuneAdapter adapter;
     private List<String> doctorIDs = new ArrayList<>();
-
+    private List<Medicine> medicineList = new ArrayList<>();
+    private MedicineAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.phr_activity_doctor_immune);
+        setContentView(R.layout.phr_activity_medicine_main);
         initView();
     }
 
     private void initView() {
-        toolbar = (Toolbar) findViewById(R.id.immune_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.medicine_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -51,34 +51,31 @@ public class DoctorImmuneActivity extends AppCompatActivity{
             }
         });
 
-        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.phr_immune_collapsing_toolbar);
-        collapsingToolbarLayout.setTitle("免疫知识");
-        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.phr_white));
-        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.phr_white));
+        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.phr_medicine_collapsing_toolbar);
+        collapsingToolbarLayout.setTitle("药品信息");
+        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.phr_black));
+        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.phr_black));
 
         Log.d(TAG, "initView: " + AVUser.getCurrentUser().getBoolean("isDoctor"));
         if (AVUser.getCurrentUser().getBoolean("isDoctor")) {
-            add = (FloatingActionButton) findViewById(R.id.phr_add_immune);
+            add = (FloatingActionButton) findViewById(R.id.phr_add_medicine);
             add.setVisibility(View.VISIBLE);
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(DoctorImmuneActivity.this, UpdateImmuneActivity.class));
+                    startActivity(new Intent(MedicineMainActivity.this, UpdateMedicineActivity.class));
                 }
             });
         }
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.phr_immune_recycler_view);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.phr_medicine_recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new ImmuneAdapter(immuneList,AVUser.getCurrentUser().getBoolean("isDoctor"));
+        adapter = new MedicineAdapter(medicineList,AVUser.getCurrentUser().getBoolean("isDoctor"));
         recyclerView.setAdapter(adapter);
     }
 
     private void initImmune(){
-        //String doctorID = null;
-        //final String[] doctorIDs;
-        Log.d(TAG, "initImmune: "+ AVUser.getCurrentUser().getBoolean("isDoctor"));
         if (AVUser.getCurrentUser().getBoolean("isDoctor")){
             doctorIDs.add(AVUser.getCurrentUser().getObjectId());
             addImmune(doctorIDs);
@@ -90,7 +87,6 @@ public class DoctorImmuneActivity extends AppCompatActivity{
                 public void done(List<AVObject> list, AVException e) {
                     if (e == null) {
                         for (AVObject i : list) {
-                            Log.d(TAG, "done: +++++++++++++++++++++++++++++++");
                             doctorIDs.add(i.getString("doctorID"));
                         }
                         addImmune(doctorIDs);
@@ -104,7 +100,7 @@ public class DoctorImmuneActivity extends AppCompatActivity{
 
     private void addImmune(List<String> doctorIDs){
         for (String doctorID : doctorIDs) {
-            AVQuery<AVObject> query = new AVQuery<>("Immune");
+            AVQuery<AVObject> query = new AVQuery<>("Medicine");
             query.whereEqualTo("doctorID", doctorID);
             query.include("doctor");
             query.addDescendingOrder("updatedAt");
@@ -112,14 +108,14 @@ public class DoctorImmuneActivity extends AppCompatActivity{
                 @Override
                 public void done(List<AVObject> list, AVException e) {
                     if (e == null) {
-                        immuneList.clear();
+                        medicineList.clear();
                         for (AVObject i : list) {
                             //Log.d(TAG, "done: " + dateString);
-                            immuneList.add(new Immune(i));
+                            medicineList.add(new Medicine(i));
                         }
                         adapter.notifyDataSetChanged();
                     } else {
-                        Toast.makeText(DoctorImmuneActivity.this, "拉取数据失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MedicineMainActivity.this, "拉取数据失败", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "done: " + e.getCode());
                     }
                 }
@@ -132,4 +128,5 @@ public class DoctorImmuneActivity extends AppCompatActivity{
         initImmune();
         super.onResume();
     }
+
 }

@@ -5,15 +5,12 @@ package com.starstudio.loser.phrapp.item.main.view;
     date:2018/7/23 13:29
 */
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +28,7 @@ import com.starstudio.loser.phrapp.item.main.PHRMainActivity;
 import com.starstudio.loser.phrapp.item.main.contract.MainContract;
 import com.starstudio.loser.phrapp.item.management.ManageMainActivity;
 import com.starstudio.loser.phrapp.item.map.HospitalMapActivity;
+import com.starstudio.loser.phrapp.item.medicine.MedicineMainActivity;
 import com.starstudio.loser.phrapp.item.message.PHRMessageActivity;
 import com.starstudio.loser.phrapp.item.modify.ModifyActivity;
 import com.starstudio.loser.phrapp.item.treatment.TreatmentActiity;
@@ -111,6 +109,10 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
         value.put("text", activity.getString(R.string.phr_main_gridlayout_text5));
         value.put("image", R.mipmap.phr_community_fl);
         list.add(value);
+        value = new HashMap<>();
+        value.put("text",activity.getString(R.string.phr_main_gridlayout_text6));
+        value.put("image",R.mipmap.phr_medicine_fl);
+        list.add(value);
 
 
         GridView gridView = (GridView) activity.findViewById(R.id.phr_main_grid_view);
@@ -132,20 +134,21 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
                         break;
                     case 1:
                         activity.startActivity(new Intent((PHRMainActivity) activity, DoctorImmuneActivity.class));
-                        Toast.makeText(activity, "no 2", Toast.LENGTH_SHORT).show();
                         break;
                     case 2:
                         activity.startActivity(new Intent((PHRMainActivity) activity, HospitalMapActivity.class));
-                        Toast.makeText(activity, "no 3", Toast.LENGTH_SHORT).show();
                         break;
                     case 3:
-                        Toast.makeText(activity, "no 4", Toast.LENGTH_SHORT).show();
                         Intent intent4 = new Intent((PHRMainActivity) activity, TreatmentActiity.class);
                         activity.startActivity(intent4);
                         break;
                     case 4:
                         intent = new Intent((PHRMainActivity) activity, CommunityActivity.class);
                         activity.startActivity(intent);
+                        break;
+                    case 5:
+                        activity.startActivity(new Intent((PHRMainActivity) activity, MedicineMainActivity.class));
+                        break;
                     default:
                 }
             }
