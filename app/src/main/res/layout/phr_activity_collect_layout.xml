@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/phr_white"
+        app:navigationIcon="@drawable/phr_arrow_back_black_24"
+        android:id="@+id/phr_activity_collect_toolbar">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_text_title"
+            tools:text="@string/phr_collect_my_collect"
+            android:text="@string/phr_collect_my_collect"
+            android:layout_gravity="center"
+            android:textSize="@dimen/phr_text_size_20"
+            android:id="@+id/phr_activity_collect_my_collect"/>
+    </android.support.v7.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/phr_divide_1"
+        android:background="@color/color_view_divide_bg_color" />
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/phr_activity_collect_recycler_view"/>
+</LinearLayout>

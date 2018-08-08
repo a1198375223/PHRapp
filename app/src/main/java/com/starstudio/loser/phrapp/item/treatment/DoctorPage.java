@@ -1,6 +1,7 @@
 package com.starstudio.loser.phrapp.item.treatment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -15,7 +16,12 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.starstudio.loser.phrapp.R;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,65 +32,61 @@ import java.util.List;
 
 public class DoctorPage extends AppCompatActivity{
     private ImageView doctorImage;
-    private TextView doctorName;
-    private TextView doctorTitle;
+    private TextView doctorNameTv;
+    private TextView doctorTitleTv;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private String[] titles={"简介","评价","预约"};
     private FragmentAdapter adapter;
     private List<Fragment> fragmentList;
     private List<String> titleList;
+    private String hospName;
+    private String deptName;
+    private String docName;
+    private String title;
+    private String profile;
+    private String imageUrl;
+    private JSONArray workTime;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phr_treatment_doc_page);
+        Intent intent=getIntent();
+        hospName=intent.getStringExtra("hosp");
+        deptName=intent.getStringExtra("dept");
+        docName=intent.getStringExtra("docName");
+        title=intent.getStringExtra("title");
+        profile=intent.getStringExtra("profile");
+        imageUrl=intent.getStringExtra("imageUrl");
         initView();
     }
 
     private void initView() {
         tabLayout=findViewById(R.id.doctor_page_tab);
         viewPager=findViewById(R.id.doctor_page_content);
+        doctorImage=findViewById(R.id.doctor_page_image);
+        doctorNameTv=findViewById(R.id.doctor_page_name);
+        doctorTitleTv=findViewById(R.id.doctor_page_title);
+
+        doctorNameTv.setText(docName);
+        doctorTitleTv.setText(title);
+        RequestOptions options = new RequestOptions()
+                .placeholder(R.drawable.waiting)
+                .error(R.drawable.default_head)
+                .diskCacheStrategy(DiskCacheStrategy.NONE);
+        Glide.with(this).load(imageUrl).apply(options).into(doctorImage);
         titleList = new ArrayList<>();
         for (int i = 0; i < titles.length; i++) {
             titleList.add(titles[i]);
         }
         fragmentList = new ArrayList<>();
         for (int i = 0; i < titleList.size(); i++) {
-            fragmentList.add(TabFragment.newInstance(i,null,null,null,null,null));// index  0: 简介; 1：评价; 2：预约
+            fragmentList.add(TabFragment.newInstance(i,hospName,deptName,docName,title,profile));// index  0: 简介; 1：评价; 2：预约
         }
         adapter = new FragmentAdapter(getSupportFragmentManager(), fragmentList, titleList);
         viewPager.setAdapter(adapter);//给ViewPager设置适配器
         tabLayout.setupWithViewPager(viewPager);//将TabLayout和ViewPager关联起来
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.phr_community_post_message_menu,menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.tab_add:
-                if (mTitles.size() == titles.length) {
-                    return true;
-                }
-                mTitles.add(titles[mTitles.size()]);
-                mFragments.add(TabFragment.newInstance(mTitles.size() - 1));
-                adapter.notifyDataSetChanged();
-                mTabLayout.setupWithViewPager(mViewPager);
-                return true;
-            case R.id.tab_change:
-                //设置TabLayout的模式，系统默认模式:MODE_FIXED
-                if (mTabLayout.getTabMode() == TabLayout.MODE_FIXED) {
-                    mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-                } else {
-                    mTabLayout.setTabMode(TabLayout.MODE_FIXED);
-                }
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
 }

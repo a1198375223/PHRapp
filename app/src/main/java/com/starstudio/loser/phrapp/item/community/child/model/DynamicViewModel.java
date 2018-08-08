@@ -222,9 +222,5 @@ public class DynamicViewModel extends PHRModel implements DynamicContract.Dynami
         }
     }
 
-    @Override
-    public void toShare(AVObject avObject) {
-
-    }
 }
 

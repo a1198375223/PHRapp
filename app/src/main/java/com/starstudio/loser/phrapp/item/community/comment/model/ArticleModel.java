@@ -122,15 +122,12 @@ public class ArticleModel extends PHRModel implements ArticleContract.ArticleCon
         query.include("comment_user");
         query.include("reply_to");
         query.include("article");
-        query.include("reply_to.comment_user");
         query.whereEqualTo("article", mCurrentAuthor);
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
                 if (e == null) {
                     mPresenter.tellToLoadComment(list);
-                } else {
-                    mPresenter.showError("出错啦");
                 }
             }
         });

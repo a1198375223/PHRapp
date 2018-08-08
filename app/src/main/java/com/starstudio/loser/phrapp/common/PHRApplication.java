@@ -8,6 +8,7 @@ package com.starstudio.loser.phrapp.common;
 import android.app.Application;
 
 import com.avos.avoscloud.AVOSCloud;
+import com.mob.MobSDK;
 
 public class PHRApplication extends Application {
     @Override
@@ -15,5 +16,7 @@ public class PHRApplication extends Application {
         super.onCreate();
         AVOSCloud.initialize(this,"NUjpdRi6jqP1S2iAfQCs7YNU-gzGzoHsz","27zlhvjRBd155W8iAWSoNJiO");
         AppContext.init(this);
+        MobSDK.init(this);
+
     }
 }
