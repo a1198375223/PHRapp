@@ -10,10 +10,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/doctor_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="@dimen/phr_width_60"
+            android:layout_height="@dimen/phr_width_60"
             android:layout_margin="@dimen/phr_margin_5"/>
 
         <LinearLayout
@@ -56,7 +56,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/phr_treatment_doc_work_time"
-        android:textSize="@dimen/phr_text_size_25"/>
+        android:layout_marginLeft="@dimen/phr_margin_3"
+        android:textSize="@dimen/phr_text_size_20"/>
 
     <GridView
         android:id="@+id/doctor_work_time_grid_view"

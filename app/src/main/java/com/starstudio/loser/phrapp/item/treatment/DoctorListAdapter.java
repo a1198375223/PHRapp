@@ -56,11 +56,14 @@ public class DoctorListAdapter extends BaseAdapter{
         convertView= LayoutInflater.from(context).inflate(R.layout.phr_doctor_list_adapter,parent,false);
         ImageView doctorImage=convertView.findViewById(R.id.doctor_image);
         TextView doctorName=convertView.findViewById(R.id.doctor_name_tv);
-        TextView doctorTitle=convertView.findViewById(R.id.doctor_title_tv);
+        final TextView doctorTitle=convertView.findViewById(R.id.doctor_title_tv);
         TextView doctorProfile=convertView.findViewById(R.id.doctor_profile_tv);
         final String hospName=doctorList.get(position).getHosp();
         final String docName=doctorList.get(position).getDoctorName();
         final String deptName=doctorList.get(position).getDept();
+        final String title=doctorList.get(position).getDoctorTitle();
+        final String profile=doctorList.get(position).getProfile();
+        final String imageUrl=doctorList.get(position).getDoctorImagId();
         final GridView doctorWorkTime=convertView.findViewById(R.id.doctor_work_time_grid_view);
         final List<String> workList=new ArrayList<>();
         RequestOptions options = new RequestOptions()
@@ -68,7 +71,7 @@ public class DoctorListAdapter extends BaseAdapter{
                 .error(R.drawable.default_head)
                 .diskCacheStrategy(DiskCacheStrategy.NONE);
 
-        Glide.with(context).load(doctorList.get(position).getDoctorImagId()).apply(options).into(doctorImage);
+        Glide.with(context).load(imageUrl).apply(options).into(doctorImage);
         doctorName.setText(docName);
         doctorTitle.setText(doctorList.get(position).getDoctorTitle());
         doctorProfile.setText(doctorList.get(position).getProfile());
@@ -105,6 +108,12 @@ public class DoctorListAdapter extends BaseAdapter{
             public void onClick(View v) {
                 //根据docnName 跳转到医生主页
                 Intent intent=new Intent(context,DoctorPage.class);
+                intent.putExtra("hosp",hospName);
+                intent.putExtra("dept",deptName);
+                intent.putExtra("docName",docName);
+                intent.putExtra("title",title);
+                intent.putExtra("profile",profile);
+                intent.putExtra("imageUrl",imageUrl);
                 context.startActivity(intent);
             }
         });

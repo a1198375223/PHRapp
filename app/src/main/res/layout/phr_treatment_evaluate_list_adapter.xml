@@ -3,16 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" 
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/phr_margin_7"
     android:layout_marginLeft="@dimen/phr_margin_3"
     android:layout_marginRight="@dimen/phr_margin_3">
     
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/evaluate_head_image"
-        android:layout_width="@dimen/phr_width_40"
-        android:layout_height="@dimen/phr_height_40"
-        android:layout_marginLeft="@dimen/phr_margin_3" />
+        android:layout_width="@dimen/phr_width_30"
+        android:layout_height="@dimen/phr_height_30"
+        android:layout_marginLeft="@dimen/phr_margin_3"
+        android:layout_marginTop="@dimen/phr_margin_4"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
 
             <TextView
                 android:id="@+id/evaluate_user_name_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/phr_width_90"
                 android:layout_height="wrap_content"
                 android:text="用户名"
                 android:textColor="@color/phr_black"
@@ -37,7 +38,7 @@
                 android:id="@+id/evaluate_grade_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/phr_margin_80"
+                android:layout_marginLeft="@dimen/phr_margin_10"
                 android:text="5"
                 android:textColor="@color/phr_main_page_text_color"
                 android:textSize="@dimen/phr_text_size_25"
