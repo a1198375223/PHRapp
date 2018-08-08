@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:title="@string/phr_article_menu_collect"
+        android:icon="@mipmap/phr_article_menu_collect"
+        android:id="@+id/phr_article_menu_collect" />
+    <item
+        android:title="@string/phr_article_menu_share"
+        android:icon="@mipmap/phr_article_menu_share"
+        android:id="@+id/phr_article_menu_share" />
+    <item
+        android:title="@string/phr_article_menu_complaints"
+        android:icon="@mipmap/phr_article_menu_warn"
+        android:id="@+id/phr_article_menu_complaints" />
+    <item
+        android:title="@string/phr_article_menu_like"
+        android:icon="@mipmap/phr_article_menu_like"
+        android:id="@+id/phr_article_menu_like" />
+    <item
+        android:title="@string/phr_article_menu_dislike"
+        android:icon="@mipmap/phr_article_menu_dislike"
+        android:id="@+id/phr_article_menu_dislike" />
 </menu>

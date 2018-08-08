@@ -96,6 +96,13 @@
     <string name="phr_article_fragment_all_reply">全部回复</string>
     <string name="phr_rv_my_article_no_comment">暂无评论</string>
     <string name="phr_activity_show_reply_title">查看回复</string>
+    <string name="phr_article_fragment_type">按时间</string>
+    <string name="phr_article_menu_collect">收  藏</string>
+    <string name="phr_article_menu_share">分  享</string>
+    <string name="phr_article_menu_complaints">举  报</string>
+    <string name="phr_article_menu_like">点  赞</string>
+    <string name="phr_article_menu_dislike">点  灭</string>
+
 
 
     <!--bottom dialog string-->
@@ -112,6 +119,8 @@
 
     <!--collect string-->
     <string name="phr_collect_my_collect">我的收藏</string>
+
+
 
 
     <string name="phr_community_text_test">静夜思\n
