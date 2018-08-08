@@ -166,6 +166,19 @@
                 android:clickable="true"
                 android:id="@+id/phr_rv_my_article_comment_reply"
                 tools:ignore="KeyboardInaccessibleWidget" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/phr_text_size_12"
+                android:layout_marginLeft="@dimen/phr_margin_15"
+                android:text="@string/phr_rv_my_article_comment_show_reply"
+                android:layout_marginStart="@dimen/phr_margin_15"
+                android:textColor="@color/color_text_hint"
+                android:layout_gravity="bottom"
+                android:clickable="true"
+                android:id="@+id/phr_rv_my_article_comment_show_reply"
+                tools:ignore="KeyboardInaccessibleWidget"
+                android:visibility="invisible" />
         </LinearLayout>
         <ImageView
             android:layout_width="@dimen/phr_width_12"

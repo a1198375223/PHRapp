@@ -58,7 +58,7 @@ public class PHRView<E extends BaseEventListener> implements BaseView<E> {
     @Override
     public void dismissProgressDialog() {
         if (mDialog != null) {
-            Log.d(TAG, "dismissProgressDialog: dismisss===================================");
+            Log.d(TAG, "dismissProgressDialog: dismiss=======================");
             mDialog.dismiss();
             mDialog = null;
         }

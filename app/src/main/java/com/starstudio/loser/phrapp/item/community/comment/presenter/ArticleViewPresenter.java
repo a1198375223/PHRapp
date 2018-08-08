@@ -6,12 +6,15 @@ package com.starstudio.loser.phrapp.item.community.comment.presenter;
 */
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.avos.avoscloud.AVObject;
 import com.starstudio.loser.phrapp.common.base.PHRPresenter;
+import com.starstudio.loser.phrapp.item.community.comment.ArticleActivity;
 import com.starstudio.loser.phrapp.item.community.comment.contract.ArticleContract;
+import com.starstudio.loser.phrapp.item.community.comment.show.ShowReplyActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +32,8 @@ public class ArticleViewPresenter extends PHRPresenter<ArticleContract.ArticleCo
         public void saveComment(String text, int id) {
             if (id != -1) {
                 if (mComment.get(id - 1) == null) {
-                    mView.showError("出错啦");
+                    mView.showErrorToast("出错啦");
+                    mView.dismissProgressDialog();
                 } else {
                     mModel.saveReply(text, mComment.get(id - 1));
                 }
@@ -39,8 +43,19 @@ public class ArticleViewPresenter extends PHRPresenter<ArticleContract.ArticleCo
         }
 
         @Override
-        public void loadComment() {
-            mModel.loadComment();
+        public void startShowReplyActivity(int position) {
+            if (mComment.get(position) != null) {
+                Bundle bundle = new Bundle();
+                bundle.putString("comment", mComment.get(position).toString());
+                bundle.putString("article", mInitData.toString());
+                bundle.putInt("id", mComment.size());
+                Intent intent = new Intent((ArticleActivity)getActivity(), ShowReplyActivity.class);
+                intent.putExtras(bundle);
+                getActivity().startActivity(intent);
+            } else {
+                mView.showErrorToast("出错啦");
+            }
+
         }
     };
 
@@ -83,16 +98,40 @@ public class ArticleViewPresenter extends PHRPresenter<ArticleContract.ArticleCo
         } else {
             mComment = list;
         }
-        mView.setData(mInitData, list);
+        mView.setData(mInitData, mComment);
     }
 
     @Override
     public void tellToLoadComment(List<AVObject> list) {
-        mView.load(list);
+        if (list == null) {
+            mComment = new ArrayList<>();
+        } else {
+            mComment = list;
+        }
+        mView.load(mComment);
     }
 
     @Override
-    public void error() {
-        mView.showError("请先登入");
+    public void showError(String error) {
+        mView.showErrorToast(error);
+        mView.dismissProgressDialog();
+    }
+
+    @Override
+    public void showSuccess(String success) {
+        mView.showSuccessToast(success);
+        mView.dismissProgressDialog();
+    }
+
+    @Override
+    public void showWarning(String warning) {
+        mView.showWarningToast(warning);
+        mView.dismissProgressDialog();
+    }
+
+    @Override
+    public void toRefresh() {
+        mView.showProgressDialog();
+        mModel.loadComment();
     }
 }

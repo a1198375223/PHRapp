@@ -17,8 +17,6 @@ public interface ArticleContract {
     interface ArticleContractView extends BaseView<ArticleEventListener> {
         void setData(AVObject data, List<AVObject> comment);
 
-        void showError(String error);
-
         void load(List<AVObject> list);
     }
 
@@ -37,7 +35,13 @@ public interface ArticleContract {
 
         void tellToLoadComment(List<AVObject> list);
 
-        void error();
+        void showError(String error);
+
+        void showSuccess(String success);
+
+        void showWarning(String warning);
+
+        void toRefresh();
     }
 
 }

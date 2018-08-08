@@ -84,7 +84,6 @@ public class ManageFragment extends Fragment {
     }
 
     public static ManageFragment newInstance(String type) {
-
         Bundle args = new Bundle();
         args.putString("type",type);
         ManageFragment fragment = new ManageFragment();

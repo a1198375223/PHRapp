@@ -12,6 +12,7 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
+import com.avos.avoscloud.SaveCallback;
 import com.starstudio.loser.phrapp.common.base.PHRModel;
 import com.starstudio.loser.phrapp.item.community.comment.contract.ArticleContract;
 
@@ -45,6 +46,8 @@ public class ArticleModel extends PHRModel implements ArticleContract.ArticleCon
                 if (e == null) {
                     mId = list.size();
                     mPresenter.toLoadView(list);
+                } else {
+                    mPresenter.showError("出错啦");
                 }
             }
         });
@@ -54,7 +57,7 @@ public class ArticleModel extends PHRModel implements ArticleContract.ArticleCon
     public void saveComment(String comment) {
         AVUser avUser = AVUser.getCurrentUser();
         if (avUser == null) {
-            mPresenter.error();
+            mPresenter.showError("请先登入");
         }else {
             AVObject avObject = new AVObject("Comment");
             avObject.put("comment", comment);
@@ -67,7 +70,16 @@ public class ArticleModel extends PHRModel implements ArticleContract.ArticleCon
             avObject.put("date", new Date(System.currentTimeMillis()));
             mCurrentAuthor.increment("reply");
             mCurrentAuthor.setFetchWhenSave(true);
-            avObject.saveInBackground();
+            avObject.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(AVException e) {
+                    if (e == null) {
+                        loadComment();
+                    } else {
+                        mPresenter.showError("出错啦");
+                    }
+                }
+            });
         }
 
     }
@@ -76,7 +88,7 @@ public class ArticleModel extends PHRModel implements ArticleContract.ArticleCon
     public void saveReply(String comment, AVObject reply) {
         AVUser avUser = AVUser.getCurrentUser();
         if (avUser == null) {
-            mPresenter.error();
+            mPresenter.showError("请先登入");
         }else {
             AVObject avObject = new AVObject("Comment");
             avObject.put("comment", comment);
@@ -87,7 +99,20 @@ public class ArticleModel extends PHRModel implements ArticleContract.ArticleCon
             avObject.put("is_author", avUser.equals(mCurrentAuthor.getAVUser("article_user")));
             avObject.put("article", mCurrentAuthor);
             avObject.put("date", new Date(System.currentTimeMillis()));
-            avObject.saveInBackground();
+            reply.increment("reply");
+            reply.setFetchWhenSave(true);
+            mCurrentAuthor.increment("reply");
+            mCurrentAuthor.setFetchWhenSave(true);
+            avObject.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(AVException e) {
+                    if (e == null) {
+                        loadComment();
+                    }else {
+                        mPresenter.showError("出错啦");
+                    }
+                }
+            });
         }
     }
 
@@ -97,7 +122,6 @@ public class ArticleModel extends PHRModel implements ArticleContract.ArticleCon
         query.include("comment_user");
         query.include("reply_to");
         query.include("article");
-        query.include("reply_to.comment_user");
         query.whereEqualTo("article", mCurrentAuthor);
         query.findInBackground(new FindCallback<AVObject>() {
             @Override

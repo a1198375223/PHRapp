@@ -7,7 +7,7 @@
     <string name="phr_main_navigation_view_menu_item3">个人PHR管理</string>
     <string name="phr_main_navigation_view_menu_item4">个人信息管理</string>
     <string name="phr_main_navigation_view_menu_item5">退出登录</string>
-    <string name="phr_main_gridlayout_text1">健康咨询</string>
+    <string name="phr_main_gridlayout_text1">健康资讯</string>
     <string name="phr_main_gridlayout_text2">计划免疫</string>
     <string name="phr_main_gridlayout_text3">就医地图</string>
     <string name="phr_main_gridlayout_text4">自动挂号</string>
@@ -88,11 +88,14 @@
     <string name="phr_rv_my_article_comment_date">日  期</string>
     <string name="phr_rv_my_article_comment_like_count">喜欢(1)</string>
     <string name="phr_rv_my_article_comment_reply">回复</string>
+    <string name="phr_rv_my_article_comment_show_reply">查看回复</string>
     <string name="phr_rv_my_article_comment_id">#1</string>
     <string name="phr_article_fragment_submit">发  布</string>
     <string name="phr_article_fragment_reply">写回复</string>
     <string name="phr_article_fragment_all_reply">全部回复</string>
     <string name="phr_rv_my_article_no_comment">暂无评论</string>
+    <string name="phr_activity_show_reply_title">查看回复</string>
+
 
     <!--bottom dialog string-->
     <string name="phr_bottom_dialog_exit">退  出</string>

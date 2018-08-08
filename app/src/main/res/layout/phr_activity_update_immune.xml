@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/phr_white">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/phr_update_immune_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/phr_white"
+        app:navigationIcon="@drawable/phr_arrow_back_black_24"
+        app:title="编辑免疫知识">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/phr_padding_12"
+        android:paddingRight="@dimen/phr_padding_12">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_25"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/phr_height_15"
+                android:layout_height="@dimen/phr_height_15"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:src="@mipmap/immune_name" />
+
+            <EditText
+                android:id="@+id/phr_update_immune_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/phr_margin_3"
+                android:layout_marginStart="@dimen/phr_margin_3"
+                android:background="@null"
+                android:hint="疫苗种类"
+                android:inputType="text"
+                android:textColorHint="@color/color_login_text4" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_1"
+            android:background="@drawable/phr_shape_gradient_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_25"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/phr_height_15"
+                android:layout_height="@dimen/phr_height_15"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:src="@mipmap/immune_age" />
+
+            <EditText
+                android:id="@+id/phr_update_immune_age"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/phr_margin_3"
+                android:layout_marginStart="@dimen/phr_margin_3"
+                android:background="@null"
+                android:hint="接种年龄"
+                android:inputType="text"
+                android:textColorHint="@color/color_login_text4" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_1"
+            android:background="@drawable/phr_shape_gradient_line" />
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/phr_height_25"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/phr_height_15"
+            android:layout_height="@dimen/phr_height_15"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:src="@mipmap/immune_times" />
+
+        <EditText
+            android:id="@+id/phr_update_immune_times"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/phr_margin_3"
+            android:layout_marginStart="@dimen/phr_margin_3"
+            android:background="@null"
+            android:hint="接种次数"
+            android:inputType="number"
+            android:textColorHint="@color/color_login_text4" />
+    </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_1"
+            android:background="@drawable/phr_shape_gradient_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_25"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/phr_height_15"
+                android:layout_height="@dimen/phr_height_15"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:src="@mipmap/immune_type" />
+
+            <EditText
+                android:id="@+id/phr_update_immune_type"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/phr_margin_3"
+                android:layout_marginStart="@dimen/phr_margin_3"
+                android:background="@null"
+                android:hint="预防疾病种类"
+                android:inputType="text"
+                android:textColorHint="@color/color_login_text4" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_1"
+            android:background="@drawable/phr_shape_gradient_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp">
+            <EditText
+                android:id="@+id/phr_update_immune_content"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:inputType="textMultiLine"
+                android:hint="可以在这里添加疫苗详情知识哦"
+                android:scrollbars="vertical"
+                android:maxLines="12"
+                android:gravity="top"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/color_line_color"/>
+            <Button
+                android:id="@+id/phr_update_immune_submit"
+                style="@style/PHR.Button.Blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/phr_height_10"
+                android:text="@string/phr_register_submit"
+                android:textSize="@dimen/phr_text_size_20" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

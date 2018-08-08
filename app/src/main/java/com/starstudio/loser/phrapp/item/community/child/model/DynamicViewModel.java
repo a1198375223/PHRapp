@@ -38,10 +38,10 @@ public class DynamicViewModel extends PHRModel implements DynamicContract.Dynami
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
-                if (e == null && list.size() != 0) {
+                if (e == null) {
                     mPresenter.setViewData(list);
                 } else {
-                    ToastyUtils.showError("出错啦");
+                    mPresenter.showError("出错啦");
                 }
             }
         });
@@ -61,7 +61,7 @@ public class DynamicViewModel extends PHRModel implements DynamicContract.Dynami
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
             public void done(List<AVObject> list, AVException e) {
-                if (e == null && list.size() != 0) {
+                if (e == null) {
                     mPresenter.setViewData(list);
                 } else {
                     mPresenter.showError("出错啦");

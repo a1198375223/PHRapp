@@ -11,5 +11,6 @@ import com.starstudio.loser.phrapp.common.base.BaseEventListener;
 public interface ArticleEventListener extends BaseEventListener {
     void saveComment(String text, int id);
 
-    void loadComment();
+
+    void startShowReplyActivity(int position);
 }

@@ -58,6 +58,9 @@
     <color name="color_text_hint">#aaaaaa</color>
     <color name="color_text_background">#cccccc</color>
 
+    <!--recycler view bg-->
+    <color name="color_recycler_view_bg">#eeeeee</color>
+
     <!--boom button-->
     <color name="color_boom_blue_normal_color">#3594F2</color>
     <color name="color_boom_blue_highlight_color">#75BAFF</color>

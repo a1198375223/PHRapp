@@ -17,6 +17,7 @@ import com.starstudio.loser.phrapp.item.message.list.view.EntertainmentFragment;
 import com.starstudio.loser.phrapp.item.message.list.view.FashionFragment;
 import com.starstudio.loser.phrapp.item.message.list.view.HealthFragment;
 import com.starstudio.loser.phrapp.item.message.list.view.IslandFragment;
+import com.starstudio.loser.phrapp.item.message.list.view.MentalFragment;
 import com.starstudio.loser.phrapp.item.message.list.view.MilitaryFragment;
 import com.starstudio.loser.phrapp.item.message.list.view.ScienceFragment;
 import com.starstudio.loser.phrapp.item.message.list.view.SocialFragment;
@@ -36,15 +37,16 @@ public class MessagePresenterImpl extends PHRPresenter<MessageContract.MessageVi
                     fragment = mMessageView == null ? null : new HealthFragment();
                     break;
                 case 1:
-                    fragment = mMessageView == null ? null : new Fragment();
+                    fragment = mMessageView == null ? null : new SportsFragment();
+
                     break;
                 case 2:
 //                    fragment = mMessageView == null ? null : new Fragment();
-                    fragment = mMessageView == null ? null : new TopFragment();
+                    fragment = mMessageView == null ? null : new MentalFragment();
                     break;
                 case 3:
 //                    fragment = mMessageView == null ? null : new Fragment();
-                    fragment = mMessageView == null ? null : new SportsFragment();
+                    fragment = mMessageView == null ? null : new TopFragment();
                     break;
                 case 4:
 //                    fragment = mMessageView == null ? null : new Fragment();
