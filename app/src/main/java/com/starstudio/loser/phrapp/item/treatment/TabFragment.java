@@ -152,7 +152,7 @@ public class TabFragment extends Fragment {
             @Override
             public void done(AVObject avObject, AVException e) {
                 if(e==null){
-                    int sum=0;
+                    float sum=0;
                     float average=0;
                     DecimalFormat df = new DecimalFormat(".00");
                     try{
@@ -163,7 +163,7 @@ public class TabFragment extends Fragment {
                             JSONObject jsonObject=jsonArray.getJSONObject(i);
                             final String userName=jsonObject.getString("user");
                             final String content=jsonObject.getString("content");
-                            final int grade=Integer.valueOf(jsonObject.getString("grade"));
+                            final float grade=Float.valueOf(jsonObject.getString("grade"));
                             sum+=grade;
                             final String date=jsonObject.getString("date");
                             final String isAnonymous=jsonObject.getString("isAnonymous");
