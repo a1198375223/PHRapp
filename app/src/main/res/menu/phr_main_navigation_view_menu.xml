@@ -3,29 +3,34 @@
 
     <item
         android:title="@string/phr_main_navigation_view_menu_item1"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/phr_navigation_collect"
         android:id="@+id/phr_main_navigation_view_menu_item1" />
 
     <item
         android:title="@string/phr_main_navigation_view_menu_item2"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/phr_navigation_message"
         android:id="@+id/phr_main_navigation_view_menu_item2" />
 
     <item
         android:title="@string/phr_main_navigation_view_menu_item3"
         android:id="@+id/phr_main_navigation_view_menu_item3"
-        android:icon="@drawable/phr_menu_item3"
+        android:icon="@mipmap/phr_navigation_health"
         android:visible="false"/>
 
     <item
-        android:icon="@drawable/phr_modify_head"
+        android:icon="@mipmap/phr_navigation_history"
         android:title="@string/phr_main_navigation_view_menu_item4"
         android:id="@+id/phr_main_navigation_view_menu_item4"
         android:visible="false"/>
 
     <item
         android:id="@+id/phr_main_navigation_view_menu_item5"
-        android:icon="@drawable/phr_menu_item5"
+        android:icon="@mipmap/phr_navigation_person"
         android:title="@string/phr_main_navigation_view_menu_item5"
+        android:visible="false"/>
+    <item
+        android:id="@+id/phr_main_navigation_view_menu_item6"
+        android:icon="@mipmap/phr_navigation_exit"
+        android:title="@string/phr_main_navigation_view_menu_item6"
         android:visible="false"/>
 </menu>

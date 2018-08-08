@@ -196,10 +196,7 @@ public class MyArticleViewModel extends PHRModel implements MyArticleContract.My
 
     }
 
-    @Override
-    public void toShare(AVObject avObject) {
 
-    }
 
     @Override
     public void toCollect(final AVObject avObject) {

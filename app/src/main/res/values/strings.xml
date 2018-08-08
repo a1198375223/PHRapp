@@ -1,12 +1,13 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">PHRApp</string>
     <string name="phr_main_navigation_view_header_name">用户名</string>
     <string name="phr_main_navigation_view_header_note">备注</string>
-    <string name="phr_main_navigation_view_menu_item1">item1</string>
-    <string name="phr_main_navigation_view_menu_item2">item2</string>
-    <string name="phr_main_navigation_view_menu_item3">个人PHR管理</string>
-    <string name="phr_main_navigation_view_menu_item4">个人信息管理</string>
-    <string name="phr_main_navigation_view_menu_item5">退出登录</string>
+    <string name="phr_main_navigation_view_menu_item1">收    藏</string>
+    <string name="phr_main_navigation_view_menu_item2">消    息</string>
+    <string name="phr_main_navigation_view_menu_item3">健康管理</string>
+    <string name="phr_main_navigation_view_menu_item4">就诊记录</string>
+    <string name="phr_main_navigation_view_menu_item5">个人信息</string>
+    <string name="phr_main_navigation_view_menu_item6">退出登录</string>
     <string name="phr_main_gridlayout_text1">健康咨询</string>
     <string name="phr_main_gridlayout_text2">计划免疫</string>
     <string name="phr_main_gridlayout_text3">就医地图</string>
@@ -101,6 +102,16 @@
     <string name="phr_bottom_dialog_exit">退  出</string>
     <string name="phr_bottom_dialog_warn">举  报</string>
     <string name="phr_bottom_dialog_dislike">点  灭</string>
+
+    <!--share string-->
+    <string name="phr_share_string" tools:ignore="TypographyEllipsis">分享到...</string>
+    <string name="phr_share_dialog_weibo">微  博</string>
+    <string name="phr_share_dialog_wechat">微  信</string>
+    <string name="phr_share_dialog_qq">QQ</string>
+    <string name="phr_share_dialog_cancel">取  消</string>
+
+    <!--collect string-->
+    <string name="phr_collect_my_collect">我的收藏</string>
 
 
     <string name="phr_community_text_test">静夜思\n

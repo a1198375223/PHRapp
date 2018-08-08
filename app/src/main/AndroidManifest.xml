@@ -53,6 +53,8 @@
         <activity android:name=".item.management.PhysicalRecordActivity" />
         <activity android:name=".item.management.UpdateClinicalActivity" />
         <activity android:name=".item.management.ClinicalRecordActivity"/>
+        <activity android:name=".item.main.collect.CollectActivity"
+            android:launchMode="singleTask"/>
 
         <activity android:name=".item.community.comment.ArticleActivity"
             android:launchMode="singleTask"/>

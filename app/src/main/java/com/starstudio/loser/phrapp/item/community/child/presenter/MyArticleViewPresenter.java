@@ -45,18 +45,27 @@ public class MyArticleViewPresenter extends PHRPresenter<MyArticleContract.MyArt
         public void toDelete(int position) {
             if (mList.get(position) != null) {
                 mModel.toDelete(mList.get(position));
+            } else {
+                mView.error("出错啦");
             }
         }
 
         @Override
         public void toShare(int position) {
-
+            if (mList.get(position) != null) {
+//                mModel.toShare(mList.get(position));
+                mView.showShareDialog(mList.get(position).getString("title"), mList.get(position).getString("text"));
+            } else {
+                mView.error("出错啦");
+            }
         }
 
         @Override
         public void toComplaints(int position) {
             if (mList.get(position) != null) {
                 mModel.toComplaints(mList.get(position));
+            } else {
+                mView.error("出错啦");
             }
         }
 
@@ -64,6 +73,8 @@ public class MyArticleViewPresenter extends PHRPresenter<MyArticleContract.MyArt
         public void toCollect(int position) {
             if (mList.get(position) != null) {
                 mModel.toCollect(mList.get(position));
+            } else {
+                mView.error("出错啦");
             }
         }
     };
