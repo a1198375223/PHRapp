@@ -40,6 +40,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="ffffff" />
                                       <entry key="backgroundLayerName" value="ic_launcher_background" />
                                       <entry key="foregroundImage" value="C:\Users\11983\Desktop\header.gif" />
                                       <entry key="foregroundLayerName" value="phr_smart_refresh_header_fl" />
@@ -76,26 +77,12 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
-                                      <entry key="image">
-                                        <value>
-                                          <PersistentState>
-                                            <option name="values">
-                                              <map>
-                                                <entry key="trimmed" value="true" />
-                                              </map>
-                                            </option>
-                                          </PersistentState>
-                                        </value>
-                                      </entry>
                                     </map>
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="assetType" value="IMAGE" />
-                                      <entry key="cropped" value="true" />
-                                      <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="C:\Users\11983\Desktop\history record.png" />
-                                      <entry key="outputName" value="phr_navigation_history" />
+                                      <entry key="backgroundColor" value="ff5722" />
+                                      <entry key="outputName" value="phr_boom_collect_highlight" />
                                     </map>
                                   </option>
                                 </PersistentState>

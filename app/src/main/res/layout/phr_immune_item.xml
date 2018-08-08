@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@color/color_line_color"/>
+    
+    <TextView
+        android:id="@+id/phr_immune_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="疫苗种类"
+        android:gravity="center"
+        android:textSize="18dp"/>
+
+    <TextView
+        android:id="@+id/phr_immune_content"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="疫苗描述"
+        android:textSize="20dp"
+        android:maxLines="3"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/phr_immune_doctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="编辑医生："/>
+
+    <TextView
+        android:id="@+id/phr_immune_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="最后更新于："/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@color/color_line_color"/>
+
+</LinearLayout>

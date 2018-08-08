@@ -50,11 +50,11 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
                 Bundle bundle = new Bundle();
                 bundle.putString("recordId",record.getRecordId());
                 if (record.getType().equals("physical")) {
-                    Intent intent = new Intent(parent.getContext(), PhysicalRecordActivity.class);
+                    Intent intent = new Intent(parent.getContext(), UpdatePhysicalActivity.class);
                     intent.putExtras(bundle);
                     parent.getContext().startActivity(intent);
                 }else if (record.getType().equals("clinical")){
-                    Intent intent = new Intent(parent.getContext(), ClinicalRecordActivity.class);
+                    Intent intent = new Intent(parent.getContext(), UpdateClinicalActivity.class);
                     intent.putExtras(bundle);
                     parent.getContext().startActivity(intent);
                 }

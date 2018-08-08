@@ -26,10 +26,12 @@ import com.avos.avoscloud.AVUser;
 import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.common.base.PHRView;
 import com.starstudio.loser.phrapp.item.community.CommunityActivity;
+import com.starstudio.loser.phrapp.item.immune.DoctorImmuneActivity;
 import com.starstudio.loser.phrapp.item.main.PHRMainActivity;
 import com.starstudio.loser.phrapp.item.main.collect.CollectActivity;
 import com.starstudio.loser.phrapp.item.main.contract.MainContract;
 import com.starstudio.loser.phrapp.item.management.ManageMainActivity;
+import com.starstudio.loser.phrapp.item.map.HospitalMapActivity;
 import com.starstudio.loser.phrapp.item.message.PHRMessageActivity;
 import com.starstudio.loser.phrapp.item.modify.ModifyActivity;
 import com.starstudio.loser.phrapp.item.treatment.TreatmentActiity;
@@ -131,9 +133,11 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
                         activity.startActivity(intent);
                         break;
                     case 1:
+                        activity.startActivity(new Intent((PHRMainActivity) activity, DoctorImmuneActivity.class));
                         Toast.makeText(activity, "no 2", Toast.LENGTH_SHORT).show();
                         break;
                     case 2:
+                        activity.startActivity(new Intent((PHRMainActivity) activity, HospitalMapActivity.class));
                         Toast.makeText(activity, "no 3", Toast.LENGTH_SHORT).show();
                         break;
                     case 3:
