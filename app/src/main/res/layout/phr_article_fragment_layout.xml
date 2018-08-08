@@ -27,7 +27,8 @@
         android:layout_height="match_parent"
         android:layout_below="@id/phr_article_fragment_toolbar"
         android:id="@+id/phr_article_fragment_scroll_view"
-        android:layout_above="@+id/reply_container">
+        android:layout_above="@+id/reply_container"
+        android:background="@color/phr_white">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +48,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/phr_width_25"
-                android:layout_marginTop="@dimen/phr_margin_2">
+                android:layout_marginTop="@dimen/phr_margin_5">
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:layout_width="@dimen/phr_width_20"
                     android:layout_height="@dimen/phr_width_20"
@@ -106,13 +107,14 @@
                 android:textSize="@dimen/phr_text_size_13"
                 android:lineSpacingExtra="@dimen/phr_padding_2"
                 android:textColor="@color/color_text_sub_title"
-                android:layout_marginTop="@dimen/phr_margin_2"
+                android:layout_marginTop="@dimen/phr_margin_5"
                 android:layout_marginBottom="@dimen/phr_margin_2"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/phr_margin_1"
-                android:layout_marginBottom="@dimen/phr_margin_4">
+                android:layout_marginTop="@dimen/phr_margin_3"
+                android:layout_marginBottom="@dimen/phr_margin_5"
+                android:background="@drawable/phr_reply_text_board_bg">
                 <View
                     android:layout_width="@dimen/phr_width_5"
                     android:layout_height="match_parent"

@@ -31,11 +31,13 @@ public class ArticleModel extends PHRModel implements ArticleContract.ArticleCon
     }
 
     @Override
-    public void getCommentFromLeanCloud(AVObject avObject) {
+    public void getCommentFromLeanCloud(final AVObject avObject) {
         mCurrentAuthor = avObject;
         AVQuery<AVObject> query = new AVQuery<>("Comment");
         query.include("comment_user");
         query.include("reply_to");
+        query.include("reply_to.comment_user");
+        query.include("article");
         query.whereEqualTo("article", avObject);
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
@@ -63,9 +65,30 @@ public class ArticleModel extends PHRModel implements ArticleContract.ArticleCon
             avObject.put("is_author", avUser.equals(mCurrentAuthor.getAVUser("article_user")));
             avObject.put("article", mCurrentAuthor);
             avObject.put("date", new Date(System.currentTimeMillis()));
+            mCurrentAuthor.increment("reply");
+            mCurrentAuthor.setFetchWhenSave(true);
             avObject.saveInBackground();
         }
 
+    }
+
+    @Override
+    public void saveReply(String comment, AVObject reply) {
+        AVUser avUser = AVUser.getCurrentUser();
+        if (avUser == null) {
+            mPresenter.error();
+        }else {
+            AVObject avObject = new AVObject("Comment");
+            avObject.put("comment", comment);
+            avObject.put("comment_user", avUser);
+            avObject.put("id", ++mId);
+            avObject.put("like", 0);
+            avObject.put("reply_to", reply);
+            avObject.put("is_author", avUser.equals(mCurrentAuthor.getAVUser("article_user")));
+            avObject.put("article", mCurrentAuthor);
+            avObject.put("date", new Date(System.currentTimeMillis()));
+            avObject.saveInBackground();
+        }
     }
 
     @Override
@@ -74,6 +97,7 @@ public class ArticleModel extends PHRModel implements ArticleContract.ArticleCon
         query.include("comment_user");
         query.include("reply_to");
         query.include("article");
+        query.include("reply_to.comment_user");
         query.whereEqualTo("article", mCurrentAuthor);
         query.findInBackground(new FindCallback<AVObject>() {
             @Override

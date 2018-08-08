@@ -56,6 +56,8 @@ public class MyArticleRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public interface OnItemClickListener {
         void onItemClickListener(int position);
+
+        void onMenuItemClickListener(int position, int index);
     }
 
     public void setListener(OnItemClickListener listener) {
@@ -81,11 +83,11 @@ public class MyArticleRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             ((MyHolder) holder).mTitle.setText(mList.get(position).getString("title"));
             ((MyHolder) holder).mText.setText(mList.get(position).getString("text"));
             ((MyHolder) holder).mDate.setText(DateUtils.parseDate(mList.get(position).getDate("time")));
-            initBoomButtonMenu((MyHolder)holder);
+            initBoomButtonMenu((MyHolder)holder, position);
         }
     }
 
-    private void initBoomButtonMenu(MyHolder holder) {
+    private void initBoomButtonMenu(MyHolder holder, final int position) {
         holder.mShare.setButtonEnum(ButtonEnum.Ham);
         holder.mShare.setPiecePlaceEnum(PiecePlaceEnum.HAM_4);
         holder.mShare.setButtonPlaceEnum(ButtonPlaceEnum.HAM_4);
@@ -104,7 +106,9 @@ public class MyArticleRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        ToastyUtils.showSuccess("click: " + index);
+                        if (mListener != null) {
+                            mListener.onMenuItemClickListener(position, index);
+                        }
                     }
                 });
 
@@ -122,7 +126,9 @@ public class MyArticleRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        ToastyUtils.showSuccess("click: " + index);
+                        if (mListener != null) {
+                            mListener.onMenuItemClickListener(position, index);
+                        }
                     }
                 });
         HamButton.Builder yellow = new HamButton.Builder()
@@ -138,7 +144,9 @@ public class MyArticleRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        ToastyUtils.showSuccess("click: " + index);
+                        if (mListener != null) {
+                            mListener.onMenuItemClickListener(position, index);
+                        }
                     }
                 });
         HamButton.Builder red = new HamButton.Builder()
@@ -154,7 +162,9 @@ public class MyArticleRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 .listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
-                        ToastyUtils.showSuccess("click: " + index);
+                        if (mListener != null) {
+                            mListener.onMenuItemClickListener(position, index);
+                        }
                     }
                 });
         holder.mShare.addBuilder(purple);

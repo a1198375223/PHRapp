@@ -6,17 +6,17 @@ package com.starstudio.loser.phrapp.item.community.callback;
 */
 
 public class MessageEventBus {
-    private boolean ifRefresh;
+    private boolean delete;
 
-    public MessageEventBus(boolean ifRefresh) {
-        this.ifRefresh = ifRefresh;
+    public MessageEventBus(boolean delete) {
+        this.delete = delete;
     }
 
-    public boolean isIfRefresh() {
-        return ifRefresh;
+    public boolean isDelete() {
+        return delete;
     }
 
-    public void setIfRefresh(boolean ifRefresh) {
-        this.ifRefresh = ifRefresh;
+    public void setDelete(boolean delete) {
+        this.delete = delete;
     }
 }

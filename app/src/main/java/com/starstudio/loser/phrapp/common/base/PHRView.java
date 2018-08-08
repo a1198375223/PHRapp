@@ -8,11 +8,14 @@ package com.starstudio.loser.phrapp.common.base;
 import android.app.Activity;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.starstudio.loser.phrapp.common.view.PHRProgressDialog;
 
 import es.dmoral.toasty.Toasty;
+
+import static com.makeramen.roundedimageview.RoundedDrawable.TAG;
 
 
 public class PHRView<E extends BaseEventListener> implements BaseView<E> {
@@ -39,19 +42,23 @@ public class PHRView<E extends BaseEventListener> implements BaseView<E> {
         this.mListener = eventListener;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     @Override
     public void showProgressDialog() {
         if (mDialog == null) {
             mDialog = new PHRProgressDialog(getActivity());
+            Log.d(TAG, "showProgressDialog: show-----------------------------");
+            mDialog.showProgressDialog();
+        }else {
+            Log.d(TAG, "showProgressDialog: show-----------------------------");
             mDialog.showProgressDialog();
         }
-        mDialog.showProgressDialog();
     }
 
     @Override
     public void dismissProgressDialog() {
         if (mDialog != null) {
+            Log.d(TAG, "dismissProgressDialog: dismisss===================================");
             mDialog.dismiss();
             mDialog = null;
         }

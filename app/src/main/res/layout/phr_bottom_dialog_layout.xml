@@ -27,7 +27,7 @@
         android:clickable="true"
         android:gravity="center"
         android:padding="@dimen/phr_padding_8"
-        android:text="@string/phr_bottom_dialog_collect"
+        android:text="@string/phr_bottom_dialog_dislike"
         android:textColor="@color/color_text_sub_title"
         android:textSize="@dimen/phr_text_size_14"
         android:id="@+id/phr_bottom_dialog_collect"

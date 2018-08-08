@@ -7,28 +7,21 @@ package com.starstudio.loser.phrapp.item.community.child.presenter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.FragmentTransaction;
-
 import com.avos.avoscloud.AVObject;
-import com.starstudio.loser.phrapp.R;
-import com.starstudio.loser.phrapp.common.PHRActivity;
 import com.starstudio.loser.phrapp.common.base.PHRPresenter;
 import com.starstudio.loser.phrapp.item.community.child.contract.MyArticleContract;
 import com.starstudio.loser.phrapp.item.community.comment.ArticleActivity;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 public class MyArticleViewPresenter extends PHRPresenter<MyArticleContract.MyArticleChildView, MyArticleContract.MyArticleContractModel> implements MyArticleContract.MyArticleChildPresenter {
-    private MyArticleContract.MyArticleContractView mView;
+    private MyArticleContract.MyArticleChildView mView;
     private MyArticleContract.MyArticleContractModel mModel;
     private List<AVObject> mList;
 
-    private ChildEventListener mListener = new ChildEventListener() {
+    private MyArticleEventListener mListener = new MyArticleEventListener() {
         @Override
         public void toRefresh() {
             mModel.getRefreshData(mList.size());
@@ -46,6 +39,32 @@ public class MyArticleViewPresenter extends PHRPresenter<MyArticleContract.MyArt
             Intent intent = new Intent(getActivity(), ArticleActivity.class);
             intent.putExtras(bundle);
             getActivity().startActivity(intent);
+        }
+
+        @Override
+        public void toDelete(int position) {
+            if (mList.get(position) != null) {
+                mModel.toDelete(mList.get(position));
+            }
+        }
+
+        @Override
+        public void toShare(int position) {
+
+        }
+
+        @Override
+        public void toComplaints(int position) {
+            if (mList.get(position) != null) {
+                mModel.toComplaints(mList.get(position));
+            }
+        }
+
+        @Override
+        public void toCollect(int position) {
+            if (mList.get(position) != null) {
+                mModel.toCollect(mList.get(position));
+            }
         }
     };
 
@@ -66,7 +85,10 @@ public class MyArticleViewPresenter extends PHRPresenter<MyArticleContract.MyArt
 
     @Override
     protected void onDetach() {
-
+        if (mList != null) {
+            mList.clear();
+            mList = null;
+        }
     }
 
     @Override
@@ -86,5 +108,20 @@ public class MyArticleViewPresenter extends PHRPresenter<MyArticleContract.MyArt
             mList.addAll(list);
             mView.load(list, true);
         }
+    }
+
+    @Override
+    public void showError(String error) {
+        mView.error(error);
+    }
+
+    @Override
+    public void showSuccess(String success) {
+        mView.success(success);
+    }
+
+    @Override
+    public void showWarning(String warning) {
+        mView.warning(warning);
     }
 }

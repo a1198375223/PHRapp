@@ -17,7 +17,7 @@ public interface ArticleContract {
     interface ArticleContractView extends BaseView<ArticleEventListener> {
         void setData(AVObject data, List<AVObject> comment);
 
-        void showError();
+        void showError(String error);
 
         void load(List<AVObject> list);
     }
@@ -26,6 +26,8 @@ public interface ArticleContract {
         void getCommentFromLeanCloud(AVObject avObject);
 
         void saveComment(String comment);
+
+        void saveReply(String comment, AVObject reply);
 
         void loadComment();
     }

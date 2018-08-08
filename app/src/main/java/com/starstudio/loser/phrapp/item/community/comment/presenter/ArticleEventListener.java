@@ -9,7 +9,7 @@ package com.starstudio.loser.phrapp.item.community.comment.presenter;
 import com.starstudio.loser.phrapp.common.base.BaseEventListener;
 
 public interface ArticleEventListener extends BaseEventListener {
-    void saveComment(String text);
+    void saveComment(String text, int id);
 
     void loadComment();
 }

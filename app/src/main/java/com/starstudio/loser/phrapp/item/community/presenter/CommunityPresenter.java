@@ -27,7 +27,10 @@ public class CommunityPresenter extends PHRPresenter<CommunityContract.Community
     private CommunityContract.CommunityView mView;
     private CommunityContract.CommunityModel mModel;
 
+    private DynamicContract.DynamicChildPresenter mDynamicChildPresenter;
     private DynamicContract.DynamicChildView mDynamicChildView;
+
+    private MyArticleContract.MyArticleChildPresenter mMyArticleChildPresenter;
     private MyArticleContract.MyArticleChildView mMyArticleChildView;
 
     private CommunityEventListener mListener = new CommunityEventListener() {
@@ -73,21 +76,30 @@ public class CommunityPresenter extends PHRPresenter<CommunityContract.Community
 
     private void init(){
         mDynamicChildView = new DynamicView(getActivity());
-        DynamicContract.DynamicChildPresenter presenter = new DynamicViewPresenter(getActivity());
-        presenter.setView(mDynamicChildView);
-        presenter.setModel(new DynamicViewModel(presenter));
-        presenter.attach();
+        mDynamicChildPresenter = new DynamicViewPresenter(getActivity());
+        mDynamicChildPresenter.setView(mDynamicChildView);
+        mDynamicChildPresenter.setModel(new DynamicViewModel(mDynamicChildPresenter));
+        mDynamicChildPresenter.attach();
 
         mMyArticleChildView = new MyArticleView(getActivity());
-        MyArticleContract.MyArticleChildPresenter presenter1 = new MyArticleViewPresenter(getActivity());
-        presenter1.setView(mMyArticleChildView);
-        presenter1.setModel(new MyArticleViewModel(presenter1));
-        presenter1.attach();
+        mMyArticleChildPresenter = new MyArticleViewPresenter(getActivity());
+        mMyArticleChildPresenter.setView(mMyArticleChildView);
+        mMyArticleChildPresenter.setModel(new MyArticleViewModel(mMyArticleChildPresenter));
+        mMyArticleChildPresenter.attach();
     } 
 
 
     @Override
     protected void onDetach() {
+        if (mDynamicChildPresenter != null) {
+            mDynamicChildPresenter.detach();
+            mDynamicChildPresenter = null;
+        }
+
+        if (mMyArticleChildPresenter != null) {
+            mMyArticleChildPresenter.detach();
+            mMyArticleChildPresenter = null;
+        }
     }
 
     @Override

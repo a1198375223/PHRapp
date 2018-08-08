@@ -17,8 +17,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
+import com.avos.avoscloud.SaveCallback;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.sackcentury.shinebuttonlib.ShineButton;
 import com.starstudio.loser.phrapp.R;
@@ -28,6 +34,8 @@ import com.starstudio.loser.phrapp.common.view.PHRBottomDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 public class CommentRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
@@ -71,7 +79,7 @@ public class CommentRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         if (holder instanceof MyHolder) {
             if (!mList.get(position).getBoolean("is_author")) {
                 ((MyHolder) holder).mAuthor.setVisibility(View.INVISIBLE);
@@ -88,7 +96,119 @@ public class CommentRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 @Override
                 public void onClick(View v) {
-                    PHRBottomDialog bottomDialog = new PHRBottomDialog(mContext);
+                    final PHRBottomDialog bottomDialog = new PHRBottomDialog(mContext);
+                    bottomDialog.setOnItemClickListener(new PHRBottomDialog.OnItemClickListener() {
+                        @Override
+                        public void onItemClickListener(int which) {
+                            switch (which) {
+                                case PHRBottomDialog.DISLIKE:
+                                    if (AVUser.getCurrentUser() == null) {
+                                        showError("请先登入");
+                                    } else {
+                                        AVQuery<AVObject> dislike = new AVQuery<>("CommentDislike");
+                                        dislike.include("comment_dislike_user").include("comment").whereEqualTo("comment", mList.get(position));
+                                        dislike.findInBackground(new FindCallback<AVObject>() {
+                                            @Override
+                                            public void done(final List<AVObject> list, AVException e) {
+                                                if (e == null) {
+                                                    boolean isContain = false;
+                                                    if (list.size() == 0) {
+                                                        isContain = false;
+                                                    } else {
+                                                        for (AVObject av : list) {
+                                                            if (av.getAVUser("comment_dislike_user").equals(AVUser.getCurrentUser())) {
+                                                                isContain = true;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    if (isContain) {
+                                                        showWarning("亲,您已经点灭过了!");
+                                                    } else {
+                                                        AVObject dislike = new AVObject("CommentDislike");
+                                                        dislike.put("comment_dislike_user", AVUser.getCurrentUser());
+                                                        dislike.put("comment", mList.get(position));
+                                                        mList.get(position).increment("dislike");
+                                                        mList.get(position).setFetchWhenSave(true);
+                                                        dislike.saveInBackground(new SaveCallback() {
+                                                            @Override
+                                                            public void done(AVException e) {
+                                                                if (e == null) {
+                                                                    showSuccess("点灭成功");
+                                                                } else {
+                                                                    showError("出错啦");
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                } else {
+                                                    showError("出错啦");
+                                                }
+                                            }
+                                        });
+                                        if (bottomDialog.isShowing()) {
+                                            bottomDialog.dismiss();
+                                        }
+                                    }
+                                    break;
+                                case PHRBottomDialog.WARN:
+                                    if (AVUser.getCurrentUser() == null) {
+                                        showError("请先登入");
+                                    } else {
+                                        AVQuery<AVObject> complaints = new AVQuery<>("CommentComplaints");
+                                        complaints.include("comment_complaints_user").include("comment").whereEqualTo("comment", mList.get(position));
+                                        complaints.findInBackground(new FindCallback<AVObject>() {
+                                            @Override
+                                            public void done(final List<AVObject> list, AVException e) {
+                                                if (e == null) {
+                                                    boolean isContain = false;
+                                                    if (list.size() == 0) {
+                                                        isContain = false;
+                                                    } else {
+                                                        for (AVObject av : list) {
+                                                            if (av.getAVUser("comment_complaints_user").equals(AVUser.getCurrentUser())) {
+                                                                isContain = true;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    if (isContain) {
+                                                        showWarning("亲,您已经举报过了!");
+                                                    } else {
+                                                        AVObject complaints = new AVObject("CommentComplaints");
+                                                        complaints.put("comment_complaints_user", AVUser.getCurrentUser());
+                                                        complaints.put("comment", mList.get(position));
+                                                        mList.get(position).increment("complaints");
+                                                        mList.get(position).setFetchWhenSave(true);
+                                                        complaints.saveInBackground(new SaveCallback() {
+                                                            @Override
+                                                            public void done(AVException e) {
+                                                                if (e == null) {
+                                                                    showSuccess("举报成功");
+                                                                } else {
+                                                                    showError("出错啦");
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                } else {
+                                                    showError("出错啦");
+                                                }
+                                            }
+                                        });
+                                        if (bottomDialog.isShowing()) {
+                                            bottomDialog.dismiss();
+                                        }
+                                    }
+                                    break;
+                                case PHRBottomDialog.EXIT:
+                                    if (bottomDialog.isShowing()) {
+                                        bottomDialog.dismiss();
+                                    }
+                                    break;
+                            }
+                        }
+                    });
                     bottomDialog.showBottomDialog();
                 }
             });
@@ -96,7 +216,53 @@ public class CommentRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((MyHolder) holder).mLike.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(View view, boolean checked) {
-
+                    if (checked) {
+                        if (AVUser.getCurrentUser() == null) {
+                            showError("请先登入");
+                        } else {
+                            AVQuery<AVObject> like = new AVQuery<>("CommentLike");
+                            like.include("comment_like_user").include("comment").whereEqualTo("comment", mList.get(position));
+                            like.findInBackground(new FindCallback<AVObject>() {
+                                @Override
+                                public void done(final List<AVObject> list, AVException e) {
+                                    if (e == null) {
+                                        boolean isContain = false;
+                                        if (list.size() == 0) {
+                                            isContain = false;
+                                        } else {
+                                            for (AVObject av : list) {
+                                                if (av.getAVUser("comment_like_user").equals(AVUser.getCurrentUser())) {
+                                                    isContain = true;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        if (isContain) {
+                                            showWarning("亲,您已经点亮过了!");
+                                        } else {
+                                            AVObject like = new AVObject("CommentLike");
+                                            like.put("comment_like_user", AVUser.getCurrentUser());
+                                            like.put("comment", mList.get(position));
+                                            mList.get(position).increment("like");
+                                            mList.get(position).setFetchWhenSave(true);
+                                            like.saveInBackground(new SaveCallback() {
+                                                @Override
+                                                public void done(AVException e) {
+                                                    if (e == null) {
+                                                        ((MyHolder) holder).mLikeCount.setText("喜欢(" + mList.get(position).getInt("like") + ")");
+                                                    } else {
+                                                        showError("出错啦");
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    } else {
+                                        showError("出错啦");
+                                    }
+                                }
+                            });
+                        }
+                    }
                 }
             });
 
@@ -175,5 +341,18 @@ public class CommentRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             super(itemView);
         }
     }
+
+    private void showError(String error) {
+        Toasty.error(mContext, error, Toast.LENGTH_SHORT, true).show();
+    }
+
+    private void showSuccess(String success) {
+        Toasty.success(mContext,success, Toast.LENGTH_SHORT, true).show();
+    }
+
+    private void showWarning(String warning) {
+        Toasty.warning(mContext, warning, Toast.LENGTH_SHORT, true).show();
+    }
+
 
 }

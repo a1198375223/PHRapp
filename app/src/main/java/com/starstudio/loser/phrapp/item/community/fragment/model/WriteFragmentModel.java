@@ -25,15 +25,11 @@ public class WriteFragmentModel extends PHRModel implements WriteFragmentContrac
 
     @Override
     public void saveToDataBase(String title, String text, AVUser avUser) {
-        Calendar calendar = Calendar.getInstance();
-        int month = calendar.get(Calendar.MONTH) + 1;
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        String date = month + "月" + day + "日";
         AVObject article = new AVObject("Article");
         article.put("title", title);
         article.put("text", text);
         article.put("article_user", avUser);
-        //article.put("date", date);
+        article.put("complaints", 0);
         article.put("time", new Date(System.currentTimeMillis()));
         article.put("like", 0);
         article.put("dislike", 0);
