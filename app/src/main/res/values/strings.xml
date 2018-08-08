@@ -7,7 +7,7 @@
     <string name="phr_main_navigation_view_menu_item3">个人PHR管理</string>
     <string name="phr_main_navigation_view_menu_item4">个人信息管理</string>
     <string name="phr_main_navigation_view_menu_item5">退出登录</string>
-    <string name="phr_main_gridlayout_text1">健康咨询</string>
+    <string name="phr_main_gridlayout_text1">健康资讯</string>
     <string name="phr_main_gridlayout_text2">计划免疫</string>
     <string name="phr_main_gridlayout_text3">就医地图</string>
     <string name="phr_main_gridlayout_text4">自动挂号</string>
