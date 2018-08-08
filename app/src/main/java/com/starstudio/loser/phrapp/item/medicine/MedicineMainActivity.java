@@ -113,6 +113,9 @@ public class MedicineMainActivity extends AppCompatActivity {
                             //Log.d(TAG, "done: " + dateString);
                             medicineList.add(new Medicine(i));
                         }
+                        if (medicineList.size() == 0){
+                            Toast.makeText(MedicineMainActivity.this, "还未有相关信息发布！", Toast.LENGTH_LONG).show();
+                        }
                         adapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(MedicineMainActivity.this, "拉取数据失败", Toast.LENGTH_SHORT).show();

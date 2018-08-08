@@ -117,6 +117,9 @@ public class DoctorImmuneActivity extends AppCompatActivity{
                             //Log.d(TAG, "done: " + dateString);
                             immuneList.add(new Immune(i));
                         }
+                        if (immuneList.size()==0){
+                            Toast.makeText(DoctorImmuneActivity.this, "还未有相关信息发布！", Toast.LENGTH_LONG).show();
+                        }
                         adapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(DoctorImmuneActivity.this, "拉取数据失败", Toast.LENGTH_SHORT).show();
