@@ -53,4 +53,7 @@ public class EntertainmentModel extends PHRModel implements CommonContract.Model
     }
 
 
+    public boolean isRepeat( ) {
+        return false;
+    }
 }

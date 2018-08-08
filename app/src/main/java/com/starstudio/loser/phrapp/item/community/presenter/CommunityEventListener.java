@@ -11,7 +11,7 @@ import android.view.View;
 import com.starstudio.loser.phrapp.common.base.BaseEventListener;
 
 public interface CommunityEventListener extends BaseEventListener {
-    Fragment getFragment(int position);
-
     void startWriteFragment();
+
+    View getView(int position);
 }

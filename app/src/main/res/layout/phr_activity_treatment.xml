@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/phr_treatment_hosp_choice_toolbar" />
+
+
+    <GridView
+        android:id="@+id/hosp_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:columnWidth="80dp"
+        android:verticalSpacing="@dimen/phr_padding_5"
+        android:layout_marginLeft="@dimen/phr_height_8"
+        android:layout_marginTop="@dimen/phr_height_5"/>
+
+        <!--android:fitsSystemWindows="true"
+        android:stretchMode="spacingWidthUniform"-->
+        <!--android:numColumns="2"
+        android:id="@+id/hosp_grid_view"
+        android:verticalSpacing="@dimen/phr_padding_5"
+        android:fitsSystemWindows="true"
+        android:layout_marginTop="@dimen/phr_margin_12" />-->
+        <!--android:id="@+id/hosp_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:columnWidth="80dp"
+        android:fitsSystemWindows="true"
+        android:stretchMode="spacingWidthUniform"/>-->
+
+
+</LinearLayout>

@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.starstudio.loser.phrapp">
 
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -34,8 +35,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".item.register.RegisterActivity" />
+
         <activity android:name=".common.PHRActivity" />
         <activity android:name=".item.message.PHRMessageActivity" />
+        <activity android:name=".item.treatment.TreatmentActiity" />
+        <activity android:name=".item.treatment.DoctorListActivity" />
+        <activity android:name=".item.treatment.ChoiceDeptActivity" />
+        <activity android:name=".item.treatment.DoctorPage" />
+        <activity android:name=".item.treatment.AppointmentActivity" />
         <activity android:name=".item.login.LoginActivity">
 
             <!-- <intent-filter> -->
@@ -46,12 +53,11 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".item.message.list.web.PHRWebActivity" />
-        <activity
-            android:name=".item.modify.ModifyActivity"
-            android:theme="@style/ModifyActivityTheme" />
-        <activity
-            android:name=".item.community.CommunityActivity"
-            android:launchMode="singleTask" />
+        <activity android:name=".item.modify.ModifyActivity"
+            android:theme="@style/ModifyActivityTheme"/>
+        <activity android:name=".item.community.CommunityActivity"
+            android:launchMode="singleTask"/>
+
         <activity android:name=".item.management.ManageMainActivity" />
         <activity android:name=".item.management.UpdatePhysicalActivity" />
         <activity android:name=".item.management.UpdateClinicalActivity" />
@@ -69,6 +75,13 @@
             android:theme="@style/ModifyActivityTheme" />
         <activity android:name=".item.immune.UpdateImmuneActivity" />
         <activity android:name=".item.immune.ImmuneDetailActivity"></activity>
+        <activity android:name=".item.management.ClinicalRecordActivity"/>
+
+        <activity android:name=".item.community.comment.ArticleActivity"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".item.community.comment.show.ShowReplyActivity"
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

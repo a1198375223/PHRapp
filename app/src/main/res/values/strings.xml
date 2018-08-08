@@ -52,14 +52,62 @@
     <string name="phr_community_count">1.3k</string>
     <string name="phr_community_goon">继续</string>
 
+    <!--treatment string-->
+    <string name="phr_treatment_hosp_choice">选择医院</string>
+    <string name="phr_treatment_dept_choice">选择科室</string>
+    <string name="phr_treatment_doc_choice">医生列表</string>
+    <string name="phr_treatment_doc_work_time">坐诊时间 :</string>
+    <string name="phr_treatment_appointment">确认挂号单</string>
+    <string name="phr_treatment_user_name">患者</string>
+    <string name="phr_treatment_hosp_name">医院名</string>
+    <string name="phr_treatment_dept_name">就诊科室</string>
+    <string name="phr_treatment_doctor_name">预约医生</string>
+    <string name="phr_treatment_appoint_time">预约时间</string>
+    <string name="phr_treatment_doc_page">医生主页</string>
+
     <!--write fragment string-->
     <string name="phr_write_positive">发布</string>
     <string name="phr_write_negative">取消</string>
     <string name="phr_write_error_title">出错啦~</string>
     <string name="phr_write_error_content">请先登入</string>
     <string name="phr_write_error_ok">确认</string>
+    
+    <!--boom menu string-->
+    <string name="phr_boom_delete_text">删  除</string>
+    <string name="phr_boom_share_text">分  享</string>
+    <string name="phr_boom_complain_text">举  报</string>
+    <string name="phr_boom_get_text">收  藏</string>
+    <string name="phr_boom_transfer_text">转  发</string>
+
+    <!--article string-->
+    <string name="phr_article_fragment_toolbar_title">文  章</string>
+    <string name="phr_article_fragment_title">标题</string>
+    <string name="phr_article_fragment_body_text">正文</string>
+    <string name="phr_rv_my_article_comment_reference">引用id楼 @user 发表的</string>
+    <string name="phr_rv_my_article_comment_author">楼  主</string>
+    <string name="phr_rv_my_article_comment_date">日  期</string>
+    <string name="phr_rv_my_article_comment_like_count">喜欢(1)</string>
+    <string name="phr_rv_my_article_comment_reply">回复</string>
+    <string name="phr_rv_my_article_comment_show_reply">查看回复</string>
+    <string name="phr_rv_my_article_comment_id">#1</string>
+    <string name="phr_article_fragment_submit">发  布</string>
+    <string name="phr_article_fragment_reply">写回复</string>
+    <string name="phr_article_fragment_all_reply">全部回复</string>
+    <string name="phr_rv_my_article_no_comment">暂无评论</string>
+    <string name="phr_activity_show_reply_title">查看回复</string>
+
+
+    <!--bottom dialog string-->
+    <string name="phr_bottom_dialog_exit">退  出</string>
+    <string name="phr_bottom_dialog_warn">举  报</string>
+    <string name="phr_bottom_dialog_dislike">点  灭</string>
+
 
     <string name="phr_community_text_test">静夜思\n
+[唐] 李白\n
+床前明月光，疑是地上霜。\n
+举头望明月，低头思故乡。</string>
+    <string name="comment">静夜思\n
 [唐] 李白\n
 床前明月光，疑是地上霜。\n
 举头望明月，低头思故乡。</string>

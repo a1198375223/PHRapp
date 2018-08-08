@@ -33,6 +33,7 @@ import com.starstudio.loser.phrapp.item.management.ManageMainActivity;
 import com.starstudio.loser.phrapp.item.map.HospitalMapActivity;
 import com.starstudio.loser.phrapp.item.message.PHRMessageActivity;
 import com.starstudio.loser.phrapp.item.modify.ModifyActivity;
+import com.starstudio.loser.phrapp.item.treatment.TreatmentActiity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -139,6 +140,8 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
                         break;
                     case 3:
                         Toast.makeText(activity, "no 4", Toast.LENGTH_SHORT).show();
+                        Intent intent4 = new Intent((PHRMainActivity) activity, TreatmentActiity.class);
+                        activity.startActivity(intent4);
                         break;
                     case 4:
                         intent = new Intent((PHRMainActivity) activity, CommunityActivity.class);

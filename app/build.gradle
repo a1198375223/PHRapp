@@ -25,7 +25,6 @@ android {
     }
 }
 
-
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
@@ -43,6 +42,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.github.bumptech.glide:glide:4.7.1'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'jp.wasabeef:glide-transformations:3.3.0' //高斯模糊化
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
@@ -59,6 +59,9 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'
+    implementation 'com.nightonke:boommenu:2.1.1'
+    implementation 'com.zzhoujay.richtext:richtext:3.0.7'
+    implementation 'com.zzhoujay:html:1.0.2'
     // LeanCloud 基础包
     implementation 'cn.leancloud.android:avoscloud-sdk:v4.6.4'
     // LeanCloud 统计包
@@ -67,7 +70,8 @@ dependencies {
     implementation 'cn.leancloud.android:avoscloud-feedback:v4.6.4@aar'
     // LeanCloud 应用内搜索包
     implementation 'cn.leancloud.android:avoscloud-search:v4.6.4@aar'
+    // LeanCloud 应用内搜索包
+    implementation 'cn.leancloud.android:avoscloud-search:v4.6.4@aar'
     //Glide依赖包
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
-
 }

@@ -11,18 +11,11 @@ import com.avos.avoscloud.AVObject;
 import com.starstudio.loser.phrapp.common.base.BaseModel;
 import com.starstudio.loser.phrapp.common.base.BasePresenter;
 import com.starstudio.loser.phrapp.common.base.BaseView;
-import com.starstudio.loser.phrapp.item.community.child.presenter.ChildEventListener;
+import com.starstudio.loser.phrapp.item.community.child.presenter.MyArticleEventListener;
 
 import java.util.List;
 
 public interface MyArticleContract {
-    interface MyArticleContractView extends BaseView<ChildEventListener>{
-        void setData(List<AVObject> list);
-
-        void load(List<AVObject> list, boolean hasMore);
-
-        void tellToRefresh();
-    }
 
     interface MyArticleContractModel extends BaseModel {
         void getDataFromLeanCloud();
@@ -30,12 +23,45 @@ public interface MyArticleContract {
         void getRefreshData(int size);
 
         void getDataSkip(int size);
+
+        void toDelete(AVObject avObject);
+
+        void toShare(AVObject avObject);
+
+        void toCollect(AVObject avObject);
+
+        void toComplaints(AVObject avObject);
+
     }
 
-    interface MyArticleContractPresenter extends BasePresenter<MyArticleContractView, MyArticleContractModel> {
+
+    interface MyArticleChildPresenter extends BasePresenter<MyArticleChildView, MyArticleContractModel> {
         void setViewData(List<AVObject> list);
 
         void toLoadView(List<AVObject> list);
+
+        void showError(String error);
+
+        void showSuccess(String success);
+
+        void showWarning(String warning);
     }
+
+    interface MyArticleChildView extends BaseView<MyArticleEventListener> {
+        View getView();
+
+        void setData(List<AVObject> list);
+
+        void load(List<AVObject> list, boolean hasMore);
+
+        void tellToRefresh();
+
+        void error(String error);
+
+        void success(String success);
+
+        void warning(String warning);
+    }
+
 
 }
