@@ -12,11 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVInstallation;
 import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVPush;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.GetCallback;
+import com.avos.avoscloud.PushService;
 import com.avos.avoscloud.SaveCallback;
+import com.avos.avoscloud.SendCallback;
 import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.item.login.LoginActivity;
 
@@ -38,6 +42,7 @@ public class AppointmentActivity extends AppCompatActivity{
     private Button button;
     private String time;
     private Toolbar toolbar;
+    private static final String TAG = "AppointmentActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,6 +89,25 @@ public class AppointmentActivity extends AppCompatActivity{
             public void onClick(View v) {
                 //提交预约单，变化预约数
                 changeAppointment(hospName,deptName,docName,avUser);
+            }
+        });
+    }
+
+    private void sendmsg(String doctorID, final String userName) {
+        AVQuery<AVObject> avQuery = new AVQuery<>("_User");
+        avQuery.getInBackground(doctorID, new GetCallback<AVObject>() {
+            @Override
+            public void done(AVObject avObject, AVException e) {
+                AVQuery pushQuery = AVInstallation.getQuery();
+// 假设 THE_INSTALLATION_ID 是保存在用户表里的 installationId，
+// 可以在应用启动的时候获取并保存到用户表
+                pushQuery.whereEqualTo("installationId", avObject.getString("installationID"));
+                AVPush.sendMessageInBackground("您收到了一条来自"+ userName +"的预约！",  pushQuery, new SendCallback() {
+                    @Override
+                    public void done(AVException e) {
+
+                    }
+                });
             }
         });
     }
@@ -158,6 +182,7 @@ public class AppointmentActivity extends AppCompatActivity{
                                                                         intent.putExtra("deptName",deptName);
                                                                         intent.putExtra("docName",docName);
                                                                         intent.putExtra("date",time);
+                                                                        sendmsg(doctorID,avUser.getUsername());
                                                                         startActivity(intent);
                                                                     } else {
                                                                         Toast.makeText(AppointmentActivity.this, "预约失败，请重试", Toast.LENGTH_SHORT).show();
