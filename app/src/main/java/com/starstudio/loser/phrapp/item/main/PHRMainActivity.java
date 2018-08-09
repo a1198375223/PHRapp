@@ -74,7 +74,7 @@ public class PHRMainActivity extends PHRActivity{
 
         PushService.setDefaultPushCallback(this, PHRMainActivity.class);
         PushService.setDefaultChannelId(this, "1");
-        AVInstallation.getCurrentInstallation().saveInBackground();
+        //AVInstallation.getCurrentInstallation().saveInBackground();
         AVOSCloud.initialize(this,"NUjpdRi6jqP1S2iAfQCs7YNU-gzGzoHsz","27zlhvjRBd155W8iAWSoNJiO");
         AVOSCloud.setDebugLogEnabled(true);
         //saveInstallation();
@@ -94,6 +94,12 @@ public class PHRMainActivity extends PHRActivity{
         mPresenter.attach();
     }
 
+    private void saveInstallation(){
+        AVUser avUser = AVUser.getCurrentUser();
+        avUser.put("installationID",AVInstallation.getCurrentInstallation().getInstallationId());
+        avUser.saveInBackground();
+    }
+
     private void initChannel() {
         if (Build.VERSION.SDK_INT>=26) {
             NotificationChannel channel = new NotificationChannel("1", "Channel1", NotificationManager.IMPORTANCE_DEFAULT);
@@ -103,31 +109,6 @@ public class PHRMainActivity extends PHRActivity{
             NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             manager.createNotificationChannel(channel);
         }
-//        AVInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
-//            @Override
-//            public void done(AVException e) {
-//                if (e == null){
-//                    Log.d(TAG, "done: " + AVInstallation.getCurrentInstallation().getInstallationId());
-//                    AVUser.getCurrentUser().put("installationID",AVInstallation.getCurrentInstallation().getInstallationId());
-//                    AVUser.getCurrentUser().saveInBackground(new SaveCallback() {
-//                        @Override
-//                        public void done(AVException e) {
-//                            AVQuery pushQuery = AVInstallation.getQuery();
-//// 假设 THE_INSTALLATION_ID 是保存在用户表里的 installationId，
-//// 可以在应用启动的时候获取并保存到用户表
-//                            pushQuery.whereEqualTo("installationId", AVUser.getCurrentUser().getString("installationID"));
-//                            AVPush.sendMessageInBackground("message to installation",  pushQuery, new SendCallback() {
-//                                @Override
-//                                public void done(AVException e) {
-//
-//                                }
-//                            });
-//                        }
-//                    });
-//
-//                }
-//            }
-//        });
     }
 
     @Override
@@ -156,7 +137,7 @@ public class PHRMainActivity extends PHRActivity{
     }
 
     private void set_head(AVUser avUser,NavigationView navigationView) {
-        //saveInstallation();//注册设备信息，以便推送
+        saveInstallation();//注册设备信息，以便推送
 
         RequestOptions options = new RequestOptions()
                 .placeholder(R.drawable.waiting)

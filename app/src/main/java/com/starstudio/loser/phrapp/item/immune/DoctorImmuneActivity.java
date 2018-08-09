@@ -45,22 +45,9 @@ public class DoctorImmuneActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phr_activity_doctor_immune);
-//        sendmsg();
         initView();
     }
 
-//    private void sendmsg() {
-//        AVQuery pushQuery = AVInstallation.getQuery();
-//// 假设 THE_INSTALLATION_ID 是保存在用户表里的 installationId，
-//// 可以在应用启动的时候获取并保存到用户表
-//        pushQuery.whereEqualTo("installationId", AVUser.getCurrentUser().getString("installationID"));
-//        AVPush.sendMessageInBackground("哈哈哈哈哈哈哈哈哈",  pushQuery, new SendCallback() {
-//            @Override
-//            public void done(AVException e) {
-//                PushService.setDefaultChannelId(DoctorImmuneActivity.this, "1");
-//            }
-//        });
-//    }
 
     private void initView() {
         toolbar = (Toolbar) findViewById(R.id.immune_toolbar);

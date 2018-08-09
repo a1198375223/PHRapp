@@ -7,7 +7,7 @@
     <!--图片和文字从 leancloud 获取-->
     <ImageView
         android:id="@+id/hosp_img"
-        android:layout_width="150dp"
+        android:layout_width="@dimen/phr_width_65"
         android:layout_height="150dp"
         android:scaleType="fitXY"
         android:layout_margin="@dimen/phr_main_gridlayout_margin"/>

@@ -1,8 +1,9 @@
 package com.starstudio.loser.phrapp.item.treatment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -21,15 +22,26 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreatmentActiity  extends Activity{
+public class TreatmentActiity  extends AppCompatActivity {
     private GridView gridView;
     private List<HospitalItem> imageUrls;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phr_activity_treatment);
 
+        toolbar =  findViewById(R.id.phr_treatment_hosp_choice_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         gridView=findViewById(R.id.hosp_grid_view);
         initData();
     }

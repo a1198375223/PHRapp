@@ -8,7 +8,6 @@ package com.starstudio.loser.phrapp.common;
 import android.app.Activity;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.starstudio.loser.phrapp.common.base.BaseEventListener;
