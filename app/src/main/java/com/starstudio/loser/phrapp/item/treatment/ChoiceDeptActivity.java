@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toolbar;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVOSCloud;
@@ -32,10 +33,22 @@ public class ChoiceDeptActivity extends Activity{
     private ListView listView;
     private Bundle bundle;
     private String hospName;
+    private Toolbar toolbar;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phr_treatment_dept);
+
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.immune_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         //获取TreatmentActivity传来的ArrayList数据
         bundle=this.getIntent().getExtras();

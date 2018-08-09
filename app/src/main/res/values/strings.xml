@@ -64,6 +64,7 @@
     <string name="phr_treatment_doctor_name">预约医生</string>
     <string name="phr_treatment_appoint_time">预约时间</string>
     <string name="phr_treatment_doc_page">医生主页</string>
+    <string name="phr_treatment_self_appointment">自助挂号</string>
 
     <!--write fragment string-->
     <string name="phr_write_positive">发布</string>
@@ -124,6 +125,8 @@
 在上赛季即将结束时，韦德已经多次表示自己并不确定是否会继续在NBA征战自己的第16个赛季，之后他也没有对这种表述做过任何修改。最近几周，韦德仍然坚持做训练，包括和勒布朗-詹姆斯在拉斯维加斯看夏季联赛，但这并不能说明他是否会继续打球。
 
 过去的一个赛季，韦德先是在骑士队效力，赛季中期的时候，他被交易到了热火。过去一个赛季，韦德替补出场，场均可以得到12分3.4个篮板和3.1次助攻。</string>
+    <string name="phr_treatment_appoint_success">预约成功</string>
+    <string name="phr_back__to_main_page">返回首页</string>
 
 
 </resources>

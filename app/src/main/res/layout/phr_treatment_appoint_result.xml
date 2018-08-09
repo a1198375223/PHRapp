@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/phr_treatment_appoint_result_toolbar"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phr_treatment_appoint_success"
+        android:textSize="@dimen/phr_text_size_25"
+        android:textColor="@color/phr_main_page_text_color"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/phr_margin_10"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/phr_margin_15"
+        android:layout_marginLeft="@dimen/phr_margin_20">
+
+        <TextView
+            android:layout_width="@dimen/phr_width_40"
+            android:layout_height="wrap_content"
+            android:text="@string/phr_treatment_hosp_name"
+            android:textSize="@dimen/phr_text_size_14"/>
+
+        <TextView
+            android:id="@+id/phr_result_hosp_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/phr_margin_7"
+            android:text="医院名"
+            android:textSize="@dimen/phr_text_size_16"
+            android:textColor="@color/phr_black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/phr_margin_10"
+        android:layout_marginLeft="@dimen/phr_margin_20">
+
+        <TextView
+            android:layout_width="@dimen/phr_width_40"
+            android:layout_height="wrap_content"
+            android:text="@string/phr_treatment_dept_name"
+            android:textSize="@dimen/phr_text_size_14"/>
+
+        <TextView
+            android:id="@+id/phr_result_dept_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/phr_margin_7"
+            android:text="科室名"
+            android:textSize="@dimen/phr_text_size_16"
+            android:textColor="@color/phr_black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/phr_margin_10"
+        android:layout_marginLeft="@dimen/phr_margin_20">
+
+        <TextView
+            android:layout_width="@dimen/phr_width_40"
+            android:layout_height="wrap_content"
+            android:text="@string/phr_treatment_doctor_name"
+            android:textSize="@dimen/phr_text_size_14"/>
+
+        <TextView
+            android:id="@+id/phr_result_appoint_doc_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/phr_margin_7"
+            android:text="医生名"
+            android:textSize="@dimen/phr_text_size_16"
+            android:textColor="@color/phr_black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/phr_margin_10"
+        android:layout_marginLeft="@dimen/phr_margin_20">
+
+        <TextView
+            android:layout_width="@dimen/phr_width_40"
+            android:layout_height="wrap_content"
+            android:text="@string/phr_treatment_appoint_time"
+            android:textSize="@dimen/phr_text_size_14"/>
+
+        <TextView
+            android:id="@+id/phr_result_appoint_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/phr_margin_7"
+            android:text="时间"
+            android:textSize="@dimen/phr_text_size_16"
+            android:textColor="@color/phr_black"/>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/phr_margin_30"
+        android:text="@string/phr_back__to_main_page"
+        android:background="@color/phr_main_page_text_color"
+        android:textColor="@color/phr_white"/>
+
+</LinearLayout>

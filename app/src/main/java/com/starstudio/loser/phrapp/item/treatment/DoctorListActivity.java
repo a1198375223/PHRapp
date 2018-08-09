@@ -4,14 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.FindCallback;
@@ -34,11 +33,23 @@ public class DoctorListActivity extends Activity{
     private List<DoctorItem> doctorList=new ArrayList<>();
     private ListView listView;
     private DoctorListAdapter adapter;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phr_treatment_doc_choice);
+
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.immune_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         Intent intent=getIntent();
         listView=findViewById(R.id.doctor_list_view);
@@ -69,13 +80,13 @@ public class DoctorListActivity extends Activity{
                                 @Override
                                 public void done(AVObject avObject, AVException e) {
                                     if (avObject == null) {
-                                        Log.e("TAG", "done: true");
+                                        //Log.e("TAG", "done: true");
                                         initDoctors(docName, imageId, title, profile, null, dept, hospName);
                                     } else{
                                         JSONArray workTime = avObject.getJSONArray("workTime");
                                         //String workTime = avObject.get("workTime").toString();
-                                        Log.e("TAG", "done: " + avObject.getObjectId());
-                                        Toast.makeText(DoctorListActivity.this, avObject.getObjectId(), Toast.LENGTH_SHORT).show();
+                                        //Log.e("TAG", "done: " + avObject.getObjectId());
+                                        //.makeText(DoctorListActivity.this, avObject.getObjectId(), Toast.LENGTH_SHORT).show();
                                         initDoctors(docName, imageId, title, profile, workTime, dept, hospName);
                                     }
                                     adapter=new DoctorListAdapter(DoctorListActivity.this,doctorList);
