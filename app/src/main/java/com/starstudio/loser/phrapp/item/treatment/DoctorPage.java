@@ -50,7 +50,7 @@ public class DoctorPage extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phr_treatment_doc_page);
 
-        toolbar = findViewById(R.id.immune_toolbar);
+        toolbar = findViewById(R.id.phr_treatment_doc_page_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);

@@ -1,22 +1,20 @@
 package com.starstudio.loser.phrapp.item.treatment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.GetCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.starstudio.loser.phrapp.R;
@@ -26,13 +24,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by 11024 on 2018/8/3.
  */
 
-public class AppointmentActivity extends Activity{
+public class AppointmentActivity extends AppCompatActivity{
     private TextView userNameTv;
     private TextView hospNameTv;
     private TextView deptNameTv;
@@ -47,7 +44,7 @@ public class AppointmentActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phr_treatment_appointment);
 
-        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.immune_toolbar);
+        toolbar =  findViewById(R.id.phr_treatment_appointment_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -103,73 +100,95 @@ public class AppointmentActivity extends Activity{
             @Override
             public void done(AVObject avObject, AVException e) {
                 if(e==null) {
-                    // object 就是符合条件的第一个 AVObject
-                    //Toast.makeText(AppointmentActivity.this,"查找成功",Toast.LENGTH_SHORT).show();
                     try {
-                        AVQuery<AVObject> query = new AVQuery<>("WorkTime");
                         final String doctorID=avObject.getObjectId();
-                        query.whereEqualTo("doctorID",doctorID);
-                        query.getFirstInBackground(new GetCallback<AVObject>() {
+                        //判断该用户是否已经在同一时段预约这位医生
+                        final String userID=avUser.getObjectId();
+                        AVQuery<AVObject> query1 = new AVQuery<>("Appointment");
+                        AVQuery<AVObject> query2 = new AVQuery<>("Appointment");
+                        AVQuery<AVObject> query3 = new AVQuery<>("Appointment");
+                        query1.whereEqualTo("doctorID",doctorID);
+                        query2.whereEqualTo("userID",userID);
+                        query3.whereEqualTo("appointTime",time);
+                        AVQuery<AVObject> avQuery = AVQuery.and(Arrays.asList(query1,query2,query3));
+                        avQuery.getFirstInBackground(new GetCallback<AVObject>() {
                             @Override
                             public void done(AVObject avObject, AVException e) {
-                                try {
-                                    JSONArray jsonArray = avObject.getJSONArray("workTime");
-                                    for (int i = 0; i < jsonArray.length(); i++) {
-                                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                        if (jsonObject.getString("date").equals(time)) {
-                                            int reserved = Integer.valueOf(jsonObject.getString("reserved"));
-                                            int reminder = Integer.valueOf(jsonObject.getString("reminder"));
-                                            //Toast.makeText(AppointmentActivity.this, "reserved:" + reserved + ",reminder:" + reminder, Toast.LENGTH_SHORT).show();
-                                            if (reminder != 0) {
-                                                reserved++;
-                                                reminder--;
-                                                jsonObject.put("reserved", String.valueOf(reserved));
-                                                jsonObject.put("reminder", String.valueOf(reminder));
-                                                //Toast.makeText(AppointmentActivity.this, "reserved:" + jsonObject.getString("reserved"), Toast.LENGTH_SHORT).show();
-                                                avObject.put("workTime", jsonArray);
-                                                avObject.saveInBackground(new SaveCallback() {
-                                                    @Override
-                                                    public void done(AVException e2) {
-                                                        if (e2 == null) {
-                                                            //Toast.makeText(AppointmentActivity.this, "存储成功", Toast.LENGTH_SHORT).show();
-                                                            //Toast.makeText(AppointmentActivity.this, "预约成功", Toast.LENGTH_SHORT).show();
-                                                            AVObject record=new AVObject("Appointment");
-                                                            record.put("hospName",hospName);
-                                                            record.put("deptName",deptName);
-                                                            record.put("doctorName",docName);
-                                                            record.put("userID",avUser.getObjectId());
-                                                            record.put("doctorID",doctorID);
-                                                            record.put("appointTime",time);
-                                                            record.put("isTreat","false");
-                                                            record.saveInBackground();
-                                                            initResultView(hospName,deptName,docName,time);
+                                if((e==null)&&(avObject!=null)){//在同一时段，该用户已经预约过这位医生了。提示后退出
+                                    Toast.makeText(AppointmentActivity.this,"您已在该时段预约过此医生",Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }else {
+                                    AVQuery<AVObject> query4 = new AVQuery<>("WorkTime");
+                                    query4.getFirstInBackground(new GetCallback<AVObject>() {
+                                        @Override
+                                        public void done(AVObject avObject, AVException e) {
+                                            try {
+                                                JSONArray jsonArray = avObject.getJSONArray("workTime");
+                                                for (int i = 0; i < jsonArray.length(); i++) {
+                                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                                    if (jsonObject.getString("date").equals(time)) {
+                                                        int reserved = Integer.valueOf(jsonObject.getString("reserved"));
+                                                        int reminder = Integer.valueOf(jsonObject.getString("reminder"));
+                                                        //Toast.makeText(AppointmentActivity.this, "reserved:" + reserved + ",reminder:" + reminder, Toast.LENGTH_SHORT).show();
+                                                        if (reminder != 0) {
+                                                            reserved++;
+                                                            reminder--;
+                                                            jsonObject.put("reserved", String.valueOf(reserved));
+                                                            jsonObject.put("reminder", String.valueOf(reminder));
+                                                            //Toast.makeText(AppointmentActivity.this, "reserved:" + jsonObject.getString("reserved"), Toast.LENGTH_SHORT).show();
+                                                            avObject.put("workTime", jsonArray);
+                                                            avObject.saveInBackground(new SaveCallback() {
+                                                                @Override
+                                                                public void done(AVException e2) {
+                                                                    if (e2 == null) {
+                                                                        //Toast.makeText(AppointmentActivity.this, "存储成功", Toast.LENGTH_SHORT).show();
+                                                                        //Toast.makeText(AppointmentActivity.this, "预约成功", Toast.LENGTH_SHORT).show();
+                                                                        AVObject record=new AVObject("Appointment");
+                                                                        record.put("hospName",hospName);
+                                                                        record.put("deptName",deptName);
+                                                                        record.put("doctorName",docName);
+                                                                        record.put("userID",avUser.getObjectId());
+                                                                        record.put("doctorID",doctorID);
+                                                                        record.put("appointTime",time);
+                                                                        record.put("isTreat","false");
+                                                                        record.saveInBackground();
+                                                                        Intent intent=new Intent(AppointmentActivity.this,AppointSuccessActivity.class);
+                                                                        intent.putExtra("hospName",hospName);
+                                                                        intent.putExtra("deptName",deptName);
+                                                                        intent.putExtra("docName",docName);
+                                                                        intent.putExtra("date",time);
+                                                                        startActivity(intent);
+                                                                    } else {
+                                                                        Toast.makeText(AppointmentActivity.this, "预约失败，请重试", Toast.LENGTH_SHORT).show();
+                                                                        Log.e("test:", e2.getCode() + "  ");
+                                                                        Log.e("test", Log.getStackTraceString(e2));
+                                                                        finish();
+                                                                    }
+                                                                }
+                                                            });
                                                         } else {
-                                                            Toast.makeText(AppointmentActivity.this, "预约失败，请重试", Toast.LENGTH_SHORT).show();
-                                                            Log.e("test:", e2.getCode() + "  ");
-                                                            Log.e("test", Log.getStackTraceString(e2));
+                                                            Toast.makeText(AppointmentActivity.this, "预约失败，该时段已预约满", Toast.LENGTH_SHORT).show();
                                                             finish();
                                                         }
                                                     }
-                                                });
-                                            } else {
-                                                Toast.makeText(AppointmentActivity.this, "预约失败，该时段已预约满", Toast.LENGTH_SHORT).show();
-                                                finish();
+                                                }
+                                            }catch (Exception e3){
+                                                e3.printStackTrace();
                                             }
+                                            //写入数据库 表 Appointment
                                         }
-                                    }
-                                }catch (Exception e3){
-                                    e3.printStackTrace();
+                                    });
                                 }
-                                //写入数据库 表 Appointment
                             }
                         });
+
                     }catch (Exception e1){
                         e1.printStackTrace();
                     }
-                    Intent intent=new Intent(AppointmentActivity.this,DoctorListActivity.class);
+                    /*Intent intent=new Intent(AppointmentActivity.this,DoctorListActivity.class);
                     intent.putExtra("dept",deptName);
                     intent.putExtra("hospName",hospName);
-                    startActivity(intent);
+                    startActivity(intent);*/
                 }else{
                     Toast.makeText(AppointmentActivity.this,"查找失败，请检查是否联网",Toast.LENGTH_SHORT).show();
                     finish();
@@ -178,19 +197,6 @@ public class AppointmentActivity extends Activity{
         });
 
 
-    }
-
-    private void initResultView(String hospName, String deptName, String docName, String time) {
-        setContentView(R.layout.phr_treatment_appoint_result);
-        TextView hospTv=findViewById(R.id.phr_result_hosp_name_tv);
-        TextView deptTv=findViewById(R.id.phr_result_dept_name_tv);
-        TextView docTv=findViewById(R.id.phr_result_appoint_doc_name_tv);
-        TextView timeTv=findViewById(R.id.phr_result_appoint_time_tv);
-
-        hospTv.setText(hospName);
-        deptTv.setText(deptName);
-        docTv.setText(docName);
-        timeTv.setText(time);
     }
 
     private void initView() {

@@ -103,6 +103,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/phr_treatment_back_to_main_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

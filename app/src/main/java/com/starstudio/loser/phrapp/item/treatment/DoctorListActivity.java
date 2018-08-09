@@ -1,9 +1,9 @@
 package com.starstudio.loser.phrapp.item.treatment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +27,7 @@ import java.util.List;
  * Created by 11024 on 2018/8/2.
  */
 
-public class DoctorListActivity extends Activity{
+public class DoctorListActivity extends AppCompatActivity {
     private String dept;
     private String hospName;
     private List<DoctorItem> doctorList=new ArrayList<>();
@@ -40,7 +40,7 @@ public class DoctorListActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phr_treatment_doc_choice);
 
-        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.immune_toolbar);
+        toolbar =  findViewById(R.id.phr_treatment_doctor_choice_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);

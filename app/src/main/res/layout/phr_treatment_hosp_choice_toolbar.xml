@@ -6,5 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/phr_white"
     app:title="@string/phr_treatment_hosp_choice"
-    app:navigationIcon="@drawable/phr_arrow_back_black_24">
+    app:navigationIcon="@drawable/phr_arrow_back_black_24"
+    android:id="@+id/phr_treatment_hosp_choice_toolbar">
 </android.support.v7.widget.Toolbar>
