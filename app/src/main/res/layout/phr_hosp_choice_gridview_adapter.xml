@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/hosp_img"
         android:layout_width="@dimen/phr_width_65"
-        android:layout_height="150dp"
+        android:layout_height="@dimen/phr_width_65"
         android:scaleType="fitXY"
         android:layout_margin="@dimen/phr_main_gridlayout_margin"/>
         <!--android:src="@mipmap/ic_launcher"-->
@@ -20,7 +20,7 @@
         android:gravity="center"
         android:textSize="@dimen/phr_main_gridlayout_text_size"
         android:padding="@dimen/phr_main_text_padding"
-        android:layout_margin="@dimen/phr_main_gridlayout_margin"
+        android:layout_marginTop="@dimen/phr_margin_4"
         android:text="文字"/>
 
 </LinearLayout>

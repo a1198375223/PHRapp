@@ -119,6 +119,7 @@ public class AppointmentActivity extends AppCompatActivity{
                                     finish();
                                 }else {
                                     AVQuery<AVObject> query4 = new AVQuery<>("WorkTime");
+                                    query4.whereEqualTo("doctorID",doctorID);
                                     query4.getFirstInBackground(new GetCallback<AVObject>() {
                                         @Override
                                         public void done(AVObject avObject, AVException e) {
@@ -170,6 +171,7 @@ public class AppointmentActivity extends AppCompatActivity{
                                                             Toast.makeText(AppointmentActivity.this, "预约失败，该时段已预约满", Toast.LENGTH_SHORT).show();
                                                             finish();
                                                         }
+                                                        break;
                                                     }
                                                 }
                                             }catch (Exception e3){
