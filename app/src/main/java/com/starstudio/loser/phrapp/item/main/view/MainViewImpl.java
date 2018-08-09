@@ -39,6 +39,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import es.dmoral.toasty.Toasty;
+
 import static android.content.Context.MODE_PRIVATE;
 
 public class MainViewImpl extends PHRView implements MainContract.MainView {
@@ -135,21 +137,33 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
                         activity.startActivity(intent);
                         break;
                     case 1:
-                        activity.startActivity(new Intent((PHRMainActivity) activity, DoctorImmuneActivity.class));
+                        if (AVUser.getCurrentUser()==null){
+                            Toasty.error(activity,"请先登录",Toast.LENGTH_SHORT).show();
+                        }else {
+                            activity.startActivity(new Intent((PHRMainActivity) activity, DoctorImmuneActivity.class));
+                        }
                         break;
                     case 2:
                         activity.startActivity(new Intent((PHRMainActivity) activity, HospitalMapActivity.class));
                         break;
                     case 3:
-                        Intent intent4 = new Intent((PHRMainActivity) activity, TreatmentActiity.class);
-                        activity.startActivity(intent4);
+                        if (AVUser.getCurrentUser() == null){
+                            Toasty.error(activity,"请先登录",Toast.LENGTH_SHORT).show();
+                        }else {
+                            Intent intent4 = new Intent((PHRMainActivity) activity, TreatmentActiity.class);
+                            activity.startActivity(intent4);
+                        }
                         break;
                     case 4:
                         intent = new Intent((PHRMainActivity) activity, CommunityActivity.class);
                         activity.startActivity(intent);
                         break;
                     case 5:
-                        activity.startActivity(new Intent((PHRMainActivity) activity, MedicineMainActivity.class));
+                        if (AVUser.getCurrentUser() == null){
+                            Toasty.error(activity,"请先登录",Toast.LENGTH_SHORT).show();
+                        }else {
+                            activity.startActivity(new Intent((PHRMainActivity) activity, MedicineMainActivity.class));
+                        }
                         break;
                     default:
                 }

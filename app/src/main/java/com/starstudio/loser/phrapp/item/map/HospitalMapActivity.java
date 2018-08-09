@@ -55,6 +55,8 @@ import com.starstudio.loser.phrapp.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 public class HospitalMapActivity extends AppCompatActivity {
 
     private static final String TAG = "HospitalMapActivity";
@@ -89,7 +91,7 @@ public class HospitalMapActivity extends AppCompatActivity {
             @Override
             public boolean onMarkerClick(Marker marker) {
                 showRoute(marker);
-                Toast.makeText(HospitalMapActivity.this,"已经为您规划好了路线！",Toast.LENGTH_SHORT).show();
+                Toasty.success(HospitalMapActivity.this,"已经为您规划好了路线！",Toast.LENGTH_SHORT,true).show();
                 return false;
             }
         });

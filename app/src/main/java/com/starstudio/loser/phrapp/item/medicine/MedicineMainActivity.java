@@ -3,6 +3,7 @@ package com.starstudio.loser.phrapp.item.medicine;
 import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +25,8 @@ import com.starstudio.loser.phrapp.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 public class MedicineMainActivity extends AppCompatActivity {
     private static final String TAG = "DoctorImmuneActivity";
     private FloatingActionButton add;
@@ -31,6 +34,7 @@ public class MedicineMainActivity extends AppCompatActivity {
     private List<String> doctorIDs = new ArrayList<>();
     private List<Medicine> medicineList = new ArrayList<>();
     private MedicineAdapter adapter;
+    private SwipeRefreshLayout swipeRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,23 @@ public class MedicineMainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new MedicineAdapter(medicineList,AVUser.getCurrentUser().getBoolean("isDoctor"));
         recyclerView.setAdapter(adapter);
+        swipeRefresh=(SwipeRefreshLayout) findViewById(R.id.medicine_swipe_refresh);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshNews();
+            }
+        });
+    }
+
+    private void refreshNews() {
+        initImmune();
+        try{
+            Thread.sleep(1500);
+            swipeRefresh.setRefreshing(false);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
     }
 
     private void initImmune(){
@@ -114,11 +135,11 @@ public class MedicineMainActivity extends AppCompatActivity {
                             medicineList.add(new Medicine(i));
                         }
                         if (medicineList.size() == 0){
-                            Toast.makeText(MedicineMainActivity.this, "还未有相关信息发布！", Toast.LENGTH_SHORT).show();
+                            Toasty.normal(MedicineMainActivity.this, "还未有相关信息发布！", Toast.LENGTH_SHORT).show();
                         }
                         adapter.notifyDataSetChanged();
                     } else {
-                        Toast.makeText(MedicineMainActivity.this, "拉取数据失败", Toast.LENGTH_SHORT).show();
+                        Toasty.error(MedicineMainActivity.this, "拉取数据失败", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "done: " + e.getCode());
                     }
                 }
