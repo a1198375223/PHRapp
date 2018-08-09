@@ -16,6 +16,7 @@ import com.avos.avoscloud.AVObject;
 import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.common.PHRActivity;
 import com.starstudio.loser.phrapp.common.base.PHRPresenter;
+import com.starstudio.loser.phrapp.common.view.PHRShareDialog;
 import com.starstudio.loser.phrapp.item.community.callback.ChildCallBack;
 import com.starstudio.loser.phrapp.item.community.child.contract.DynamicContract;
 import com.starstudio.loser.phrapp.item.community.comment.ArticleActivity;
@@ -28,6 +29,7 @@ public class DynamicViewPresenter extends PHRPresenter<DynamicContract.DynamicCh
     private DynamicContract.DynamicChildView mView;
     private DynamicContract.DynamicContractModel mModel;
     private List<AVObject> mList;
+
 
     private DynamicEventListener mListener = new DynamicEventListener() {
         @Override
@@ -53,13 +55,18 @@ public class DynamicViewPresenter extends PHRPresenter<DynamicContract.DynamicCh
         public void toTransfer(int position) {
             if (mList.get(position) != null) {
                 mModel.toTransfer(mList.get(position));
+            } else {
+                mView.error("出错啦");
             }
         }
 
         @Override
         public void toShare(int position) {
             if (mList.get(position) != null) {
-                mModel.toShare(mList.get(position));
+//                mModel.toShare(mList.get(position));
+                mView.showShareDialog(mList.get(position).getString("title"), mList.get(position).getString("text"));
+            } else {
+                mView.error("出错啦");
             }
         }
 
@@ -67,6 +74,8 @@ public class DynamicViewPresenter extends PHRPresenter<DynamicContract.DynamicCh
         public void toComplaints(int position) {
             if (mList.get(position) != null) {
                 mModel.toComplaints(mList.get(position));
+            } else {
+                mView.error("出错啦");
             }
         }
 
@@ -74,6 +83,8 @@ public class DynamicViewPresenter extends PHRPresenter<DynamicContract.DynamicCh
         public void toCollect(int position) {
             if (mList.get(position) != null) {
                 mModel.toCollect(mList.get(position));
+            } else {
+                mView.error("出错啦");
             }
         }
     };

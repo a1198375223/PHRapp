@@ -26,7 +26,6 @@ public interface MyArticleContract {
 
         void toDelete(AVObject avObject);
 
-        void toShare(AVObject avObject);
 
         void toCollect(AVObject avObject);
 
@@ -61,6 +60,8 @@ public interface MyArticleContract {
         void success(String success);
 
         void warning(String warning);
+
+        void showShareDialog(String title, String text);
     }
 
 

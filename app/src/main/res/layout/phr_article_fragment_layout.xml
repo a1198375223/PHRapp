@@ -21,11 +21,30 @@
             android:layout_gravity="center"
             android:textSize="@dimen/phr_text_size_20"
             android:id="@+id/phr_article_fragment_toolbar_title"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_text_title"
+            tools:text="@string/phr_article_fragment_type"
+            android:text="@string/phr_article_fragment_type"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/phr_article_type_text_bg"
+            android:textSize="@dimen/phr_text_size_12"
+            android:padding="@dimen/phr_padding_1"
+            android:id="@+id/phr_article_fragment_toolbar_type"
+            tools:ignore="RtlHardcoded" />
     </android.support.v7.widget.Toolbar>
+
+    <View
+        android:layout_width="@dimen/phr_divide_1"
+        android:layout_height="@dimen/phr_divide_1"
+        android:background="@color/color_view_divide_bg_color"
+        android:layout_below="@+id/phr_article_fragment_toolbar"
+        android:id="@+id/divide"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/phr_article_fragment_toolbar"
+        android:layout_below="@id/divide"
         android:id="@+id/phr_article_fragment_scroll_view"
         android:layout_above="@+id/reply_container"
         android:background="@color/phr_white">

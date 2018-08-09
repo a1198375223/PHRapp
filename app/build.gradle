@@ -1,4 +1,35 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
+
+MobSDK {
+    appKey "274527adceaf1"
+    appSecret "bc8e165e9ac705fc94ca426b50065f67"
+    ShareSDK {
+        devInfo {
+            SinaWeibo {
+                appKey "568898243"
+                appSecret "38a4f8204cc784f81f9f0daaf31e02e3"
+                callbackUri "http://www.sharesdk.cn"
+                shareByAppClient true
+            }
+            Wechat {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+                userName "gh_afb25ac019c9"
+                path "pages/index/index.html?id=1"
+                withShareTicket true
+                miniprogramType 2
+                bypassApproval false
+            }
+            QQ {
+                appId "1107514479"
+                appKey "23Xb76n1oA3igSRs"
+                shareByAppClient true
+                bypassApproval false
+            }
+        }
+    }
+}
 
 android {
     compileSdkVersion 27

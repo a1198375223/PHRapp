@@ -96,6 +96,7 @@
         android:id="@+id/phr_rv_my_article_body_text"
         android:paddingTop="@dimen/phr_padding_2"
         android:paddingBottom="@dimen/phr_padding_2"
-        android:maxLines="3"/>
+        android:maxLines="3"
+        android:layout_marginBottom="@dimen/phr_margin_3"/>
 
 </LinearLayout>

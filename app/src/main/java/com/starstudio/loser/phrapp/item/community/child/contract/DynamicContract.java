@@ -29,7 +29,7 @@ public interface DynamicContract {
 
         void toCollect(AVObject avObject);
 
-        void toShare(AVObject avObject);
+
     }
 
 
@@ -60,5 +60,7 @@ public interface DynamicContract {
         void error(String error);
 
         void warning(String warning);
+
+        void showShareDialog(String title, String text);
     }
 }

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/phr_white">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/phr_update_medicine_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/phr_white"
+        app:navigationIcon="@drawable/phr_arrow_back_black_24"
+        app:title="编辑药品信息">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/phr_padding_12"
+        android:paddingRight="@dimen/phr_padding_12">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_25"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/phr_height_15"
+                android:layout_height="@dimen/phr_height_15"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:src="@mipmap/phr_medicine_name" />
+
+            <EditText
+                android:id="@+id/phr_update_medicine_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/phr_margin_3"
+                android:layout_marginStart="@dimen/phr_margin_3"
+                android:background="@null"
+                android:hint="药品名称"
+                android:inputType="text"
+                android:textColorHint="@color/color_login_text4" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_1"
+            android:background="@drawable/phr_shape_gradient_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_25"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/phr_height_15"
+                android:layout_height="@dimen/phr_height_15"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:src="@mipmap/phr_medicine_money" />
+
+            <EditText
+                android:id="@+id/phr_update_medicine_money"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/phr_margin_3"
+                android:layout_marginStart="@dimen/phr_margin_3"
+                android:background="@null"
+                android:hint="药品价格"
+                android:inputType="text"
+                android:textColorHint="@color/color_login_text4" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_1"
+            android:background="@drawable/phr_shape_gradient_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_25"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/phr_height_15"
+                android:layout_height="@dimen/phr_height_15"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:src="@mipmap/phr_medicine_factory" />
+
+            <EditText
+                android:id="@+id/phr_update_medicine_factory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/phr_margin_3"
+                android:layout_marginStart="@dimen/phr_margin_3"
+                android:background="@null"
+                android:hint="制药厂"
+                android:textColorHint="@color/color_login_text4" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phr_height_1"
+            android:background="@drawable/phr_shape_gradient_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp">
+            <EditText
+                android:id="@+id/phr_update_medicine_content"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:inputType="textMultiLine"
+                android:hint="可以在这里添加药品详情哦"
+                android:scrollbars="vertical"
+                android:gravity="top"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/color_line_color"/>
+            <Button
+                android:id="@+id/phr_update_medicine_submit"
+                style="@style/PHR.Button.Blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/phr_height_10"
+                android:text="@string/phr_register_submit"
+                android:textSize="@dimen/phr_text_size_20" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

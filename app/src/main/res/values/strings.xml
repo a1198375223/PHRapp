@@ -1,18 +1,19 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">PHRApp</string>
     <string name="phr_main_navigation_view_header_name">用户名</string>
     <string name="phr_main_navigation_view_header_note">备注</string>
-    <string name="phr_main_navigation_view_menu_item1">item1</string>
-    <string name="phr_main_navigation_view_menu_item2">item2</string>
-    <string name="phr_main_navigation_view_menu_item3">个人PHR管理</string>
-    <string name="phr_main_navigation_view_menu_item4">个人信息管理</string>
-    <string name="phr_main_navigation_view_menu_item5">退出登录</string>
+    <string name="phr_main_navigation_view_menu_item1">收    藏</string>
+    <string name="phr_main_navigation_view_menu_item2">消    息</string>
+    <string name="phr_main_navigation_view_menu_item3">健康管理</string>
+    <string name="phr_main_navigation_view_menu_item4">就诊记录</string>
+    <string name="phr_main_navigation_view_menu_item5">个人信息</string>
+    <string name="phr_main_navigation_view_menu_item6">退出登录</string>
     <string name="phr_main_gridlayout_text1">健康资讯</string>
     <string name="phr_main_gridlayout_text2">计划免疫</string>
     <string name="phr_main_gridlayout_text3">就医地图</string>
     <string name="phr_main_gridlayout_text4">自动挂号</string>
     <string name="phr_main_gridlayout_text5">社  区</string>
-    <string name="phr_main_gridlayout_text6">开发中</string>
+    <string name="phr_main_gridlayout_text6">药品信息</string>
 
     <!--login string-->
     <string name="phr_login_app_name">PHR健康社区</string>
@@ -72,7 +73,7 @@
     <string name="phr_write_error_title">出错啦~</string>
     <string name="phr_write_error_content">请先登入</string>
     <string name="phr_write_error_ok">确认</string>
-    
+
     <!--boom menu string-->
     <string name="phr_boom_delete_text">删  除</string>
     <string name="phr_boom_share_text">分  享</string>
@@ -96,12 +97,31 @@
     <string name="phr_article_fragment_all_reply">全部回复</string>
     <string name="phr_rv_my_article_no_comment">暂无评论</string>
     <string name="phr_activity_show_reply_title">查看回复</string>
+    <string name="phr_article_fragment_type">按时间</string>
+    <string name="phr_article_menu_collect">收  藏</string>
+    <string name="phr_article_menu_share">分  享</string>
+    <string name="phr_article_menu_complaints">举  报</string>
+    <string name="phr_article_menu_like">点  赞</string>
+    <string name="phr_article_menu_dislike">点  灭</string>
+
 
 
     <!--bottom dialog string-->
     <string name="phr_bottom_dialog_exit">退  出</string>
     <string name="phr_bottom_dialog_warn">举  报</string>
     <string name="phr_bottom_dialog_dislike">点  灭</string>
+
+    <!--share string-->
+    <string name="phr_share_string" tools:ignore="TypographyEllipsis">分享到...</string>
+    <string name="phr_share_dialog_weibo">微  博</string>
+    <string name="phr_share_dialog_wechat">微  信</string>
+    <string name="phr_share_dialog_qq">QQ</string>
+    <string name="phr_share_dialog_cancel">取  消</string>
+
+    <!--collect string-->
+    <string name="phr_collect_my_collect">我的收藏</string>
+
+
 
 
     <string name="phr_community_text_test">静夜思\n

@@ -78,6 +78,7 @@ public class DoctorImmuneActivity extends AppCompatActivity{
     private void initImmune(){
         //String doctorID = null;
         //final String[] doctorIDs;
+        Log.d(TAG, "initImmune: "+ AVUser.getCurrentUser().getBoolean("isDoctor"));
         if (AVUser.getCurrentUser().getBoolean("isDoctor")){
             doctorIDs.add(AVUser.getCurrentUser().getObjectId());
             addImmune(doctorIDs);
@@ -89,6 +90,7 @@ public class DoctorImmuneActivity extends AppCompatActivity{
                 public void done(List<AVObject> list, AVException e) {
                     if (e == null) {
                         for (AVObject i : list) {
+                            Log.d(TAG, "done: +++++++++++++++++++++++++++++++");
                             doctorIDs.add(i.getString("doctorID"));
                         }
                         addImmune(doctorIDs);
@@ -114,6 +116,9 @@ public class DoctorImmuneActivity extends AppCompatActivity{
                         for (AVObject i : list) {
                             //Log.d(TAG, "done: " + dateString);
                             immuneList.add(new Immune(i));
+                        }
+                        if (immuneList.size()==0){
+                            Toast.makeText(DoctorImmuneActivity.this, "还未有相关信息发布！", Toast.LENGTH_SHORT).show();
                         }
                         adapter.notifyDataSetChanged();
                     } else {

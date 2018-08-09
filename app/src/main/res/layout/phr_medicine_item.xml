@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@color/color_line_color"/>
+
+    <TextView
+        android:id="@+id/phr_medicine_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="药品名称"
+        android:gravity="center"
+        android:textSize="18dp"/>
+
+    <TextView
+        android:id="@+id/phr_medicine_content"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="药品描述"
+        android:textSize="20dp"
+        android:maxLines="3"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/phr_medicine_doctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="编辑医生："/>
+
+    <TextView
+        android:id="@+id/phr_medicine_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="最后更新于："/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@color/color_line_color"/>
+
+</LinearLayout>

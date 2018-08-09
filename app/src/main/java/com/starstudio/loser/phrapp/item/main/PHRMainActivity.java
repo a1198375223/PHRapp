@@ -106,6 +106,7 @@ public class PHRMainActivity extends PHRActivity{
         menu = navigationView.getMenu();
         menu.findItem(R.id.phr_main_navigation_view_menu_item5).setVisible(true);
         menu.findItem(R.id.phr_main_navigation_view_menu_item4).setVisible(true);
+        menu.findItem(R.id.phr_main_navigation_view_menu_item6).setVisible(true);
         menu.findItem(R.id.phr_main_navigation_view_menu_item3).setVisible(true);//登录后让“退出登录”和“个人信息管理可见”可见
         name = (TextView) headerView.findViewById(R.id.phr_main_navigation_view_header_name_text);
         note = (TextView) headerView.findViewById(R.id.phr_main_navigation_view_header_note_text);
