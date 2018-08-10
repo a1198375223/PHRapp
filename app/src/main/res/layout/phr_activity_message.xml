@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:id="@+id/phr_message_content">
 
@@ -17,11 +18,15 @@
             android:background="@color/phr_white"
             app:navigationIcon="@drawable/phr_appbar_logo"
             app:layout_scrollFlags="enterAlways|scroll">
-            <!--<android.support.v7.widget.SearchView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/phr_message_search_view"-->
-                <!--/>-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_text_title"
+                tools:text="@string/phr_message_toolbar_title"
+                android:text="@string/phr_message_toolbar_title"
+                android:layout_gravity="center"
+                android:textSize="@dimen/phr_text_size_20"
+                android:id="@+id/phr_activity_collect_my_collect"/>
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout

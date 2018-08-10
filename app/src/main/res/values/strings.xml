@@ -55,6 +55,7 @@
     <!--message menu-->
     <string name="phr_message_menu_add">添加</string>
     <string name="phr_message_menu_delete">删除</string>
+    <string name="phr_message_toolbar_title">健康咨询</string>
 
     <!--community string-->
     <string name="phr_community_name">用户名</string>

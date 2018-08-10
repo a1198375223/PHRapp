@@ -29,7 +29,6 @@ import java.util.Objects;
 public class PHRMessageActivity extends PHRActivity {
     private MessageContract.MessagePresenter mPresenter;
     private Toolbar mToolbar;
-    private SearchView mSearchView;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -44,32 +43,7 @@ public class PHRMessageActivity extends PHRActivity {
         mPresenter.setView(new MessageViewImpl(this));
         mPresenter.attach();
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.phr_message_search_view, menu);
-        MenuItem searchItem = menu.findItem(R.id.phr_message_search_view);
-        mSearchView = (SearchView)searchItem.getActionView();
-        mSearchView.setQueryHint("输入关键字");
-        mSearchView.setIconified(true);
-        mSearchView.clearFocus();
-
-        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            //提交时回调
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            //输入时回调
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                return false;
-            }
-        });
-        return super.onCreateOptionsMenu(menu);
-    }
+    
 
     @Override
     protected void onDestroy() {
