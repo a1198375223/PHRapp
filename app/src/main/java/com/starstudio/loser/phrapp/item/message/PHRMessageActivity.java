@@ -43,7 +43,6 @@ public class PHRMessageActivity extends PHRActivity {
         mPresenter.setView(new MessageViewImpl(this));
         mPresenter.attach();
     }
-    
 
     @Override
     protected void onDestroy() {
