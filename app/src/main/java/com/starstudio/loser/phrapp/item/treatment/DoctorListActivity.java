@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -91,6 +93,7 @@ public class DoctorListActivity extends AppCompatActivity {
                                     }
                                     adapter=new DoctorListAdapter(DoctorListActivity.this,doctorList);
                                     listView.setAdapter(adapter);
+                                    setListViewHeight(listView);
                                 }
                             });
 //                            AVObject object=avObject.getAVObject("workTime");
@@ -122,5 +125,22 @@ public class DoctorListActivity extends AppCompatActivity {
         DoctorItem doctor=new DoctorItem(name,imageId,title,profile,workTime,dept,hosp);
         doctorList.add(doctor);
         return doctor;
+    }
+
+    //设置ListView的高度
+    public void setListViewHeight(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
     }
 }

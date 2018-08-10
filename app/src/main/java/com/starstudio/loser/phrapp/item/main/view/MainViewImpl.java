@@ -32,6 +32,7 @@ import com.starstudio.loser.phrapp.item.map.HospitalMapActivity;
 import com.starstudio.loser.phrapp.item.medicine.MedicineMainActivity;
 import com.starstudio.loser.phrapp.item.message.PHRMessageActivity;
 import com.starstudio.loser.phrapp.item.modify.ModifyActivity;
+import com.starstudio.loser.phrapp.item.treatment.RecordActivity;
 import com.starstudio.loser.phrapp.item.treatment.TreatmentActiity;
 
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
                         activity.startActivity(new Intent(activity, ManageMainActivity.class));
                         break;
                     case R.id.phr_main_navigation_view_menu_item4:
-
+                        activity.startActivity(new Intent(activity, RecordActivity.class));
                         break;
                     case R.id.phr_main_navigation_view_menu_item5:
                         activity.startActivity(new Intent(activity, ModifyActivity.class));

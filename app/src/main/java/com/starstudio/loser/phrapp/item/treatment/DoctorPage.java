@@ -97,5 +97,4 @@ public class DoctorPage extends AppCompatActivity{
         viewPager.setAdapter(adapter);//给ViewPager设置适配器
         tabLayout.setupWithViewPager(viewPager);//将TabLayout和ViewPager关联起来
     }
-
 }

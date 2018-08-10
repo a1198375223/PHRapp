@@ -5,10 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,10 +14,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.starstudio.loser.phrapp.R;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,8 +57,6 @@ public class DoctorListAdapter extends BaseAdapter{
         final String title=doctorList.get(position).getDoctorTitle();
         final String profile=doctorList.get(position).getProfile();
         final String imageUrl=doctorList.get(position).getDoctorImagId();
-        final GridView doctorWorkTime=convertView.findViewById(R.id.doctor_work_time_grid_view);
-        final List<String> workList=new ArrayList<>();
         RequestOptions options = new RequestOptions()
                 .placeholder(R.drawable.waiting)
                 .error(R.drawable.default_head)
@@ -75,32 +66,6 @@ public class DoctorListAdapter extends BaseAdapter{
         doctorName.setText(docName);
         doctorTitle.setText(doctorList.get(position).getDoctorTitle());
         doctorProfile.setText(doctorList.get(position).getProfile());
-
-        try {
-            JSONArray jsonArray = doctorList.get(position).getWorkArray();
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject=jsonArray.getJSONObject(i);
-                String date=jsonObject.getString("date");
-                String total=jsonObject.getString("total");
-                String reserved=jsonObject.getString("reserved");
-                workList.add(date+"\n预约数："+reserved+"/"+total);
-            }
-        }catch (Exception e1){
-            e1.printStackTrace();
-        }
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,workList);
-        doctorWorkTime.setAdapter(adapter);
-        doctorWorkTime.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(context,AppointmentActivity.class);
-                intent.putExtra("hospName",hospName);
-                intent.putExtra("deptName",deptName);
-                intent.putExtra("docName",docName);
-                intent.putExtra("time",workList.get(position));
-                context.startActivity(intent);
-            }
-        });
 
         doctorImage.setOnClickListener(new View.OnClickListener(){
 

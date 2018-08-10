@@ -53,6 +53,7 @@ import com.starstudio.loser.phrapp.item.login.LoginActivity;
 import com.starstudio.loser.phrapp.item.main.model.MainModelmpl;
 import com.starstudio.loser.phrapp.item.main.presenter.MainPresenterImpl;
 import com.starstudio.loser.phrapp.item.main.view.MainViewImpl;
+import com.starstudio.loser.phrapp.item.treatment.RecordActivity;
 
 
 import es.dmoral.toasty.Toasty;
@@ -72,7 +73,7 @@ public class PHRMainActivity extends PHRActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phr_main_layout);
 
-        PushService.setDefaultPushCallback(this, PHRMainActivity.class);
+        PushService.setDefaultPushCallback(this, RecordActivity.class);
         PushService.setDefaultChannelId(this, "1");
         //AVInstallation.getCurrentInstallation().saveInBackground();
         AVOSCloud.initialize(this,"NUjpdRi6jqP1S2iAfQCs7YNU-gzGzoHsz","27zlhvjRBd155W8iAWSoNJiO");
