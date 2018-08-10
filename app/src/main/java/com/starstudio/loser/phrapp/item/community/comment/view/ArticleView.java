@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
@@ -34,14 +35,21 @@ import com.starstudio.loser.phrapp.common.base.PHRView;
 import com.starstudio.loser.phrapp.common.utils.DateUtils;
 import com.starstudio.loser.phrapp.common.utils.GlideUtils;
 import com.starstudio.loser.phrapp.common.utils.KeyBoardUtils;
+import com.starstudio.loser.phrapp.common.utils.ShareUtils;
+import com.starstudio.loser.phrapp.common.view.PHRShareDialog;
+import com.starstudio.loser.phrapp.common.view.PHRSortDialog;
 import com.starstudio.loser.phrapp.item.community.comment.ArticleActivity;
 import com.starstudio.loser.phrapp.item.community.comment.adpater.CommentRvAdapter;
 import com.starstudio.loser.phrapp.item.community.comment.contract.ArticleContract;
 import com.starstudio.loser.phrapp.item.community.comment.presenter.ArticleEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
 
 import static com.makeramen.roundedimageview.RoundedDrawable.TAG;
 
@@ -54,6 +62,8 @@ public class ArticleView extends PHRView<ArticleEventListener> implements Articl
     private TextView mBody;
     private CommentRvAdapter mAdapter;
     private int mId = -1;
+    private PHRShareDialog mShareDialog;
+    private int mSortId = 1;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -68,6 +78,127 @@ public class ArticleView extends PHRView<ArticleEventListener> implements Articl
             @Override
             public void onClick(View v) {
                 getActivity().finish();
+            }
+        });
+        final TextView text = (TextView) activity.findViewById(R.id.phr_article_fragment_toolbar_type);
+        final PHRSortDialog dialog = new PHRSortDialog(getActivity());
+        dialog.setListener(new PHRSortDialog.OnItemClickListener() {
+            @Override
+            public void onItemClickListener(int which) {
+                switch (which) {
+                    case PHRSortDialog.ITEM_1:
+                        mSortId = 1;
+                        text.setText("按时间");
+                        showProgressDialog();
+                        getListener().sortByTime();//降序
+                        break;
+                    case PHRSortDialog.ITEM_2:
+                        mSortId = 2;
+                        text.setText("按赞数");
+                        showProgressDialog();
+                        getListener().sortByLike();
+                        break;
+                    case PHRSortDialog.ITEM_3:
+                        mSortId = 3;
+                        text.setText("按新鲜");
+                        showProgressDialog();
+                        getListener().sortById();
+                        break;
+                    case PHRSortDialog.ITEM_4:
+                        mSortId = 4;
+                        text.setText("看楼主");
+                        showProgressDialog();
+                        getListener().sortByAuthor();
+                        break;
+                }
+            }
+        });
+
+
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.showSortDialog();
+            }
+        });
+
+        mShareDialog = new PHRShareDialog(getActivity());
+        mShareDialog.setListener(new PHRShareDialog.OnShareItemClickListener() {
+            @Override
+            public void onCancelItemClickListener() {
+                if (mShareDialog.isShowing()) {
+                    mShareDialog.dismiss();
+                }
+                Toast.makeText(getActivity(), "取消分享", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onShareItemClickListener(int which, String title, String text) {
+                switch (which) {
+                    case PHRShareDialog.WEIBO:
+                        ShareUtils.shareWeibo(title, "http://lc-nujpdri6.cn-n1.lcfile.com/31bc75a685cd225af824.png", text, new PlatformActionListener() {
+                            @Override
+                            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                                showSuccessToast("分享成功");
+                            }
+
+                            @Override
+                            public void onError(Platform platform, int i, Throwable throwable) {
+                                showErrorToast("出错啦");
+                            }
+
+                            @Override
+                            public void onCancel(Platform platform, int i) {
+                                Toast.makeText(getActivity(), "取消分享", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        if (mShareDialog.isShowing()) {
+                            mShareDialog.dismiss();
+                        }
+                        break;
+                    case PHRShareDialog.QQ:
+                        ShareUtils.shareQQ(title, "http://lc-nujpdri6.cn-n1.lcfile.com/31bc75a685cd225af824.png", text, new PlatformActionListener() {
+                            @Override
+                            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                                showSuccessToast("分享成功");
+                            }
+
+                            @Override
+                            public void onError(Platform platform, int i, Throwable throwable) {
+                                showErrorToast("出错啦");
+                            }
+
+                            @Override
+                            public void onCancel(Platform platform, int i) {
+                                Toast.makeText(getActivity(), "取消分享", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        if (mShareDialog.isShowing()) {
+                            mShareDialog.dismiss();
+                        }
+                        break;
+                    case PHRShareDialog.WECHAT:
+                        ShareUtils.shareWechat(title, "http://lc-nujpdri6.cn-n1.lcfile.com/31bc75a685cd225af824.png", text, new PlatformActionListener() {
+                            @Override
+                            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                                showSuccessToast("分享成功");
+                            }
+
+                            @Override
+                            public void onError(Platform platform, int i, Throwable throwable) {
+                                showErrorToast("出错啦");
+                            }
+
+                            @Override
+                            public void onCancel(Platform platform, int i) {
+                                Toast.makeText(getActivity(), "取消分享", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        if (mShareDialog.isShowing()) {
+                            mShareDialog.dismiss();
+                        }
+                        break;
+                }
             }
         });
 
@@ -123,10 +254,14 @@ public class ArticleView extends PHRView<ArticleEventListener> implements Articl
             @Override
             public void onClick(View v) {
                 showProgressDialog();
-                if (((ArticleActivity) getActivity()).isReply) {
-                    getListener().saveComment(editText.getText().toString(), mId);
+                if (mSortId == 4) {
+                    getListener().toReplyAuthor(editText.getText().toString(), mId);
                 } else {
-                    getListener().saveComment(editText.getText().toString(), -1);
+                    if (((ArticleActivity) getActivity()).isReply) {
+                        getListener().saveComment(editText.getText().toString(), mId);
+                    } else {
+                        getListener().saveComment(editText.getText().toString(), -1);
+                    }
                 }
 
                 editText.setText("");
@@ -178,5 +313,14 @@ public class ArticleView extends PHRView<ArticleEventListener> implements Articl
     public void load(List<AVObject> list) {
         mAdapter.setList(list);
         dismissProgressDialog();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void showShareDialog(String title, String text) {
+        mShareDialog.setTitle(title);
+        mShareDialog.setText(text);
+        dismissProgressDialog();
+        mShareDialog.showShareDialog();
     }
 }

@@ -3,51 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    android:focusable="true"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:focusable="true">
 
-   <EditText
+   <android.support.v7.widget.Toolbar
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_alignParentBottom="true"
-       android:id="@+id/edit"
-       android:background="@drawable/phr_my_article_edit_bg"
-       android:textColor="@color/color_text_sub_title"
-       android:textColorHint="@color/color_text_hint"
-       android:hint="写回复"
-       android:padding="@dimen/phr_padding_4"
-       android:textSize="@dimen/phr_text_size_14"
-       android:drawableLeft="@drawable/ic_write_black_24dp"
-       android:drawableStart="@drawable/ic_write_black_24dp"
-       />
-   <!--<EditText-->
-       <!--android:layout_alignParentBottom="true"-->
-       <!--android:layout_width="match_parent"-->
-       <!--android:layout_height="wrap_content"-->
-       <!--android:layout_gravity="center"-->
-       <!--android:layout_marginBottom="10dp"-->
-       <!--android:layout_marginLeft="20dp"-->
-       <!--android:layout_marginRight="20dp"-->
-       <!--android:layout_marginTop="10dp"-->
-       <!--android:background="@drawable/shape_edittext_white_corner"-->
-       <!--android:cursorVisible="true"-->
-       <!--android:drawableLeft="@mipmap/search_contact"-->
-       <!--android:focusable="true"-->
-       <!--android:focusableInTouchMode="true"-->
-       <!--android:gravity="left"-->
-       <!--android:hint="圆形角度带logo自定义cursor的搜索框"-->
-       <!--android:padding="5dp"-->
-       <!--android:singleLine="true"-->
-       <!--android:textCursorDrawable="@drawable/cursor_item"-->
-       <!--android:textSize="14sp"/>-->
+       android:layout_height="?attr/actionBarSize"
+       android:id="@+id/toolbar"
+       android:background="@color/color_boom_red_normal_color"/>
 
-
-   <Button
+   <RelativeLayout
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:text="click"
-       android:id="@+id/button"
-       android:background="@drawable/phr_bottom_dialog_item_collect_bg"
-       android:textColor="@drawable/phr_button_text_color_bg"/>
+       android:layout_height="match_parent"
+       android:layout_below="@+id/toolbar"
+       android:id="@+id/container">
+      <Button
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="click"
+          android:id="@+id/button"
+          android:background="@drawable/phr_bottom_dialog_item_collect_bg"
+          android:textColor="@drawable/phr_button_text_color_bg" />
+   </RelativeLayout>
+
+
 
 </RelativeLayout>

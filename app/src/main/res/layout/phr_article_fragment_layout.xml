@@ -60,7 +60,7 @@
                 android:id="@+id/phr_article_fragment_title"
                 tools:text="@string/phr_article_fragment_title"
                 android:textColor="@color/color_text_title"
-                android:textSize="@dimen/phr_text_size_18"
+                android:textSize="@dimen/phr_text_size_20"
                 android:gravity="center_vertical"
                 android:layout_marginTop="@dimen/phr_margin_2"
                 android:lineSpacingExtra="@dimen/phr_padding_2" />

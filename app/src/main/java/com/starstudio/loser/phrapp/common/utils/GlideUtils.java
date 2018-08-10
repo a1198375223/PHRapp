@@ -38,5 +38,10 @@ public class GlideUtils {
                 .into(imageView);
     }
 
+    //加载本地资源图片
+    public static void loadLocal(Context context, int res, ImageView imageView) {
+        Glide.with(context).load(res).into(imageView);
+    }
+
 
 }

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/community_container">
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -17,7 +18,17 @@
                 app:navigationIcon="@drawable/phr_arrow_back_black_24"
                 android:background="@color/phr_white"
                 android:id="@+id/phr_community_toolbar"
-                app:layout_scrollFlags="scroll|enterAlways"/>
+                app:layout_scrollFlags="scroll|enterAlways">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_text_title"
+                    tools:text="@string/phr_community_toolbar_title"
+                    android:text="@string/phr_community_toolbar_title"
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/phr_text_size_20"
+                    android:id="@+id/phr_article_fragment_toolbar_title"/>
+            </android.support.v7.widget.Toolbar>
 
             <android.support.design.widget.TabLayout
                 android:layout_width="match_parent"

@@ -220,8 +220,8 @@ public class CommunityRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         holder.mShare.clearBuilders();
         TextOutsideCircleButton.Builder blue = new TextOutsideCircleButton.Builder()
                 //图片
-                .normalImageRes(R.mipmap.phr_boom_delete_normal)
-                .highlightedImageRes(R.mipmap.phr_boom_delete_highlight)
+                .normalImageRes(R.mipmap.phr_boom_transfer_normal)
+                .highlightedImageRes(R.mipmap.phr_boom_transfer_highlight)
                 //文字
                 .normalTextRes(R.string.phr_boom_transfer_text)
                 .normalTextColorRes(R.color.avoscloud_feedback_white)
