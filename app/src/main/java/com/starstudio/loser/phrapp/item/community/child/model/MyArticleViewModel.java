@@ -279,7 +279,7 @@ public class MyArticleViewModel extends PHRModel implements MyArticleContract.My
                             AVObject complaint = new AVObject("Complaint");
                             complaint.put("complaints_user", avUser);
                             complaint.put("article", avObject);
-                            avObject.increment("complains");
+                            avObject.increment("complaints");
                             avObject.setFetchWhenSave(true);
                             complaint.saveInBackground(new SaveCallback() {
                                 @Override

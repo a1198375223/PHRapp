@@ -56,7 +56,8 @@
         <activity android:name=".item.modify.ModifyActivity"
             android:theme="@style/ModifyActivityTheme"/>
         <activity android:name=".item.community.CommunityActivity"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:theme="@style/PHR.CommunityActivity"/>
 
         <activity android:name=".item.management.ManageMainActivity" />
         <activity android:name=".item.management.UpdatePhysicalActivity" />
@@ -83,6 +84,10 @@
             android:launchMode="singleTask"/>
         <activity
             android:name=".item.community.comment.show.ShowReplyActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:theme="@style/PHR.SearchActivity"
+            android:name=".item.community.search.SearchActivity"
             android:launchMode="singleTask" />
     </application>
 

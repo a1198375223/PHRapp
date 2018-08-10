@@ -37,7 +37,20 @@
     <string name="phr_main_logo_text">PHR个人健康管理</string>
 
     <!--search view-->
-    <string name="phr_search_view_text">查   找</string>
+    <string name="phr_search_view_text">查找</string>
+    <string name="phr_search_hint" tools:ignore="TypographyEllipsis">搜索一下...</string>
+    <string name="phr_search_community">社区</string>
+    <string name="phr_search_result">n条结果</string>
+    <string name="phr_search_history">搜索历史</string>
+    <string name="phr_search_clear">清空</string>
+    <string name="phr_search_none">抱歉，未找到相关结果</string>
+    <string name="phr_search_history_result">结果</string>
+    <string name="phr_search_result_title">标题</string>
+    <string name="phr_search_result_time">时间</string>
+    <string name="phr_search_result_author">作者</string>
+    <string name="phr_search_result_like">11</string>
+    <string name="phr_search_result_comment">102</string>
+
 
     <!--message menu-->
     <string name="phr_message_menu_add">添加</string>
@@ -52,6 +65,7 @@
     <string name="phr_community_text">3行正文</string>
     <string name="phr_community_count">1.3k</string>
     <string name="phr_community_goon">继续</string>
+    <string name="phr_community_toolbar_title">社  区</string>
 
     <!--treatment string-->
     <string name="phr_treatment_hosp_choice">选择医院</string>
@@ -102,7 +116,15 @@
     <string name="phr_article_menu_complaints">举  报</string>
     <string name="phr_article_menu_like">点  赞</string>
     <string name="phr_article_menu_dislike">点  灭</string>
+    <string name="phr_article_menu_more">更  多</string>
 
+    <!--sort string-->
+    <string name="phr_article_sort_title">请选择排序方式</string>
+    <string name="phr_article_sort_item1">按时间</string>
+    <string name="phr_article_sort_item2">按赞数</string>
+    <string name="phr_article_sort_item3">按新鲜</string>
+    <string name="phr_article_sort_item4">看楼主</string>
+    <string name="phr_article_sort_item5">取消</string>
 
 
     <!--bottom dialog string-->

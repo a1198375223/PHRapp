@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/phr_bottom_dialog_bg">
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/phr_article_more_recycler_view"
+        android:background="@color/color_bottom_dialog_bg_color"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/phr_bottom_dialog_item_collect_bg"
+        android:clickable="true"
+        android:layout_marginTop="@dimen/phr_margin_5"
+        android:gravity="center"
+        android:padding="@dimen/phr_padding_8"
+        android:text="@string/phr_share_dialog_cancel"
+        android:textColor="#666666"
+        android:textSize="@dimen/phr_text_size_14"
+        android:id="@+id/phr_article_more_dialog_cancel"
+        tools:ignore="KeyboardInaccessibleWidget" />
+</LinearLayout>

@@ -5,17 +5,22 @@ package com.starstudio.loser.phrapp.item.community;
     date:2018/7/30 17:49
 */
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import com.starstudio.loser.phrapp.R;
 import com.starstudio.loser.phrapp.common.PHRActivity;
 import com.starstudio.loser.phrapp.item.community.callback.AFCallback;
 import com.starstudio.loser.phrapp.item.community.contract.CommunityContract;
 import com.starstudio.loser.phrapp.item.community.model.CommunityModel;
 import com.starstudio.loser.phrapp.item.community.presenter.CommunityPresenter;
+import com.starstudio.loser.phrapp.item.community.search.SearchActivity;
 import com.starstudio.loser.phrapp.item.community.view.CommunityView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -55,6 +60,23 @@ public class CommunityActivity extends PHRActivity implements AFCallback{
 //        if (EventBus.getDefault().isRegistered(this)) {
 //            EventBus.getDefault().unregister(this);
 //        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.phr_menu_search, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.phr_search:
+                Intent intent = new Intent(this, SearchActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return true;
     }
 
     @Override

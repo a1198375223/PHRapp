@@ -18,6 +18,8 @@ public interface ArticleContract {
         void setData(AVObject data, List<AVObject> comment);
 
         void load(List<AVObject> list);
+
+        void showShareDialog(String title, String text);
     }
 
     interface ArticleContractModel extends BaseModel {
@@ -28,6 +30,20 @@ public interface ArticleContract {
         void saveReply(String comment, AVObject reply);
 
         void loadComment();
+
+        void loadCommentOnlyAuthor(AVObject article);
+
+        void loadCommentByLike();
+
+        void loadCommentById();
+
+        void toCollect(AVObject article);
+
+        void toLike(AVObject article);
+
+        void toDislike(AVObject article);
+
+        void toComplaints(AVObject article);
     }
 
     interface ArticleContractPresenter extends BasePresenter<ArticleContractView, ArticleContractModel> {
@@ -42,6 +58,19 @@ public interface ArticleContract {
         void showWarning(String warning);
 
         void toRefresh();
+
+        void toShare();
+
+        void toCollect();
+
+        void toLike();
+
+        void toDislike();
+
+        void toComplaints();
+
+        void toLoadAuthorComment(List<AVObject> list);
+
     }
 
 }

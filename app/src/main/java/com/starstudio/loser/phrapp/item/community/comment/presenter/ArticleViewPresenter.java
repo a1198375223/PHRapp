@@ -26,6 +26,7 @@ public class ArticleViewPresenter extends PHRPresenter<ArticleContract.ArticleCo
     private ArticleContract.ArticleContractModel mModel;
     private AVObject mInitData;
     private List<AVObject> mComment;
+    private List<AVObject> mAuthor;
 
     private ArticleEventListener mListener = new ArticleEventListener() {
         @Override
@@ -56,6 +57,36 @@ public class ArticleViewPresenter extends PHRPresenter<ArticleContract.ArticleCo
                 mView.showErrorToast("出错啦");
             }
 
+        }
+
+        @Override
+        public void sortByTime() {
+            mModel.loadComment();
+        }
+
+        @Override
+        public void sortById() {
+            mModel.loadCommentById();
+        }
+
+        @Override
+        public void sortByLike() {
+            mModel.loadCommentByLike();
+        }
+
+        @Override
+        public void sortByAuthor() {
+            mModel.loadCommentOnlyAuthor(mInitData);
+        }
+
+        @Override
+        public void toReplyAuthor(String text, int id) {
+            if (mAuthor.get(id - 1) != null) {
+                mModel.saveReply(text, mAuthor.get(id - 1));
+            } else {
+                mView.showErrorToast("出错啦");
+                mView.dismissProgressDialog();
+            }
         }
     };
 
@@ -134,4 +165,43 @@ public class ArticleViewPresenter extends PHRPresenter<ArticleContract.ArticleCo
         mView.showProgressDialog();
         mModel.loadComment();
     }
+
+    @Override
+    public void toShare() {
+        mView.showProgressDialog();
+        mView.showShareDialog(mInitData.getString("title"), mInitData.getString("text"));
+    }
+
+    @Override
+    public void toCollect() {
+        mView.showProgressDialog();
+        mModel.toCollect(mInitData);
+    }
+
+    @Override
+    public void toLike() {
+        mView.showProgressDialog();
+        mModel.toLike(mInitData);
+    }
+
+    @Override
+    public void toDislike() {
+        mView.showProgressDialog();
+        mModel.toDislike(mInitData);
+    }
+
+    @Override
+    public void toComplaints() {
+        mView.showProgressDialog();
+        mModel.toComplaints(mInitData);
+    }
+
+
+    @Override
+    public void toLoadAuthorComment(List<AVObject> list) {
+        mAuthor = list;
+        mView.load(list);
+    }
+
+
 }
