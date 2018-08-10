@@ -1,17 +1,18 @@
 package com.starstudio.loser.phrapp.item.treatment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.FindCallback;
@@ -28,17 +29,29 @@ import java.util.List;
  * Created by 11024 on 2018/8/2.
  */
 
-public class DoctorListActivity extends Activity{
+public class DoctorListActivity extends AppCompatActivity {
     private String dept;
     private String hospName;
     private List<DoctorItem> doctorList=new ArrayList<>();
     private ListView listView;
     private DoctorListAdapter adapter;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.phr_treatment_doc_choice);
+
+        toolbar =  findViewById(R.id.phr_treatment_doctor_choice_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         Intent intent=getIntent();
         listView=findViewById(R.id.doctor_list_view);
@@ -69,17 +82,18 @@ public class DoctorListActivity extends Activity{
                                 @Override
                                 public void done(AVObject avObject, AVException e) {
                                     if (avObject == null) {
-                                        Log.e("TAG", "done: true");
+                                        //Log.e("TAG", "done: true");
                                         initDoctors(docName, imageId, title, profile, null, dept, hospName);
                                     } else{
                                         JSONArray workTime = avObject.getJSONArray("workTime");
                                         //String workTime = avObject.get("workTime").toString();
-                                        Log.e("TAG", "done: " + avObject.getObjectId());
-                                        Toast.makeText(DoctorListActivity.this, avObject.getObjectId(), Toast.LENGTH_SHORT).show();
+                                        //Log.e("TAG", "done: " + avObject.getObjectId());
+                                        //.makeText(DoctorListActivity.this, avObject.getObjectId(), Toast.LENGTH_SHORT).show();
                                         initDoctors(docName, imageId, title, profile, workTime, dept, hospName);
                                     }
                                     adapter=new DoctorListAdapter(DoctorListActivity.this,doctorList);
                                     listView.setAdapter(adapter);
+                                    setListViewHeight(listView);
                                 }
                             });
 //                            AVObject object=avObject.getAVObject("workTime");
@@ -111,5 +125,22 @@ public class DoctorListActivity extends Activity{
         DoctorItem doctor=new DoctorItem(name,imageId,title,profile,workTime,dept,hosp);
         doctorList.add(doctor);
         return doctor;
+    }
+
+    //设置ListView的高度
+    public void setListViewHeight(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            return;
+        }
+        int totalHeight = 0;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
     }
 }

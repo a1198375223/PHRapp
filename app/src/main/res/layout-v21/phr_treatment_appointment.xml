@@ -132,6 +132,8 @@
         android:layout_height="wrap_content"
         android:text="@string/phr_write_error_ok"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/phr_margin_8"/>
+        android:layout_marginTop="@dimen/phr_margin_8"
+        android:background="@color/phr_main_page_text_color"
+        android:textColor="@color/phr_white"/>
 
 </LinearLayout>

@@ -4,7 +4,7 @@
 
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -43,6 +43,8 @@
         <activity android:name=".item.treatment.ChoiceDeptActivity" />
         <activity android:name=".item.treatment.DoctorPage" />
         <activity android:name=".item.treatment.AppointmentActivity" />
+        <activity android:name=".item.treatment.AppointSuccessActivity" />
+        <activity android:name=".item.treatment.RecordActivity" />
         <activity android:name=".item.login.LoginActivity">
 
             <!-- <intent-filter> -->
@@ -76,7 +78,6 @@
             android:theme="@style/ModifyActivityTheme" />
         <activity android:name=".item.immune.UpdateImmuneActivity" />
         <activity android:name=".item.immune.ImmuneDetailActivity"></activity>
-        <activity android:name=".item.management.ClinicalRecordActivity"/>
         <activity android:name=".item.main.collect.CollectActivity"
             android:launchMode="singleTask"/>
 
@@ -89,6 +90,21 @@
             android:theme="@style/PHR.SearchActivity"
             android:name=".item.community.search.SearchActivity"
             android:launchMode="singleTask" />
+        <activity
+            android:name=".item.medicine.MedicineMainActivity"
+            android:theme="@style/ModifyActivityTheme" />
+        <activity android:name=".item.medicine.UpdateMedicineActivity" />
+        <activity android:name=".item.medicine.MedicineDetailActivity"></activity>
+
+        <service android:name="com.avos.avoscloud.PushService" />
+        <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

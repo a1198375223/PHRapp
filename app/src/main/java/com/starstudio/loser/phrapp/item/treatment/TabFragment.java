@@ -139,7 +139,7 @@ public class TabFragment extends Fragment {
     }
 
     private void initEvaluate(final LinearLayout linearLayout, String hosp, String dept, String docName) {
-        Toast.makeText(getActivity(),hosp+","+dept+","+docName,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(),hosp+","+dept+","+docName,Toast.LENGTH_SHORT).show();
 
         AVQuery<AVObject> query1 = new AVQuery<>("_User");
         AVQuery<AVObject> query2 = new AVQuery<>("_User");
@@ -156,8 +156,7 @@ public class TabFragment extends Fragment {
                     float average=0;
                     DecimalFormat df = new DecimalFormat(".00");
                     try{
-                        String name=avObject.getString("username");
-                        Toast.makeText(getActivity(),"test::"+name,Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(),"test::"+name,Toast.LENGTH_SHORT).show();
                         JSONArray jsonArray=avObject.getJSONArray("evaluate");
                         for(int i=0;i<jsonArray.length();i++){
                             JSONObject jsonObject=jsonArray.getJSONObject(i);
@@ -168,7 +167,7 @@ public class TabFragment extends Fragment {
                             final String date=jsonObject.getString("date");
                             final String isAnonymous=jsonObject.getString("isAnonymous");
                             final String imageUrl=jsonObject.getString("imageUrl");
-                            Log.e("test:::",userName+","+content+","+grade+","+date+","+isAnonymous+","+imageUrl);
+                            //Log.e("test:::",userName+","+content+","+grade+","+date+","+isAnonymous+","+imageUrl);
                             if(isAnonymous.equals("true")){
                                 EvaluateItem item=new EvaluateItem("*****",String.valueOf(grade),content,date,imageUrl);
                                 evaluateList.add(item);
@@ -211,7 +210,7 @@ public class TabFragment extends Fragment {
                     listView.setAdapter(adapter);
 
                     linearLayout.addView(listView);
-                    Toast.makeText(getActivity(),"test:"+"size:"+evaluateList.size(),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(),"test:"+"size:"+evaluateList.size(),Toast.LENGTH_SHORT).show();
                 }
             }
         });
