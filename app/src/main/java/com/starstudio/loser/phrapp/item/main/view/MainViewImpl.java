@@ -72,6 +72,7 @@ public class MainViewImpl extends PHRView implements MainContract.MainView {
                         break;
                     case R.id.phr_main_navigation_view_menu_item4:
                         activity.startActivity(new Intent(activity, RecordActivity.class));
+                        break;
                     case R.id.phr_main_navigation_view_menu_item5:
                         activity.startActivity(new Intent(activity, ModifyActivity.class));
                         break;

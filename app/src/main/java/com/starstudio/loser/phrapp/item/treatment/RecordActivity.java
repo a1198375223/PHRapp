@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -72,18 +73,28 @@ public class RecordActivity extends AppCompatActivity {
         query.whereEqualTo("doctorID",objectId);
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
-            public void done(List<AVObject> list, AVException e) {
+            public void done(final List<AVObject> list, AVException e) {
                 for(int i=0;i<list.size();i++){
+                    final int num = i;
                     AVObject avObject=list.get(i);
-                    String hosp=avObject.getString("hospName");
-                    String dept=avObject.getString("deptName");
+                    final String hosp=avObject.getString("hospName");
+                    final String dept=avObject.getString("deptName");
                     String userID=avObject.getString("userID");
-                    String userName=userID.substring(userID.length()-5);
-                    String date=avObject.getString("appointTime");
-                    recordList.add(hosp+"    "+dept+"\n"+"用户："+userName+"    "+date);
+                    final String userName=userID.substring(userID.length()-5);
+                    final String date=avObject.getString("appointTime");
+                    AVQuery<AVUser> avUserAVQuery = new AVQuery<>("_User");
+                    avUserAVQuery.getInBackground(userID, new GetCallback<AVUser>() {
+                        @Override
+                        public void done(AVUser avUser, AVException e) {
+                            Log.d("############", "done: ++++++++++++++" + avUser.getUsername());
+                            recordList.add(hosp+"    "+dept+"\n"+"用户："+avUser.getUsername()+"    "+date);
+                            if (num==list.size()-1){
+                                ArrayAdapter<String> adapter=new ArrayAdapter<String>(RecordActivity.this,android.R.layout.simple_list_item_1,recordList);
+                                listView.setAdapter(adapter);
+                            }
+                        }
+                    });
                 }
-                ArrayAdapter<String> adapter=new ArrayAdapter<String>(RecordActivity.this,android.R.layout.simple_list_item_1,recordList);
-                listView.setAdapter(adapter);
             }
         });
     }
@@ -101,4 +112,5 @@ public class RecordActivity extends AppCompatActivity {
             }
         });
     }
+
 }
