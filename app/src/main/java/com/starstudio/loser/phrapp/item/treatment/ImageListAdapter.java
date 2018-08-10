@@ -49,8 +49,8 @@ public class ImageListAdapter extends BaseAdapter {
         TextView hospTv=convertView.findViewById(R.id.hosp_text);
         ImageView hospIv=convertView.findViewById(R.id.hosp_img);
         RequestOptions options = new RequestOptions()
-                .placeholder(R.drawable.waiting)
-                .error(R.drawable.default_head)
+                .placeholder(R.mipmap.waiting)
+                .error(R.mipmap.default_head)
                 .diskCacheStrategy(DiskCacheStrategy.NONE);
 
         Glide.with(context).load(imageUrls.get(position).getHospImagId()).apply(options).into(hospIv);

@@ -67,6 +67,7 @@
     <string name="phr_community_count">1.3k</string>
     <string name="phr_community_goon">继续</string>
     <string name="phr_community_toolbar_title">社  区</string>
+    <string name="phr_community_write">写文章</string>
 
     <!--treatment string-->
     <string name="phr_treatment_hosp_choice">选择医院</string>

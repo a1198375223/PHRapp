@@ -361,7 +361,9 @@ public class HospitalMapActivity extends AppCompatActivity {
         super.onDestroy();
         mLocationClient.stop();
         mapView.onDestroy();
-        mPoiSearch.destroy();
+        if (mPoiSearch != null) {
+            mPoiSearch.destroy();
+        }
         baiduMap.setMyLocationEnabled(false);
     }
 }
