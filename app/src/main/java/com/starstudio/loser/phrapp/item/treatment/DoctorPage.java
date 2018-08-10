@@ -81,8 +81,8 @@ public class DoctorPage extends AppCompatActivity{
         doctorNameTv.setText(docName);
         doctorTitleTv.setText(title);
         RequestOptions options = new RequestOptions()
-                .placeholder(R.drawable.waiting)
-                .error(R.drawable.default_head)
+                .placeholder(R.mipmap.waiting)
+                .error(R.mipmap.default_head)
                 .diskCacheStrategy(DiskCacheStrategy.NONE);
         Glide.with(this).load(imageUrl).apply(options).into(doctorImage);
         titleList = new ArrayList<>();

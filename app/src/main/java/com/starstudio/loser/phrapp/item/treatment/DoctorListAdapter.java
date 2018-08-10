@@ -58,8 +58,8 @@ public class DoctorListAdapter extends BaseAdapter{
         final String profile=doctorList.get(position).getProfile();
         final String imageUrl=doctorList.get(position).getDoctorImagId();
         RequestOptions options = new RequestOptions()
-                .placeholder(R.drawable.waiting)
-                .error(R.drawable.default_head)
+                .placeholder(R.mipmap.waiting)
+                .error(R.mipmap.default_head)
                 .diskCacheStrategy(DiskCacheStrategy.NONE);
 
         Glide.with(context).load(imageUrl).apply(options).into(doctorImage);

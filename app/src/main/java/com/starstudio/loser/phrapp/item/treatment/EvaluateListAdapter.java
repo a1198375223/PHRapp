@@ -61,8 +61,8 @@ public class EvaluateListAdapter extends BaseAdapter{
         String content=evaluateList.get(position).getEvaluation();
         String date=evaluateList.get(position).getEvaluateDate();
         RequestOptions options = new RequestOptions()
-                .placeholder(R.drawable.waiting)
-                .error(R.drawable.default_head)
+                .placeholder(R.mipmap.waiting)
+                .error(R.mipmap.default_head)
                 .diskCacheStrategy(DiskCacheStrategy.NONE);
 
         Glide.with(context).load(evaluateList.get(position).getImageId()).apply(options).into(userHeadImage);

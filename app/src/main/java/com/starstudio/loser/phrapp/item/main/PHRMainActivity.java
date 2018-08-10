@@ -141,8 +141,8 @@ public class PHRMainActivity extends PHRActivity{
         saveInstallation();//注册设备信息，以便推送
 
         RequestOptions options = new RequestOptions()
-                .placeholder(R.drawable.waiting)
-                .error(R.drawable.default_head)
+                .placeholder(R.mipmap.waiting)
+                .error(R.mipmap.default_head)
                 .diskCacheStrategy(DiskCacheStrategy.NONE);
 
         View headerView = navigationView.getHeaderView(0);

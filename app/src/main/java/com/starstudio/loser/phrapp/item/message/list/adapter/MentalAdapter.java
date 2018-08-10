@@ -33,7 +33,7 @@ public class MentalAdapter extends RecyclerView.Adapter<MentalAdapter.ViewHolder
     private Context mContext;
 
     private RequestOptions options = new RequestOptions()
-            .placeholder(R.drawable.waiting)
+            .placeholder(R.mipmap.waiting)
             .error(R.drawable.error)
             .diskCacheStrategy(DiskCacheStrategy.NONE);
 

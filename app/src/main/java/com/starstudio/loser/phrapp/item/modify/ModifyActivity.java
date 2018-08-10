@@ -78,8 +78,8 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
 
     private void initView() {
         RequestOptions options = new RequestOptions()
-                .placeholder(R.drawable.waiting)
-                .error(R.drawable.default_head)
+                .placeholder(R.mipmap.waiting)
+                .error(R.mipmap.default_head)
                 .diskCacheStrategy(DiskCacheStrategy.NONE);
 
         AVQuery<AVUser> userQuery = new AVQuery<>("_User");
