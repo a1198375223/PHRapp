@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -63,7 +64,6 @@ public class RecordActivity extends AppCompatActivity {
                     recordList.add(hosp+"    "+dept+"\n"+"医生："+doctor+"    "+date);
                 }
                 ArrayAdapter<String> adapter=new ArrayAdapter<String>(RecordActivity.this,android.R.layout.simple_list_item_1,recordList);
-
                 listView.setAdapter(adapter);
             }
         });

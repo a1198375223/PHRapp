@@ -22,6 +22,8 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.GetCallback;
 import com.starstudio.loser.phrapp.R;
+import com.starstudio.loser.phrapp.common.utils.ShareUtils;
+import com.starstudio.loser.phrapp.common.view.PHRShareDialog;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,7 +31,13 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
+
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
+import es.dmoral.toasty.Toasty;
 
 /**
  * Created by 11024 on 2018/8/3.
@@ -39,6 +47,7 @@ public class TabFragment extends Fragment {
     private LinearLayout linearLayout;
     List<EvaluateItem> evaluateList=new ArrayList<>();
     List<String> workTimeList=new ArrayList<>();
+    private PHRShareDialog mDialog;
 
     public static TabFragment newInstance(int index,String hosp,String dept,String docName,String title,String profile){
         Bundle bundle = new Bundle();
@@ -64,6 +73,85 @@ public class TabFragment extends Fragment {
         String hosp=getArguments().getString("hosp");
         String dept=getArguments().getString("dept");
         String docName=getArguments().getString("docName");
+        mDialog = new PHRShareDialog(Objects.requireNonNull(getContext()));
+        mDialog.setListener(new PHRShareDialog.OnShareItemClickListener() {
+            @Override
+            public void onCancelItemClickListener() {
+                if (mDialog.isShowing()) {
+                    mDialog.dismiss();
+                }
+                Toast.makeText(getActivity(), "取消分享", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onShareItemClickListener(int which, String title, String text) {
+                switch (which) {
+                    case PHRShareDialog.WEIBO:
+                        ShareUtils.shareWeibo(title, "http://lc-nujpdri6.cn-n1.lcfile.com/31bc75a685cd225af824.png", text, new PlatformActionListener() {
+                            @Override
+                            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                                Toasty.success(getContext(),"分享成功", Toast.LENGTH_SHORT, true).show();
+                            }
+
+                            @Override
+                            public void onError(Platform platform, int i, Throwable throwable) {
+                                Toasty.success(getContext(),"出错啦", Toast.LENGTH_SHORT, true).show();
+                            }
+
+                            @Override
+                            public void onCancel(Platform platform, int i) {
+                                Toast.makeText(getContext(), "取消分享", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        if (mDialog.isShowing()) {
+                            mDialog.dismiss();
+                        }
+                        break;
+                    case PHRShareDialog.QQ:
+                        ShareUtils.shareQQ(title, "http://lc-nujpdri6.cn-n1.lcfile.com/31bc75a685cd225af824.png", text, new PlatformActionListener() {
+                            @Override
+                            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                                Toasty.success(getContext(),"分享成功", Toast.LENGTH_SHORT, true).show();
+                            }
+
+                            @Override
+                            public void onError(Platform platform, int i, Throwable throwable) {
+                                Toasty.success(getContext(),"出错啦", Toast.LENGTH_SHORT, true).show();
+                            }
+
+                            @Override
+                            public void onCancel(Platform platform, int i) {
+                                Toast.makeText(getContext(), "取消分享", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        if (mDialog.isShowing()) {
+                            mDialog.dismiss();
+                        }
+                        break;
+                    case PHRShareDialog.WECHAT:
+                        ShareUtils.shareWechat(title, "http://lc-nujpdri6.cn-n1.lcfile.com/31bc75a685cd225af824.png", text, new PlatformActionListener() {
+                            @Override
+                            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                                Toasty.success(getContext(),"分享成功", Toast.LENGTH_SHORT, true).show();
+                            }
+
+                            @Override
+                            public void onError(Platform platform, int i, Throwable throwable) {
+                                Toasty.success(getContext(),"出错啦", Toast.LENGTH_SHORT, true).show();
+                            }
+
+                            @Override
+                            public void onCancel(Platform platform, int i) {
+                                Toast.makeText(getContext(), "取消分享", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        if (mDialog.isShowing()) {
+                            mDialog.dismiss();
+                        }
+                        break;
+                }
+            }
+        });
         switch (index){
             case 0://简介
                 String profile=getArguments().getString("profile");
@@ -150,7 +238,7 @@ public class TabFragment extends Fragment {
         final AVQuery<AVObject> query = AVQuery.and(Arrays.asList(query1,query2,query3));
         query.getFirstInBackground(new GetCallback<AVObject>() {
             @Override
-            public void done(AVObject avObject, AVException e) {
+            public void done(AVObject avObject, final AVException e) {
                 if(e==null){
                     float sum=0;
                     float average=0;
@@ -207,6 +295,16 @@ public class TabFragment extends Fragment {
                     ListView listView=new ListView(getActivity());
                     listView.setLayoutParams(lvParams);
                     EvaluateListAdapter adapter=new EvaluateListAdapter(getActivity(),evaluateList);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            if (evaluateList.get(position) != null) {
+                                mDialog.setTitle(evaluateList.get(position).getEvaluation());
+                                mDialog.setText(evaluateList.get(position).getGrade());
+                                mDialog.showShareDialog();
+                            }
+                        }
+                    });
                     listView.setAdapter(adapter);
 
                     linearLayout.addView(listView);
