@@ -23,10 +23,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.starstudio.loser.phrapp.R;
+import com.starstudio.loser.phrapp.common.PHRActivity;
 import com.starstudio.loser.phrapp.common.base.BaseFragment;
 import com.starstudio.loser.phrapp.item.community.CommunityActivity;
 import com.starstudio.loser.phrapp.item.community.callback.AFCallback;
@@ -53,48 +55,28 @@ public class WriteFragment extends BaseFragment<WriteFragmentEventListener> impl
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.phr_community_post_message_layout, container, false);
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.phr_community_post_message_toolbar);
-        ((RxAppCompatActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
-        Objects.requireNonNull(((RxAppCompatActivity) getActivity()).getSupportActionBar()).setDisplayShowTitleEnabled(false);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//        Toolbar toolbar = (Toolbar) view.findViewById(R.id.phr_community_post_message_toolbar);
+//        ((PHRActivity) Objects.requireNonNull(getActivity())).setSupportActionBar(toolbar);
+//        Objects.requireNonNull(((PHRActivity) getActivity()).getSupportActionBar()).setDisplayShowTitleEnabled(false);
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getActivity().onBackPressed();
+//            }
+//        });
+        ImageView back = (ImageView) view.findViewById(R.id.phr_fragment_write_image);
+        TextView goon = (TextView) view.findViewById(R.id.phr_fragment_write_goon);
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().onBackPressed();
+                Objects.requireNonNull(getActivity()).onBackPressed();
             }
         });
-        setHasOptionsMenu(true);
-        mTitle = (EditText) view.findViewById(R.id.phr_community_post_message_title);
-        mText = (EditText) view.findViewById(R.id.phr_community_post_message_text);
-        mPresenter = new WriteFragmentPresenter(this);
-        mPresenter.setModel(new WriteFragmentModel(mPresenter));
-        mPresenter.setView(this);
-        mPresenter.attach();
-        return view;
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mCallback = (AFCallback) context;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mPresenter.detach();
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.phr_community_post_message_menu, menu);
-    }
-
-    @SuppressLint({"ResourceAsColor", "NewApi"})
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.phr_community_post_message_goon:
+        goon.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
+            @Override
+            public void onClick(View v) {
                 if (!mTitle.getText().toString().equals("") && !mText.getText().toString().equals("")){
                     mPostDialog = new MaterialDialog.Builder(Objects.requireNonNull(getActivity()))
                             .title(mTitle.getText().toString())
@@ -126,12 +108,31 @@ public class WriteFragment extends BaseFragment<WriteFragmentEventListener> impl
                 } else if (mText.getText().toString().equals("")) {
                     showErrorToast("内容不能为空");
                 }
+            }
+        });
 
-                break;
-            default:
-        }
-        return true;
+        setHasOptionsMenu(true);
+        mTitle = (EditText) view.findViewById(R.id.phr_community_post_message_title);
+        mText = (EditText) view.findViewById(R.id.phr_community_post_message_text);
+        mPresenter = new WriteFragmentPresenter(this);
+        mPresenter.setModel(new WriteFragmentModel(mPresenter));
+        mPresenter.setView(this);
+        mPresenter.attach();
+        return view;
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mCallback = (AFCallback) context;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.detach();
+    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override

@@ -18,9 +18,9 @@
     <application
         android:name=".common.PHRApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/phr_logo_fl"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/phr_logo_fl"
         android:supportsRtl="true"
         android:theme="@style/PHR.AppTheme">
         <meta-data
