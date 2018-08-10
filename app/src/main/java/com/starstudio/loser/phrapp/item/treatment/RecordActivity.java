@@ -63,6 +63,7 @@ public class RecordActivity extends AppCompatActivity {
                     recordList.add(hosp+"    "+dept+"\n"+"医生："+doctor+"    "+date);
                 }
                 ArrayAdapter<String> adapter=new ArrayAdapter<String>(RecordActivity.this,android.R.layout.simple_list_item_1,recordList);
+
                 listView.setAdapter(adapter);
             }
         });
