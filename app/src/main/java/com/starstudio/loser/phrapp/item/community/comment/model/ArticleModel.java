@@ -126,6 +126,7 @@ public class ArticleModel extends PHRModel implements ArticleContract.ArticleCon
         query.include("comment_user");
         query.include("reply_to");
         query.include("article");
+        query.include("reply_to.comment_user");
         query.addAscendingOrder("date");
         query.whereEqualTo("article", mCurrentAuthor);
         query.findInBackground(new FindCallback<AVObject>() {
